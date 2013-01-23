@@ -7,6 +7,7 @@
 /// ***************************************************************************
 /// </summary>
 using System;
+using System.Collections.Generic;
 using System.Text;
 using ParameterList = CSJ2K.j2k.util.ParameterList;
 using DecoderSpecs = CSJ2K.j2k.decoder.DecoderSpecs;
@@ -322,12 +323,11 @@ namespace CSJ2K.Icc
 		/* Bit twiddling constant for integral types. */ public const int BYTES_PER_LONG = 8;
 		
 		/* JP2 Box structure analysis help */
-		
-		[Serializable]
-		private class BoxType:System.Collections.Hashtable
+
+		private class BoxType : System.Collections.Generic.Dictionary<System.Int32, System.String>
 		{
 			
-			private static System.Collections.Hashtable map = System.Collections.Hashtable.Synchronized(new System.Collections.Hashtable());
+			private static System.Collections.Generic.Dictionary<System.Int32, System.String> map = new Dictionary<int, string>();
 			
 			public static void  put(int type, System.String desc)
 			{
@@ -838,7 +838,7 @@ namespace CSJ2K.Icc
 				
 				for (i = 0; i < 8; ++i)
 					lbytes[i] = 0;
-                byte[] tbytes = System.Text.ASCIIEncoding.ASCII.GetBytes(System.Convert.ToString(row * 16, 16));
+                byte[] tbytes = System.Text.Encoding.UTF8.GetBytes(System.Convert.ToString(row * 16, 16));
 				for (int t = 0, l = lbytes.Length - tbytes.Length; t < tbytes.Length; ++l, ++t)
 					lbytes[l] = tbytes[t];
 				
@@ -861,11 +861,11 @@ namespace CSJ2K.Icc
 			
 			for (i = 0; i < 8; ++i)
 				lbytes[i] = 0;
-			byte[] tbytes2 = System.Text.ASCIIEncoding.ASCII.GetBytes(System.Convert.ToString(row * 16, 16));
+			byte[] tbytes2 = System.Text.Encoding.UTF8.GetBytes(System.Convert.ToString(row * 16, 16));
 			for (int t = 0, l = lbytes.Length - tbytes2.Length; t < tbytes2.Length; ++l, ++t)
 				lbytes[l] = tbytes2[t];
 			
-			rep0 = new System.Text.StringBuilder(System.Text.ASCIIEncoding.ASCII.GetString(lbytes));
+			rep0 = new System.Text.StringBuilder(System.Text.Encoding.UTF8.GetString(lbytes, 0, lbytes.Length));
 			
 			for (col = 0; col < rem; ++col)
 			{
@@ -903,10 +903,10 @@ namespace CSJ2K.Icc
 			// First look for the gray TRC tag. If the profile is indeed an input profile, and this
 			// tag exists, then the profile is a Monochrome Input profile
 			
-			ICCCurveType grayTag = (ICCCurveType) tags[(System.Int32) kdwGrayTRCTag];
-			if (grayTag != null)
+			ICCTag grayTag;
+			if (tags.TryGetValue((System.Int32) kdwGrayTRCTag, out grayTag))
 			{
-				return RestrictedICCProfile.createInstance(grayTag);
+				return RestrictedICCProfile.createInstance((ICCCurveType)grayTag);
 			}
 			
 			// If it wasn't a Monochrome Input profile, look for the Red Colorant tag. If that
@@ -933,7 +933,7 @@ namespace CSJ2K.Icc
 		/// <param name="os">output file
 		/// </param>
 		//UPGRADE_TODO: Class 'java.io.RandomAccessFile' was converted to 'System.IO.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioRandomAccessFile'"
-		public virtual void  write(System.IO.FileStream os)
+		public virtual void  write(System.IO.Stream os)
 		{
 			Header.write(os);
 			TagTable.write(os);
@@ -964,7 +964,7 @@ namespace CSJ2K.Icc
         }
         static int GetTagInt(string tag)
         {
-            byte[] tagBytes = ASCIIEncoding.ASCII.GetBytes(tag);
+            byte[] tagBytes = Encoding.UTF8.GetBytes(tag);
             Array.Reverse(tagBytes);
             return BitConverter.ToInt32(tagBytes, 0);
         }

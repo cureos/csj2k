@@ -983,7 +983,7 @@ namespace CSJ2K.j2k.codestream.writer
 			}
 			if (notFound)
 			{
-				throw new System.ApplicationException("Default representative for quantization type " + " and number of decomposition levels not found " + " in main QCD marker segment. " + "You have found a JJ2000 bug.");
+				throw new System.InvalidOperationException("Default representative for quantization type " + " and number of decomposition levels not found " + " in main QCD marker segment. " + "You have found a JJ2000 bug.");
 			}
 			SubbandAn sb, csb, sbRoot = dwt.getAnSubbandTree(tcIdx[0], tcIdx[1]);
 			defimgn = dwt.getNomRangeBits(tcIdx[1]);
@@ -1029,7 +1029,7 @@ namespace CSJ2K.j2k.codestream.writer
 					break;
 				
 				default: 
-					throw new System.ApplicationException("Internal JJ2000 error");
+					throw new System.InvalidOperationException("Internal JJ2000 error");
 				
 			}
 			
@@ -1104,7 +1104,7 @@ namespace CSJ2K.j2k.codestream.writer
 					break;
 				
 				default: 
-					throw new System.ApplicationException("Internal JJ2000 error");
+					throw new System.InvalidOperationException("Internal JJ2000 error");
 				
 			}
 		}
@@ -1160,7 +1160,7 @@ namespace CSJ2K.j2k.codestream.writer
 			}
 			if (notFound)
 			{
-				throw new System.ApplicationException("Default representative for quantization type " + " and number of decomposition levels not found " + " in main QCC (c=" + compIdx + ") marker segment. " + "You have found a JJ2000 bug.");
+				throw new System.InvalidOperationException("Default representative for quantization type " + " and number of decomposition levels not found " + " in main QCC (c=" + compIdx + ") marker segment. " + "You have found a JJ2000 bug.");
 			}
 			sbRoot = dwt.getAnSubbandTree(tIdx, compIdx);
 			
@@ -1223,7 +1223,7 @@ namespace CSJ2K.j2k.codestream.writer
 					break;
 				
 				default: 
-					throw new System.ApplicationException("Internal JJ2000 error");
+					throw new System.InvalidOperationException("Internal JJ2000 error");
 				
 			}
 			
@@ -1309,7 +1309,7 @@ namespace CSJ2K.j2k.codestream.writer
 					break;
 				
 				default: 
-					throw new System.ApplicationException("Internal JJ2000 error");
+					throw new System.InvalidOperationException("Internal JJ2000 error");
 				
 			}
 		}
@@ -1354,7 +1354,7 @@ namespace CSJ2K.j2k.codestream.writer
 			}
 			if (notFound)
 			{
-				throw new System.ApplicationException("Default representative for quantization type " + " and number of decomposition levels not found " + " in tile QCD (t=" + tIdx + ") marker segment. " + "You have found a JJ2000 bug.");
+				throw new System.InvalidOperationException("Default representative for quantization type " + " and number of decomposition levels not found " + " in tile QCD (t=" + tIdx + ") marker segment. " + "You have found a JJ2000 bug.");
 			}
 			
 			sbRoot = dwt.getAnSubbandTree(tIdx, compIdx);
@@ -1405,7 +1405,7 @@ namespace CSJ2K.j2k.codestream.writer
 					break;
 				
 				default: 
-					throw new System.ApplicationException("Internal JJ2000 error");
+					throw new System.InvalidOperationException("Internal JJ2000 error");
 				
 			}
 			
@@ -1480,7 +1480,7 @@ namespace CSJ2K.j2k.codestream.writer
 					break;
 				
 				default: 
-					throw new System.ApplicationException("Internal JJ2000 error");
+					throw new System.InvalidOperationException("Internal JJ2000 error");
 				
 			}
 		}
@@ -1576,7 +1576,7 @@ namespace CSJ2K.j2k.codestream.writer
 					break;
 				
 				default: 
-					throw new System.ApplicationException("Internal JJ2000 error");
+					throw new System.InvalidOperationException("Internal JJ2000 error");
 				
 			}
 			
@@ -1662,7 +1662,7 @@ namespace CSJ2K.j2k.codestream.writer
 					break;
 				
 				default: 
-					throw new System.ApplicationException("Internal JJ2000 error");
+					throw new System.InvalidOperationException("Internal JJ2000 error");
 				
 			}
 		}

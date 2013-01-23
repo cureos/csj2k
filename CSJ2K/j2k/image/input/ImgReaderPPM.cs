@@ -71,7 +71,7 @@ namespace CSJ2K.j2k.image.input
 		
 		/// <summary>Where to read the data from </summary>
 		//UPGRADE_TODO: Class 'java.io.RandomAccessFile' was converted to 'System.IO.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioRandomAccessFile'"
-		private System.IO.FileStream in_Renamed;
+		private System.IO.Stream in_Renamed;
 		
 		/// <summary>The offset of the raw pixel data in the PPM file </summary>
 		private int offset;
@@ -134,7 +134,7 @@ namespace CSJ2K.j2k.image.input
 		/// 
 		/// </exception>
 		//UPGRADE_TODO: Class 'java.io.RandomAccessFile' was converted to 'System.IO.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioRandomAccessFile'"
-		private ImgReaderPPM(System.IO.FileStream in_Renamed)
+		private ImgReaderPPM(System.IO.Stream in_Renamed)
 		{
 			this.in_Renamed = in_Renamed;
 			
@@ -159,7 +159,7 @@ namespace CSJ2K.j2k.image.input
 		/// </exception>
 		public override void  close()
 		{
-			in_Renamed.Close();
+			in_Renamed.Dispose();
 			in_Renamed = null;
 			// Free memory
 			barr[0] = null;

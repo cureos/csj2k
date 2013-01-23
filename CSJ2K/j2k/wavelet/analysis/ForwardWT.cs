@@ -157,7 +157,7 @@ namespace CSJ2K.j2k.wavelet.analysis
 			System.String str = "";
 			if (pl.getParameter("Wcboff") == null)
 			{
-				throw new System.ApplicationException("You must specify an argument to the '-Wcboff' " + "option. See usage with the '-u' option");
+				throw new System.InvalidOperationException("You must specify an argument to the '-Wcboff' " + "option. See usage with the '-u' option");
 			}
 			SupportClass.Tokenizer stk = new SupportClass.Tokenizer(pl.getParameter("Wcboff"));
 			if (stk.Count != 2)

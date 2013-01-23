@@ -371,7 +371,7 @@ namespace CSJ2K.j2k.image
 		{
 			if (t != TileIdx)
 			{
-				throw new System.ApplicationException("Asking the width of a tile-component which is " + "not in the current tile (call setTile() or " + "nextTile() methods before).");
+				throw new System.InvalidOperationException("Asking the width of a tile-component which is " + "not in the current tile (call setTile() or " + "nextTile() methods before).");
 			}
 			return compW[c];
 		}
@@ -392,7 +392,7 @@ namespace CSJ2K.j2k.image
 		{
 			if (t != TileIdx)
 			{
-				throw new System.ApplicationException("Asking the width of a tile-component which is " + "not in the current tile (call setTile() or " + "nextTile() methods before).");
+				throw new System.InvalidOperationException("Asking the width of a tile-component which is " + "not in the current tile (call setTile() or " + "nextTile() methods before).");
 			}
 			return compH[c];
 		}

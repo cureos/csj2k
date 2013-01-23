@@ -270,7 +270,6 @@
     <Compile Include="j2k\JJ2KInfo.cs" />
     <Compile Include="j2k\ModuleSpec.cs" />
     <Compile Include="j2k\NoNextElementException.cs" />
-    <Compile Include="j2k\NotImplementedError.cs" />
     <Compile Include="j2k\quantization\dequantizer\CBlkQuantDataSrcDec.cs" />
     <Compile Include="j2k\quantization\dequantizer\Dequantizer.cs" />
     <Compile Include="j2k\quantization\dequantizer\DequantizerParams.cs" />

@@ -180,7 +180,7 @@ namespace CSJ2K.j2k.fileformat.writer
 			}
 			catch (System.Exception e)
 			{
-				throw new System.ApplicationException("Error while writing JP2 file format(2): " + e.Message + "\n" + e.StackTrace);
+				throw new System.InvalidOperationException("Error while writing JP2 file format(2): " + e.Message + "\n" + e.StackTrace);
 			}
 			if (bpcVaries)
 				return 12 + FTB_LENGTH + 8 + IHB_LENGTH + CSB_LENGTH + BPC_LENGTH + nc + 8;

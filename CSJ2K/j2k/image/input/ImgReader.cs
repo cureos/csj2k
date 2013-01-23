@@ -308,7 +308,7 @@ namespace CSJ2K.j2k.image.input
 		{
 			if (t != 0)
 			{
-				throw new System.ApplicationException("Asking a tile-component width for a tile index" + " greater than 0 whereas there is only one tile");
+				throw new System.InvalidOperationException("Asking a tile-component width for a tile index" + " greater than 0 whereas there is only one tile");
 			}
 			return w;
 		}
@@ -333,7 +333,7 @@ namespace CSJ2K.j2k.image.input
 		{
 			if (t != 0)
 			{
-				throw new System.ApplicationException("Asking a tile-component width for a tile index" + " greater than 0 whereas there is only one tile");
+				throw new System.InvalidOperationException("Asking a tile-component width for a tile index" + " greater than 0 whereas there is only one tile");
 			}
 			return h;
 		}

@@ -393,7 +393,7 @@ namespace CSJ2K.j2k.entropy
 		public virtual int getPPX(int t, int c, int rl)
 		{
 			int mrl, idx;
-			System.Collections.ArrayList[] v = null;
+			System.Collections.Generic.List<System.Int32>[] v = null;
 			bool tileSpecified = (t != - 1?true:false);
 			bool compSpecified = (c != - 1?true:false);
 			
@@ -403,22 +403,22 @@ namespace CSJ2K.j2k.entropy
 			if (tileSpecified && compSpecified)
 			{
 				mrl = ((System.Int32) dls.getTileCompVal(t, c));
-				v = (System.Collections.ArrayList[]) getTileCompVal(t, c);
+				v = (System.Collections.Generic.List<System.Int32>[])getTileCompVal(t, c);
 			}
 			else if (tileSpecified && !compSpecified)
 			{
 				mrl = ((System.Int32) dls.getTileDef(t));
-				v = (System.Collections.ArrayList[]) getTileDef(t);
+				v = (System.Collections.Generic.List<System.Int32>[])getTileDef(t);
 			}
 			else if (!tileSpecified && compSpecified)
 			{
 				mrl = ((System.Int32) dls.getCompDef(c));
-				v = (System.Collections.ArrayList[]) getCompDef(c);
+				v = (System.Collections.Generic.List<System.Int32>[])getCompDef(c);
 			}
 			else
 			{
 				mrl = ((System.Int32) dls.getDefault());
-				v = (System.Collections.ArrayList[]) getDefault();
+				v = (System.Collections.Generic.List<System.Int32>[])getDefault();
 			}
 			idx = mrl - rl;
 			if (v[0].Count > idx)
@@ -455,7 +455,7 @@ namespace CSJ2K.j2k.entropy
 		public virtual int getPPY(int t, int c, int rl)
 		{
 			int mrl, idx;
-			System.Collections.ArrayList[] v = null;
+			System.Collections.Generic.List<System.Int32>[] v = null;
 			bool tileSpecified = (t != - 1?true:false);
 			bool compSpecified = (c != - 1?true:false);
 			
@@ -465,22 +465,22 @@ namespace CSJ2K.j2k.entropy
 			if (tileSpecified && compSpecified)
 			{
 				mrl = ((System.Int32) dls.getTileCompVal(t, c));
-				v = (System.Collections.ArrayList[]) getTileCompVal(t, c);
+				v = (System.Collections.Generic.List<System.Int32>[]) getTileCompVal(t, c);
 			}
 			else if (tileSpecified && !compSpecified)
 			{
 				mrl = ((System.Int32) dls.getTileDef(t));
-				v = (System.Collections.ArrayList[]) getTileDef(t);
+				v = (System.Collections.Generic.List<System.Int32>[]) getTileDef(t);
 			}
 			else if (!tileSpecified && compSpecified)
 			{
 				mrl = ((System.Int32) dls.getCompDef(c));
-				v = (System.Collections.ArrayList[]) getCompDef(c);
+				v = (System.Collections.Generic.List<System.Int32>[]) getCompDef(c);
 			}
 			else
 			{
 				mrl = ((System.Int32) dls.getDefault());
-				v = (System.Collections.ArrayList[]) getDefault();
+				v = (System.Collections.Generic.List<System.Int32>[]) getDefault();
 			}
 			idx = mrl - rl;
 			if (v[1].Count > idx)

@@ -116,7 +116,7 @@ namespace CSJ2K.j2k.io
 		/// 
 		/// </summary>
 		//UPGRADE_TODO: Class 'java.io.RandomAccessFile' was converted to 'System.IO.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioRandomAccessFile'"
-		private System.IO.FileStream theFile;
+		private System.IO.Stream theFile;
 		
 		/// <summary> Buffer of bytes containing the part of the file that is currently being
 		/// accessed
@@ -338,7 +338,7 @@ namespace CSJ2K.j2k.io
 			*/
 			flush();
 			byteBuffer = null; // Release the byte-buffer reference
-			theFile.Close();
+			theFile.Dispose();
 		}
 		
 		/// <summary> Returns the current length of the stream, in bytes, taking into

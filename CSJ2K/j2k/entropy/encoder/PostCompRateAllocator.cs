@@ -264,7 +264,7 @@ namespace CSJ2K.j2k.entropy.encoder
 			}
 			catch (System.IO.IOException e)
 			{
-				throw new System.ApplicationException("An IOException has ocurred where it " + "should never occur");
+				throw new System.InvalidOperationException("An IOException has ocurred where it " + "should never occur");
 			}
 			ratepending = false;
 			islayer = false;
@@ -329,7 +329,7 @@ namespace CSJ2K.j2k.entropy.encoder
 						}
 						catch (System.IO.IOException e)
 						{
-							throw new System.ApplicationException("An IOException has ocurred where it " + "should never occur");
+							throw new System.InvalidOperationException("An IOException has ocurred where it " + "should never occur");
 						}
 						if (stok.ttype != SupportClass.StreamTokenizerSupport.TT_EOF)
 						{
@@ -347,7 +347,7 @@ namespace CSJ2K.j2k.entropy.encoder
 				}
 				catch (System.IO.IOException e)
 				{
-					throw new System.ApplicationException("An IOException has ocurred where it " + "should never occur");
+					throw new System.InvalidOperationException("An IOException has ocurred where it " + "should never occur");
 				}
 			}
 			if (islayer)

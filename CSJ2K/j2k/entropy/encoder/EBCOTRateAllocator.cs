@@ -670,7 +670,7 @@ namespace CSJ2K.j2k.entropy.encoder
 			}
 			if (nValidProg == 0)
 			{
-				throw new System.ApplicationException("Unable to initialize rate allocator: No " + "default progression type has been defined.");
+				throw new System.InvalidOperationException("Unable to initialize rate allocator: No " + "default progression type has been defined.");
 			}
 			
 			// Tile specific values
@@ -689,7 +689,7 @@ namespace CSJ2K.j2k.entropy.encoder
 					}
 					if (nValidProg == 0)
 					{
-						throw new System.ApplicationException("Unable to initialize rate allocator:" + " No default progression type has been " + "defined for tile " + t);
+						throw new System.InvalidOperationException("Unable to initialize rate allocator:" + " No default progression type has been " + "defined for tile " + t);
 					}
 				}
 			} // End loop on tiles
@@ -1015,7 +1015,7 @@ namespace CSJ2K.j2k.entropy.encoder
 							break;
 						
 						default: 
-							throw new System.ApplicationException("Unsupported bit stream progression type");
+							throw new System.InvalidOperationException("Unsupported bit stream progression type");
 						
 					} // switch on progression
 					
@@ -1363,7 +1363,7 @@ namespace CSJ2K.j2k.entropy.encoder
 			
 			if (nPrec == 0)
 			{
-				throw new System.ApplicationException("Image cannot have no precinct");
+				throw new System.InvalidOperationException("Image cannot have no precinct");
 			}
 			
 			int pyend = (maxy - miny) / gcd_y + 1;
@@ -1456,7 +1456,7 @@ namespace CSJ2K.j2k.entropy.encoder
 						continue;
 					if (nextPrec[c][r] < numPrec[t][c][r].x * numPrec[t][c][r].y - 1)
 					{
-						throw new System.ApplicationException("JJ2000 bug: One precinct at least has " + "not been written for resolution level " + r + " of component " + c + " in tile " + t + ".");
+						throw new System.InvalidOperationException("JJ2000 bug: One precinct at least has " + "not been written for resolution level " + r + " of component " + c + " in tile " + t + ".");
 					}
 				}
 			}
@@ -1580,7 +1580,7 @@ namespace CSJ2K.j2k.entropy.encoder
 			
 			if (nPrec == 0)
 			{
-				throw new System.ApplicationException("Image cannot have no precinct");
+				throw new System.InvalidOperationException("Image cannot have no precinct");
 			}
 			
 			int pyend = (maxy - miny) / gcd_y + 1;
@@ -1676,7 +1676,7 @@ namespace CSJ2K.j2k.entropy.encoder
 						continue;
 					if (nextPrec[c][r] < numPrec[t][c][r].x * numPrec[t][c][r].y - 1)
 					{
-						throw new System.ApplicationException("JJ2000 bug: One precinct at least has " + "not been written for resolution level " + r + " of component " + c + " in tile " + t + ".");
+						throw new System.InvalidOperationException("JJ2000 bug: One precinct at least has " + "not been written for resolution level " + r + " of component " + c + " in tile " + t + ".");
 					}
 				}
 			}
@@ -1800,7 +1800,7 @@ namespace CSJ2K.j2k.entropy.encoder
 			
 			if (nPrec == 0)
 			{
-				throw new System.ApplicationException("Image cannot have no precinct");
+				throw new System.InvalidOperationException("Image cannot have no precinct");
 			}
 			
 			int pyend = (maxy - miny) / gcd_y + 1;
@@ -1893,7 +1893,7 @@ namespace CSJ2K.j2k.entropy.encoder
 						continue;
 					if (nextPrec[c][r] < numPrec[t][c][r].x * numPrec[t][c][r].y - 1)
 					{
-						throw new System.ApplicationException("JJ2000 bug: One precinct at least has " + "not been written for resolution level " + r + " of component " + c + " in tile " + t + ".");
+						throw new System.InvalidOperationException("JJ2000 bug: One precinct at least has " + "not been written for resolution level " + r + " of component " + c + " in tile " + t + ".");
 					}
 				}
 			}

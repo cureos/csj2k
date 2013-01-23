@@ -78,7 +78,7 @@ namespace CSJ2K.j2k.entropy
 		{
 			if (type != ModuleSpec.SPEC_TYPE_TILE)
 			{
-				throw new System.ApplicationException("Illegal use of class ProgressionSpec !");
+				throw new System.InvalidOperationException("Illegal use of class ProgressionSpec !");
 			}
 		}
 		
@@ -263,7 +263,7 @@ namespace CSJ2K.j2k.entropy
 							}
 							else
 							{
-								throw new System.ApplicationException("Error in usage of 'Aptype' " + "option: " + param);
+								throw new System.InvalidOperationException("Error in usage of 'Aptype' " + "option: " + param);
 							}
 						}
 						

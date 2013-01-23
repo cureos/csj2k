@@ -41,6 +41,7 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using System.Collections.Generic;
 using CSJ2K.j2k.quantization.quantizer;
 using CSJ2K.j2k.wavelet.analysis;
 using CSJ2K.j2k.codestream;
@@ -149,12 +150,12 @@ namespace CSJ2K.j2k.entropy.encoder
 		/// <summary>The queue of idle compressors. Used in multithreaded
 		/// implementation only 
 		/// </summary>
-		private System.Collections.ArrayList idleComps;
+		private System.Collections.Generic.List<StdEntropyCoder.Compressor> idleComps;
 		
 		/// <summary>The queue of completed compressors, for each component. Used
 		/// in multithreaded implementation only. 
 		/// </summary>
-		private System.Collections.ArrayList[] completedComps;
+		private System.Collections.Generic.List<StdEntropyCoder.Compressor>[] completedComps;
 		
 		/// <summary>The number of busy compressors, for each component. Used in
 		/// multithreaded implementation only. 
@@ -857,13 +858,13 @@ namespace CSJ2K.j2k.entropy.encoder
 				FacilityManager.getMsgLogger().printmsg(CSJ2K.j2k.util.MsgLogger_Fields.INFO, "Using multithreaded entropy coder " + "with " + nt + " compressor threads.");
 				tsl = nt;
 				tPool = new ThreadPool(nt, (System.Int32) SupportClass.ThreadClass.Current().Priority + THREADS_PRIORITY_INC, "StdEntropyCoder");
-				idleComps = new System.Collections.ArrayList();
-				completedComps = new System.Collections.ArrayList[src.NumComps];
+				idleComps = new List<Compressor>();
+				completedComps = new List<Compressor>[src.NumComps];
 				nBusyComps = new int[src.NumComps];
 				finishedTileComponent = new bool[src.NumComps];
 				for (i = src.NumComps - 1; i >= 0; i--)
 				{
-					completedComps[i] = new System.Collections.ArrayList();
+					completedComps[i] = new List<Compressor>();
 				}
 				for (i = 0; i < nt; i++)
 				{
@@ -1403,7 +1404,7 @@ namespace CSJ2K.j2k.entropy.encoder
 					break;
 				
 				default: 
-					throw new System.ApplicationException("JJ2000 internal error");
+					throw new System.InvalidOperationException("JJ2000 internal error");
 				
 			}
 			

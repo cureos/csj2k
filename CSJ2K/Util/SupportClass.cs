@@ -1965,9 +1965,9 @@ internal class SupportClass
 		/// </summary>
 		/// <param name="stack">The stack where the element at the top will be returned and removed.</param>
 		/// <returns>The element at the top of the stack.</returns>
-		public static System.Object Pop(System.Collections.ArrayList stack)
+		public static T Pop<T>(System.Collections.Generic.List<T> stack)
 		{
-			System.Object obj = stack[stack.Count - 1];
+			T obj = stack[stack.Count - 1];
 			stack.RemoveAt(stack.Count - 1);
 
 			return obj;

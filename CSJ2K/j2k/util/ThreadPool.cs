@@ -165,11 +165,11 @@ namespace CSJ2K.j2k.util
 		
 		/// <summary>The last error thrown by a target. Null if none </summary>
 		// NOTE: needs to be volatile, so that only one copy exits in memory
-		private volatile System.ApplicationException targetE;
+		private volatile System.InvalidOperationException targetE;
 		
 		/// <summary>The last runtime exception thrown by a target. Null if none </summary>
 		// NOTE: needs to be volatile, so that only one copy exits in memory
-		private volatile System.SystemException targetRE;
+		private volatile System.Exception targetRE;
 		
 		//UPGRADE_NOTE: Field 'EnclosingInstance' was added to class 'ThreadPoolThread' to access its enclosing instance. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1019'"
 		/// <summary> The threads that are managed by the pool.
@@ -260,7 +260,7 @@ namespace CSJ2K.j2k.util
 						{
 							target.Run();
 						}
-						//UPGRADE_NOTE: Exception 'java.lang.ThreadDeath' was converted to 'System.ApplicationException' which has different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1100'"
+						//UPGRADE_NOTE: Exception 'java.lang.ThreadDeath' was converted to 'System.InvalidOperationException' which has different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1100'"
 						catch (System.Threading.ThreadAbortException td)
 						{
 							// We have been instructed to abruptly terminate
@@ -269,13 +269,9 @@ namespace CSJ2K.j2k.util
 							FacilityManager.getMsgLogger().printmsg(CSJ2K.j2k.util.MsgLogger_Fields.WARNING, "Thread.stop() called on a ThreadPool " + "thread or ThreadDeath thrown. This is " + "deprecated. Lock-up might occur.");
 							throw td;
 						}
-						catch (System.ApplicationException e)
+						catch (System.InvalidOperationException e)
 						{
 							Enclosing_Instance.targetE = e;
-						}
-						catch (System.SystemException re)
-						{
-							Enclosing_Instance.targetRE = re;
 						}
 						//UPGRADE_NOTE: Exception 'java.lang.Throwable' was converted to 'System.Exception' which has different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1100'"
 						catch (System.Exception e)
@@ -283,7 +279,7 @@ namespace CSJ2K.j2k.util
 							// A totally unexpected error has occurred
 							// (Thread.stop(Throwable) has been used, which should 
 							// never be.
-							Enclosing_Instance.targetRE = new System.SystemException("Unchecked exception " + "thrown by target's " + "run() method in pool " + Enclosing_Instance.poolName + ".");
+							Enclosing_Instance.targetRE = new System.Exception("Unchecked exception " + "thrown by target's " + "run() method in pool " + Enclosing_Instance.poolName + ".");
 						}
 						// Join idle threads
 						Enclosing_Instance.putInIdleList(this);

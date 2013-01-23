@@ -76,7 +76,7 @@ namespace CSJ2K
             }
             catch (EndOfStreamException e)
             {
-                throw new ApplicationException("Codestream too short or bad header, unable to decode.", e);
+                throw new InvalidOperationException("Codestream too short or bad header, unable to decode.", e);
             }
 
             int nCompCod = hd.NumComps;
@@ -100,11 +100,11 @@ namespace CSJ2K
             }
             catch (IOException e)
             {
-                throw new ApplicationException("Error while reading bit stream header or parsing packets.", e);
+                throw new InvalidOperationException("Error while reading bit stream header or parsing packets.", e);
             }
             catch (ArgumentException e)
             {
-                throw new ApplicationException("Cannot instantiate bit stream reader.", e);
+                throw new InvalidOperationException("Cannot instantiate bit stream reader.", e);
             }
 
             // **** Entropy decoder ****
@@ -115,7 +115,7 @@ namespace CSJ2K
             }
             catch (ArgumentException e)
             {
-                throw new ApplicationException("Cannot instantiate entropy decoder.", e);
+                throw new InvalidOperationException("Cannot instantiate entropy decoder.", e);
             }
 
             // **** ROI de-scaler ****
@@ -126,7 +126,7 @@ namespace CSJ2K
             }
             catch (ArgumentException e)
             {
-                throw new ApplicationException("Cannot instantiate roi de-scaler.", e);
+                throw new InvalidOperationException("Cannot instantiate roi de-scaler.", e);
             }
 
             // **** Dequantizer ****
@@ -137,7 +137,7 @@ namespace CSJ2K
             }
             catch (ArgumentException e)
             {
-                throw new ApplicationException("Cannot instantiate dequantizer.", e);
+                throw new InvalidOperationException("Cannot instantiate dequantizer.", e);
             }
 
             // **** Inverse wavelet transform ***
@@ -149,7 +149,7 @@ namespace CSJ2K
             }
             catch (ArgumentException e)
             {
-                throw new ApplicationException("Cannot instantiate inverse wavelet transform.", e);
+                throw new InvalidOperationException("Cannot instantiate inverse wavelet transform.", e);
             }
 
             int res = breader.ImgRes;
@@ -175,11 +175,11 @@ namespace CSJ2K
                 }
                 catch (ArgumentException e)
                 {
-                    throw new ApplicationException("Could not instantiate ICC profiler.", e);
+                    throw new InvalidOperationException("Could not instantiate ICC profiler.", e);
                 }
                 catch (ColorSpaceException e)
                 {
-                    throw new ApplicationException("Error processing ColorSpace information.", e);
+                    throw new InvalidOperationException("Error processing ColorSpace information.", e);
                 }
             }
             else
@@ -209,7 +209,7 @@ namespace CSJ2K
                 case 4:
                     pixelFormat = PixelFormat.Format32bppArgb; break;
                 default:
-                    throw new ApplicationException("Unsupported PixelFormat.  " + numComps + " components.");
+                    throw new InvalidOperationException("Unsupported PixelFormat.  " + numComps + " components.");
             }
 
             Bitmap dst = new Bitmap(decodedImage.ImgWidth, decodedImage.ImgHeight, pixelFormat);
@@ -325,7 +325,7 @@ namespace CSJ2K
         }
         public static void ToStream(Bitmap bitmap, Stream stream)
         {
-            throw new NotImplementedError();
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -337,35 +337,35 @@ namespace CSJ2K
 
             str = BitstreamReaderAgent.ParameterInfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--)
-                    pl.Set(str[i][0], str[i][3]);
+                    pl[str[i][0]] = str[i][3];
 
             str = EntropyDecoder.ParameterInfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--)
-                    pl.Set(str[i][0], str[i][3]);
+                    pl[str[i][0]] = str[i][3];
 
             str = ROIDeScaler.ParameterInfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--)
-                    pl.Set(str[i][0], str[i][3]);
+                    pl[str[i][0]] = str[i][3];
 
             str = Dequantizer.ParameterInfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--)
-                    pl.Set(str[i][0], str[i][3]);
+                    pl[str[i][0]] = str[i][3];
 
             str = InvCompTransf.ParameterInfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--)
-                    pl.Set(str[i][0], str[i][3]);
+                    pl[str[i][0]] = str[i][3];
 
             str = HeaderDecoder.ParameterInfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--)
-                    pl.Set(str[i][0], str[i][3]);
+                    pl[str[i][0]] = str[i][3];
 
             str = ICCProfiler.ParameterInfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--)
-                    pl.Set(str[i][0], str[i][3]);
+                    pl[str[i][0]] = str[i][3];
 
             str = pinfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--)
-                    pl.Set(str[i][0], str[i][3]);
+                    pl[str[i][0]] = str[i][3];
 
             return pl;
         }

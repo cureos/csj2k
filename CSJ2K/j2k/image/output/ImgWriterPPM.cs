@@ -81,7 +81,7 @@ namespace CSJ2K.j2k.image.output
 		
 		/// <summary>Where to write the data </summary>
 		//UPGRADE_TODO: Class 'java.io.RandomAccessFile' was converted to 'System.IO.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioRandomAccessFile'"
-		private System.IO.FileStream out_Renamed;
+		private System.IO.Stream out_Renamed;
 		
 		/// <summary>The array of indexes of the components from where to get the data </summary>
 		private int[] cps = new int[3];
@@ -245,7 +245,7 @@ namespace CSJ2K.j2k.image.output
 					out_Renamed.WriteByte((System.Byte) 0);
 				}
 			}
-			out_Renamed.Close();
+			out_Renamed.Dispose();
 			src = null;
 			out_Renamed = null;
 			db = null;

@@ -41,6 +41,8 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using System.Collections.Generic;
+
 namespace CSJ2K.j2k.util
 {
 	
@@ -78,22 +80,22 @@ namespace CSJ2K.j2k.util
 		{
 			get
 			{
-				ProgressWatch pw = (ProgressWatch) watchProgList[SupportClass.ThreadClass.Current()];
-				return (pw == null)?defWatchProg:pw;
+				ProgressWatch pw;
+				return (watchProgList.TryGetValue(SupportClass.ThreadClass.Current(), out pw))?pw:defWatchProg;
 			}
 			
 		}
 		
 		/// <summary>The loggers associated to different threads </summary>
 		//UPGRADE_NOTE: Final was removed from the declaration of 'loggerList '. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1003'"
-		private static readonly System.Collections.Hashtable loggerList = System.Collections.Hashtable.Synchronized(new System.Collections.Hashtable());
+		private static readonly System.Collections.Generic.Dictionary<SupportClass.ThreadClass, MsgLogger> loggerList = new Dictionary<SupportClass.ThreadClass, MsgLogger>();
 		
 		/// <summary>The default logger, for threads that have none associated with them </summary>
 		private static MsgLogger defMsgLogger = new StreamMsgLogger(System.Console.OpenStandardOutput(), System.Console.OpenStandardError(), 78);
 		
 		/// <summary>The ProgressWatch instance associated to different threads </summary>
 		//UPGRADE_NOTE: Final was removed from the declaration of 'watchProgList '. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1003'"
-		private static readonly System.Collections.Hashtable watchProgList = System.Collections.Hashtable.Synchronized(new System.Collections.Hashtable());
+		private static readonly System.Collections.Generic.Dictionary<SupportClass.ThreadClass, ProgressWatch> watchProgList = new Dictionary<SupportClass.ThreadClass, ProgressWatch>();
 		
 		/// <summary>The default ProgressWatch for threads that have none
 		/// associated with them. 
@@ -158,8 +160,8 @@ namespace CSJ2K.j2k.util
 		/// </returns>
 		public static MsgLogger getMsgLogger()
 		{
-			MsgLogger ml = (MsgLogger) loggerList[SupportClass.ThreadClass.Current()];
-			return (ml == null)?defMsgLogger:ml;
+			MsgLogger ml;
+			return loggerList.TryGetValue(SupportClass.ThreadClass.Current(), out ml)?ml:defMsgLogger;
 		}
 		
 		/// <summary> Returns the MsgLogger registered with the thread 't' (the

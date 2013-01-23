@@ -459,7 +459,7 @@ namespace CSJ2K.j2k.image.input
 										break;
 									
 									default: 
-										throw new System.ApplicationException("Internal JJ2000 bug");
+										throw new System.InvalidOperationException("Internal JJ2000 bug");
 									
 								}
 							}
@@ -490,7 +490,7 @@ namespace CSJ2K.j2k.image.input
 										break;
 									
 									default: 
-										throw new System.ApplicationException("Internal JJ2000 bug");
+										throw new System.InvalidOperationException("Internal JJ2000 bug");
 									
 								}
 							}
@@ -526,7 +526,7 @@ namespace CSJ2K.j2k.image.input
 										break;
 									
 									default: 
-										throw new System.ApplicationException("Internal JJ2000 bug");
+										throw new System.InvalidOperationException("Internal JJ2000 bug");
 									
 								}
 							}
@@ -556,7 +556,7 @@ namespace CSJ2K.j2k.image.input
 										break;
 									
 									default: 
-										throw new System.ApplicationException("Internal JJ2000 bug");
+										throw new System.InvalidOperationException("Internal JJ2000 bug");
 									
 								}
 							}

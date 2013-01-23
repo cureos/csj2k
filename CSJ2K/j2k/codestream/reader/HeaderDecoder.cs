@@ -41,6 +41,7 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using System.Collections.Generic;
 using CSJ2K.j2k.quantization.dequantizer;
 using CSJ2K.j2k.wavelet.synthesis;
 using CSJ2K.j2k.entropy.decoder;
@@ -451,7 +452,7 @@ namespace CSJ2K.j2k.codestream.reader
 		//private static readonly int TILE_RESET = ~ (PLM_FOUND | SIZ_FOUND | RGN_FOUND);
 		
 		/// <summary>HashTable used to store temporary marker segment byte buffers </summary>
-		private System.Collections.Hashtable ht = null;
+		private System.Collections.Generic.Dictionary<System.String, byte[]> ht = null;
 		
 		/// <summary>The number of components in the image </summary>
 		private int nComp;
@@ -472,7 +473,7 @@ namespace CSJ2K.j2k.codestream.reader
 		public int mainHeadOff;
 		
 		/// <summary>Vector containing info as to which tile each tilepart belong </summary>
-		private System.Collections.ArrayList tileOfTileParts;
+		private System.Collections.Generic.List<System.Int32> tileOfTileParts;
 		
 		/// <summary>Array containing the Nppm and Ippm fields of the PPM marker segments</summary>
 		private byte[][] pPMMarkerData;
@@ -667,7 +668,7 @@ namespace CSJ2K.j2k.codestream.reader
 			kid = filtIdx[0] = ehs.ReadByte();
 			if (kid >= (1 << 7))
 			{
-				throw new NotImplementedError("Custom filters not supported");
+				throw new NotImplementedException("Custom filters not supported");
 			}
 			// Return filter based on ID
 			switch (kid)
@@ -736,7 +737,7 @@ namespace CSJ2K.j2k.codestream.reader
 			ms.rsiz = ehs.ReadUInt16();
 			if (ms.rsiz > 2)
 			{
-				throw new System.ApplicationException("Codestream capabiities not JPEG 2000 - Part I" + " compliant");
+				throw new System.InvalidOperationException("Codestream capabiities not JPEG 2000 - Part I" + " compliant");
 			}
 			
 			// Read image size
@@ -1597,9 +1598,9 @@ namespace CSJ2K.j2k.codestream.reader
 			hvfilters[1] = vfilters;
 			
 			// Get precinct partition sizes
-			System.Collections.ArrayList[] v = new System.Collections.ArrayList[2];
-			v[0] = System.Collections.ArrayList.Synchronized(new System.Collections.ArrayList(10));
-			v[1] = System.Collections.ArrayList.Synchronized(new System.Collections.ArrayList(10));
+			System.Collections.Generic.List<System.Int32>[] v = new System.Collections.Generic.List<System.Int32>[2];
+			v[0] = new List<int>(10);
+			v[1] = new List<int>(10);
 			int val = CSJ2K.j2k.codestream.Markers.PRECINCT_PARTITION_DEF_SIZE;
 			if (!precinctPartitionIsUsed)
 			{
@@ -1775,9 +1776,9 @@ namespace CSJ2K.j2k.codestream.reader
 			hvfilters[1] = vfilters;
 			
 			// Get precinct partition sizes
-			System.Collections.ArrayList[] v = new System.Collections.ArrayList[2];
-			v[0] = System.Collections.ArrayList.Synchronized(new System.Collections.ArrayList(10));
-			v[1] = System.Collections.ArrayList.Synchronized(new System.Collections.ArrayList(10));
+			System.Collections.Generic.List<System.Int32>[] v = new System.Collections.Generic.List<System.Int32>[2];
+			v[0] = new List<int>(10);
+			v[1] = new List<int>(10);
 			int val = CSJ2K.j2k.codestream.Markers.PRECINCT_PARTITION_DEF_SIZE;
 			if (!precinctPartitionIsUsed)
 			{
@@ -2187,7 +2188,7 @@ namespace CSJ2K.j2k.codestream.reader
 			if (pPMMarkerData == null)
 			{
 				pPMMarkerData = new byte[nPPMMarkSeg][];
-				tileOfTileParts = System.Collections.ArrayList.Synchronized(new System.Collections.ArrayList(10));
+				tileOfTileParts = new List<int>(10);
 				decSpec.pphs.setDefault((System.Object) true);
 			}
 			
@@ -2293,7 +2294,7 @@ namespace CSJ2K.j2k.codestream.reader
 			System.String htKey = ""; // Name used as a key for the hash-table
 			if (ht == null)
 			{
-				ht = System.Collections.Hashtable.Synchronized(new System.Collections.Hashtable());
+				ht = new Dictionary<string, byte[]>();
 			}
 			
 			switch (marker)
@@ -2459,7 +2460,7 @@ namespace CSJ2K.j2k.codestream.reader
 			System.String htKey = ""; // Name used as a hash-table key
 			if (ht == null)
 			{
-				ht = System.Collections.Hashtable.Synchronized(new System.Collections.Hashtable());
+				ht = new Dictionary<string, byte[]>();
 			}
 			
 			switch (marker)
