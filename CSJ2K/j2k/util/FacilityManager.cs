@@ -40,7 +40,8 @@
 * 
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
-using CSJ2K.Util;
+
+using System;
 
 namespace CSJ2K.j2k.util
 {
@@ -70,13 +71,39 @@ namespace CSJ2K.j2k.util
 	/// </seealso>
 	public class FacilityManager
 	{
-		/// <summary>The default logger, for threads that have none associated with them </summary>
-		private static MsgLogger defMsgLogger = 
+		#region FIELDS
+
+		private static MsgLogger _defMsgLogger;
+
+		#endregion
+
+		#region CONSTRUCTORS
+
+		static FacilityManager()
+		{
 #if DOTNET
-			new StreamMsgLogger(System.Console.OpenStandardOutput(), System.Console.OpenStandardError(), 78);
+			DefaultMsgLogger = new StreamMsgLogger(System.Console.OpenStandardOutput(), System.Console.OpenStandardError(), 78);
 #else
-			new StreamMsgLogger(FileStreamFactory.Create("stdout.log", "rw"), FileStreamFactory.Create("stderr.log", "rw"), 78);
+			DefaultMsgLogger = null;
 #endif
+		}
+
+		#endregion
+
+		#region PROPERTIES
+
+		/// <summary>The default logger, for threads that have none associated with them </summary>
+		public static MsgLogger DefaultMsgLogger
+		{
+			set
+			{
+				if (_defMsgLogger != null)
+					throw new InvalidOperationException("Default message logger can only be registered once.");
+				_defMsgLogger = value;
+			}
+		}
+
+		#endregion
 
 		/// <summary> Returns the MsgLogger registered with the current thread (the
 		/// thread that calls this method). If the current thread has no
@@ -90,7 +117,7 @@ namespace CSJ2K.j2k.util
 		/// </returns>
 		public static MsgLogger getMsgLogger()
 		{
-			return defMsgLogger;
+			return _defMsgLogger;
 		}
 	}
 }
