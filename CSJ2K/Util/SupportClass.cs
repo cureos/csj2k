@@ -55,7 +55,7 @@ internal class SupportClass
 	/// <returns>The new array of bytes</returns>
 	public static byte[] ToByteArray(System.String sourceString)
 	{
-		return System.Text.UTF8Encoding.UTF8.GetBytes(sourceString);
+		return System.Text.Encoding.UTF8.GetBytes(sourceString);
 	}
 
 	/// <summary>
@@ -113,7 +113,7 @@ internal class SupportClass
 	/// <returns>The new array of chars</returns>
 	public static char[] ToCharArray(sbyte[] sByteArray) 
 	{
-		return System.Text.UTF8Encoding.UTF8.GetChars(ToByteArray(sByteArray));
+		return System.Text.Encoding.UTF8.GetChars(ToByteArray(sByteArray));
 	}
 
 	/// <summary>
@@ -123,7 +123,7 @@ internal class SupportClass
 	/// <returns>The new array of chars</returns>
 	public static char[] ToCharArray(byte[] byteArray) 
 	{
-		return System.Text.UTF8Encoding.UTF8.GetChars(byteArray);
+		return System.Text.Encoding.UTF8.GetChars(byteArray);
 	}
 
 	/*******************************/
