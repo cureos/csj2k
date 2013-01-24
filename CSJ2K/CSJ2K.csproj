@@ -349,7 +349,7 @@
     <Compile Include="Util\IBitmapAdapter.cs" />
     <Compile Include="Util\IFileInfo.cs" />
     <Compile Include="Util\IFileInfoAdapter.cs" />
-    <Compile Include="Util\IFileStreamFactory.cs" />
+    <Compile Include="Util\IFileStreamAdapter.cs" />
     <Compile Include="Util\SupportClass.cs">
       <SubType>Code</SubType>
     </Compile>

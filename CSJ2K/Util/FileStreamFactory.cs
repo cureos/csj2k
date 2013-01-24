@@ -5,12 +5,12 @@ namespace CSJ2K.Util
 {
 	public class FileStreamFactory
 #if DOTNET
-		: IFileStreamFactory
+		: IFileStreamAdapter
 #endif
 	{
 		#region FIELDS
 
-		private static IFileStreamFactory _factory;
+		private static IFileStreamAdapter _adapter;
 
 		#endregion
 
@@ -31,20 +31,20 @@ namespace CSJ2K.Util
 
 		#region METHODS
 
-		public static void RegisterFactory(IFileStreamFactory factory)
+		public static void RegisterFactory(IFileStreamAdapter adapter)
 		{
-			if (factory == null) throw new ArgumentNullException("factory");
-			if (_factory != null) throw new InvalidOperationException("File stream factory can only be registered once.");
-			_factory = factory;
+			if (adapter == null) throw new ArgumentNullException("adapter");
+			if (_adapter != null) throw new InvalidOperationException("File stream adapter can only be registered once.");
+			_adapter = adapter;
 		}
 
 		internal static Stream Create(string path, string mode)
 		{
-			if (_factory == null) throw new InvalidOperationException("No file stream factory is registered.");
+			if (_adapter == null) throw new InvalidOperationException("No file stream adapter is registered.");
 			if (path == null) throw new ArgumentNullException("path");
 			if (mode == null) throw new ArgumentNullException("mode");
 
-			return _factory.CreateFileStream(path, mode);
+			return _adapter.CreateFileStream(path, mode);
 		}
 
 #if DOTNET
