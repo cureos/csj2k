@@ -255,6 +255,11 @@
     <Compile Include="j2k\wavelet\WTFilterSpec.cs" />
     <Compile Include="Util\EndianBinaryReader.cs" />
     <Compile Include="Util\EndianBinaryWriter.cs" />
+    <Compile Include="Util\FileInfoFactory.cs" />
+    <Compile Include="Util\FileStreamFactory.cs" />
+    <Compile Include="Util\IFileInfo.cs" />
+    <Compile Include="Util\IFileInfoAdapter.cs" />
+    <Compile Include="Util\IFileStreamFactory.cs" />
     <Compile Include="Util\SupportClass.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

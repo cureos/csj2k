@@ -56,8 +56,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants>DOTNET</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
@@ -80,8 +79,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants>DOTNET</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
@@ -144,6 +142,7 @@
     <Compile Include="Icc\Tags\ICCSignatureType.cs" />
     <Compile Include="Icc\Tags\ICCMeasurementType.cs" />
     <Compile Include="J2kImage.cs" />
+    <Compile Include="Util\FileInfoFactory.cs" />
     <Compile Include="Util\EndianBinaryReader.cs" />
     <Compile Include="Icc\ICCMatrixBasedInputProfile.cs" />
     <Compile Include="Icc\ICCMonochromeInputProfile.cs" />
@@ -341,6 +340,12 @@
     <Compile Include="j2k\wavelet\WTDecompSpec.cs" />
     <Compile Include="j2k\wavelet\WTFilterSpec.cs" />
     <Compile Include="Util\EndianBinaryWriter.cs" />
+    <Compile Include="Util\FileInfoAdapter.cs" />
+    <Compile Include="Util\FileInfoImpl.cs" />
+    <Compile Include="Util\FileStreamFactory.cs" />
+    <Compile Include="Util\IFileInfo.cs" />
+    <Compile Include="Util\IFileInfoAdapter.cs" />
+    <Compile Include="Util\IFileStreamFactory.cs" />
     <Compile Include="Util\SupportClass.cs">
       <SubType>Code</SubType>
     </Compile>

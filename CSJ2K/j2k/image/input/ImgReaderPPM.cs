@@ -39,6 +39,7 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using CSJ2K.Util;
 using CSJ2K.j2k.image;
 using CSJ2K.j2k.io;
 using CSJ2K.j2k;
@@ -94,7 +95,7 @@ namespace CSJ2K.j2k.image.input
 		/// filters). This avoid allocating new DataBlk at each time 
 		/// </summary>
 		private DataBlkInt intBlk;
-		
+
 		/// <summary> Creates a new PPM file reader from the specified file.
 		/// 
 		/// </summary>
@@ -104,9 +105,10 @@ namespace CSJ2K.j2k.image.input
 		/// <param name="IOException">If an error occurs while opening the file.
 		/// 
 		/// </param>
-		public ImgReaderPPM(System.IO.FileInfo file):this(SupportClass.RandomAccessFileSupport.CreateRandomAccessFile(file, "r"))
+		public ImgReaderPPM(IFileInfo file)
+			: this(SupportClass.RandomAccessFileSupport.CreateRandomAccessFile(file, "r"))
 		{
-		}
+		} 
 		
 		/// <summary> Creates a new PPM file reader from the specified file name.
 		/// 

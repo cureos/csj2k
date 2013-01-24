@@ -41,6 +41,8 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using CSJ2K.Util;
+
 namespace CSJ2K.j2k.io
 {
 	
@@ -172,7 +174,7 @@ namespace CSJ2K.j2k.io
 		/// <exception cref="java.io.IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
-		protected internal BufferedRandomAccessFile(System.IO.FileInfo file, System.String mode, int bufferSize)
+		protected internal BufferedRandomAccessFile(IFileInfo file, System.String mode, int bufferSize)
 		{
 			
 			fileName = file.Name;
@@ -182,29 +184,9 @@ namespace CSJ2K.j2k.io
 				isReadOnly = false;
 				if (mode.Equals("rw"))
 				{
-					// mode read / (over)write
-					bool tmpBool;
-					if (System.IO.File.Exists(file.FullName))
-						tmpBool = true;
-					else
-						tmpBool = System.IO.Directory.Exists(file.FullName);
-					if (tmpBool)
-					// Output file already exists
+					if (file.Exists && !file.Delete())
 					{
-						bool tmpBool2;
-						if (System.IO.File.Exists(file.FullName))
-						{
-							System.IO.File.Delete(file.FullName);
-							tmpBool2 = true;
-						}
-						else if (System.IO.Directory.Exists(file.FullName))
-						{
-							System.IO.Directory.Delete(file.FullName);
-							tmpBool2 = true;
-						}
-						else
-							tmpBool2 = false;
-						bool generatedAux = tmpBool2;
+						throw new System.IO.IOException("Could not delete existing file");
 					}
 				}
 				mode = "rw";
@@ -230,7 +212,7 @@ namespace CSJ2K.j2k.io
 		/// <exception cref="java.io.IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
-		protected internal BufferedRandomAccessFile(System.IO.FileInfo file, System.String mode):this(file, mode, 512)
+		protected internal BufferedRandomAccessFile(IFileInfo file, System.String mode):this(file, mode, 512)
 		{
 		}
 		
@@ -252,7 +234,7 @@ namespace CSJ2K.j2k.io
 		/// <exception cref="java.io.IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
-		protected internal BufferedRandomAccessFile(System.String name, System.String mode, int bufferSize):this(new System.IO.FileInfo(name), mode, bufferSize)
+		protected internal BufferedRandomAccessFile(System.String name, System.String mode, int bufferSize):this(FileInfoFactory.Create(name), mode, bufferSize)
 		{
 		}
 		

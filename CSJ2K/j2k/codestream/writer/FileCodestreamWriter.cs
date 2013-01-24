@@ -147,7 +147,8 @@ namespace CSJ2K.j2k.codestream.writer
 		
 		/// <summary>Length of last packets containing no ROI information </summary>
 		private int lenLastNoROI = 0;
-		
+
+#if DOTNET
 		/// <summary> Opens the file 'file' for writing the codestream. The magic number is
 		/// written to the bit stream. Normally, the header encoder must be empty
 		/// (i.e. no data has been written to it yet). A BufferedOutputStream is
@@ -166,13 +167,15 @@ namespace CSJ2K.j2k.codestream.writer
 		/// for writing or while writing the magic number.
 		/// 
 		/// </exception>
-		public FileCodestreamWriter(System.IO.FileInfo file, int mb):base(mb)
+		public FileCodestreamWriter(System.IO.FileInfo file, int mb)
+			: base(mb)
 		{
 			//UPGRADE_TODO: Constructor 'java.io.FileOutputStream.FileOutputStream' was converted to 'System.IO.FileStream.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioFileOutputStreamFileOutputStream_javaioFile'"
 			out_Renamed = new System.IO.BufferedStream(new System.IO.FileStream(file.FullName, System.IO.FileMode.Create), DEF_BUF_LEN);
 			initSOP_EPHArrays();
-		}
-		
+		}		
+#endif
+	
 		/// <summary> Opens the file named 'fname' for writing the bit stream, using the 'he'
 		/// header encoder. The magic number is written to the bit
 		/// stream. Normally, the header encoder must be empty (i.e. no data has

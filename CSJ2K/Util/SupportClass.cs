@@ -10,8 +10,9 @@
 //
 
 using System;
+using CSJ2K.Util;
 
-	/// <summary>
+/// <summary>
 	/// This interface should be implemented by any class whose instances are intended 
 	/// to be executed by a thread.
 	/// </summary>
@@ -178,20 +179,9 @@ internal class SupportClass
 		/// <param name="fileName">A relative or absolute path for the file to open</param>
 		/// <param name="mode">Mode to open the file in</param>
 		/// <returns>The new System.IO.FileStream</returns>
-		public static System.IO.FileStream CreateRandomAccessFile(System.String fileName, System.String mode) 
+		public static System.IO.Stream CreateRandomAccessFile(System.String fileName, System.String mode)
 		{
-			System.IO.FileStream newFile = null;
-
-            if (mode.CompareTo("rw") == 0)
-            //    newFile = new System.IO.FileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
-            //else if (mode.CompareTo("rw+") == 0)
-                newFile = new System.IO.FileStream(fileName, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
-            else if (mode.CompareTo("r") == 0)
-                newFile = new System.IO.FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-            else
-                throw new System.ArgumentException();
-
-			return newFile;
+			return FileStreamFactory.Create(fileName, mode);
 		}
 
 		/// <summary>
@@ -200,17 +190,17 @@ internal class SupportClass
 		/// <param name="fileName">File infomation for the file to open</param>
 		/// <param name="mode">Mode to open the file in</param>
 		/// <returns>The new System.IO.FileStream</returns>
-		public static System.IO.FileStream CreateRandomAccessFile(System.IO.FileInfo fileName, System.String mode)
+		public static System.IO.Stream CreateRandomAccessFile(IFileInfo fileName, System.String mode)
 		{
 			return CreateRandomAccessFile(fileName.FullName, mode);
-		}
+		} 
 
 		/// <summary>
 		/// Writes the data to the specified file stream
 		/// </summary>
 		/// <param name="data">Data to write</param>
 		/// <param name="fileStream">File to write to</param>
-		public static void WriteBytes(System.String data,System.IO.FileStream fileStream)
+		public static void WriteBytes(System.String data,System.IO.Stream fileStream)
 		{
 			int index = 0;
 			int length = data.Length;
@@ -224,7 +214,7 @@ internal class SupportClass
 		/// </summary>
 		/// <param name="data">String of information to write</param>
 		/// <param name="fileStream">File to write to</param>
-		public static void WriteChars(System.String data,System.IO.FileStream fileStream)
+		public static void WriteChars(System.String data,System.IO.Stream fileStream)
 		{
 			WriteBytes(data, fileStream);	
 		}
@@ -234,7 +224,7 @@ internal class SupportClass
 		/// </summary>
 		/// <param name="sByteArray">Data to write</param>
 		/// <param name="fileStream">File to write to</param>
-		public static void WriteRandomFile(sbyte[] sByteArray,System.IO.FileStream fileStream)
+		public static void WriteRandomFile(sbyte[] sByteArray,System.IO.Stream fileStream)
 		{
 			byte[] byteArray = ToByteArray(sByteArray);
 			fileStream.Write(byteArray, 0, byteArray.Length);
@@ -1740,7 +1730,8 @@ internal class SupportClass
 			threadField = new System.Threading.Thread(new System.Threading.ThreadStart(Run));
 			this.Name = Name;
 		}
-	      
+
+#if DOTNET
 		/// <summary>
 		/// Initializes a new instance of the Thread class.
 		/// </summary>
@@ -1749,7 +1740,7 @@ internal class SupportClass
 		{
 			threadField = new System.Threading.Thread(Start);
 		}
-	 
+
 		/// <summary>
 		/// Initializes a new instance of the Thread class.
 		/// </summary>
@@ -1759,7 +1750,8 @@ internal class SupportClass
 		{
 			threadField = new System.Threading.Thread(Start);
 			this.Name = Name;
-		}
+		} 
+#endif
 	      
 		/// <summary>
 		/// This method has no functionality unless the method is overridden

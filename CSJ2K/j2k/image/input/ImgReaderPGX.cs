@@ -42,6 +42,7 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using CSJ2K.Util;
 using CSJ2K.j2k.image;
 using CSJ2K.j2k.io;
 using CSJ2K.j2k;
@@ -109,7 +110,7 @@ namespace CSJ2K.j2k.image.input
 		
 		/// <summary>The RandomAccessIO where to get datas from </summary>
 		//UPGRADE_TODO: Class 'java.io.RandomAccessFile' was converted to 'System.IO.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioRandomAccessFile'"
-		private System.IO.FileStream in_Renamed;
+		private System.IO.Stream in_Renamed;
 		
 		/// <summary>The bit-depth of the input file (must be between 1 and 31)</summary>
 		private int bitDepth;
@@ -145,17 +146,12 @@ namespace CSJ2K.j2k.image.input
 		/// <exception cref="IOException">If an I/O error occurs.
 		/// 
 		/// </exception>
-		public ImgReaderPGX(System.IO.FileInfo in_Renamed)
+		public ImgReaderPGX(IFileInfo in_Renamed)
 		{
 			System.String header;
 			
 			// Check if specified file exists
-			bool tmpBool;
-			if (System.IO.File.Exists(in_Renamed.FullName))
-				tmpBool = true;
-			else
-				tmpBool = System.IO.Directory.Exists(in_Renamed.FullName);
-			if (!tmpBool)
+			if (!in_Renamed.Exists)
 			{
 				throw new System.ArgumentException("PGX file " + in_Renamed.Name + " does not exist");
 			}
@@ -249,7 +245,7 @@ namespace CSJ2K.j2k.image.input
 		/// <param name="inName">The input file name.
 		/// 
 		/// </param>
-		public ImgReaderPGX(System.String inName):this(new System.IO.FileInfo(inName))
+		public ImgReaderPGX(System.String inName):this(FileInfoFactory.Create(inName))
 		{
 		}
 		
@@ -262,7 +258,7 @@ namespace CSJ2K.j2k.image.input
 		/// </exception>
 		public override void  close()
 		{
-			in_Renamed.Close();
+			in_Renamed.Dispose();
 			in_Renamed = null;
 			buf = null;
 		}

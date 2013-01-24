@@ -41,6 +41,8 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using CSJ2K.Util;
+
 namespace CSJ2K.j2k.io
 {
 	
@@ -60,7 +62,6 @@ namespace CSJ2K.j2k.io
 	/// </seealso>
 	public class BEBufferedRandomAccessFile:BufferedRandomAccessFile, RandomAccessIO, EndianType
 	{
-		
 		/// <summary> Constructor. Always needs a size for the buffer.
 		/// 
 		/// </summary>
@@ -79,11 +80,12 @@ namespace CSJ2K.j2k.io
 		/// <exception cref="java.io.IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
-		public BEBufferedRandomAccessFile(System.IO.FileInfo file, System.String mode, int bufferSize):base(file, mode, bufferSize)
+		public BEBufferedRandomAccessFile(IFileInfo file, System.String mode, int bufferSize)
+			: base(file, mode, bufferSize)
 		{
 			byte_Ordering = CSJ2K.j2k.io.EndianType_Fields.BIG_ENDIAN;
 		}
-		
+
 		/// <summary> Constructor. Uses the default value for the byte-buffer size (512
 		/// bytes).
 		/// 
@@ -100,10 +102,11 @@ namespace CSJ2K.j2k.io
 		/// <exception cref="java.io.IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
-		public BEBufferedRandomAccessFile(System.IO.FileInfo file, System.String mode):base(file, mode)
+		public BEBufferedRandomAccessFile(IFileInfo file, System.String mode)
+			: base(file, mode)
 		{
 			byte_Ordering = CSJ2K.j2k.io.EndianType_Fields.BIG_ENDIAN;
-		}
+		} 
 		
 		/// <summary> Constructor. Always needs a size for the buffer.
 		/// 
