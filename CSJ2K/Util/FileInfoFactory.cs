@@ -2,13 +2,24 @@
 
 namespace CSJ2K.Util
 {
-	public class FileInfoFactory
+	public static class FileInfoFactory
 	{
 		#region FIELDS
 
 		private static IFileInfoAdapter _adapter;
 
 		#endregion
+
+#if DOTNET
+		#region CONSTRUCTORS
+
+		static FileInfoFactory()
+		{
+			RegisterAdapter(new FileInfoAdapter());
+		}
+
+		#endregion
+#endif
 
 		#region METHODS
 

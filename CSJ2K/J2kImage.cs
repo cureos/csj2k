@@ -1,13 +1,12 @@
 #region Using Statements
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using CSJ2K;
 using CSJ2K.Color;
 using CSJ2K.Icc;
+using CSJ2K.Util;
 using CSJ2K.j2k;
 using CSJ2K.j2k.codestream;
 using CSJ2K.j2k.codestream.reader;
@@ -29,20 +28,20 @@ namespace CSJ2K
     {
 
         #region Static Decoder Methods
-        public static Image FromFile(string filename)
+        public static IBitmap FromFile(string filename)
         {
-            Stream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            Image img = FromStream(stream);
-            stream.Close();
+            Stream stream = FileStreamFactory.Create(filename, "r");
+            IBitmap img = FromStream(stream);
+            stream.Dispose();
             return (img);
         }
 
-        public static Image FromBytes(byte[] j2kdata)
+        public static IBitmap FromBytes(byte[] j2kdata)
         {
             return FromStream(new MemoryStream(j2kdata));
         }
 
-        public static Image FromStream(Stream stream)
+        public static IBitmap FromStream(Stream stream)
         {
             RandomAccessIO in_stream = new ISRandomAccessIO(stream);
 
@@ -199,22 +198,9 @@ namespace CSJ2K
             int bytesPerPixel = (numComps == 4 ? 4 : 3);
 
             // **** Copy to Bitmap ****
-            PixelFormat pixelFormat;
-            switch (numComps)
-            {
-                case 1:
-                    pixelFormat = PixelFormat.Format24bppRgb; break;
-                case 3:
-                    pixelFormat = PixelFormat.Format24bppRgb; break;
-                case 4:
-                    pixelFormat = PixelFormat.Format32bppArgb; break;
-                default:
-                    throw new InvalidOperationException("Unsupported PixelFormat.  " + numComps + " components.");
-            }
+			var dst = BitmapFactory.Create(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps);
 
-            Bitmap dst = new Bitmap(decodedImage.ImgWidth, decodedImage.ImgHeight, pixelFormat);
-
-            Coord numTiles = decodedImage.getNumTiles(null);
+	        Coord numTiles = decodedImage.getNumTiles(null);
 
             int tIdx = 0;
 
@@ -296,34 +282,29 @@ namespace CSJ2K
                             }
                         }
 
-                        BitmapData dstdata = dst.LockBits(
-                            new System.Drawing.Rectangle(tOffx, tOffy + l, width, 1),
-                            ImageLockMode.ReadWrite, pixelFormat);
-
-                        IntPtr ptr = dstdata.Scan0;
-                        System.Runtime.InteropServices.Marshal.Copy(rowvalues, 0, ptr, rowvalues.Length);
-                        dst.UnlockBits(dstdata);
+                        dst.FillRow(tOffx, tOffy + l, width, rowvalues);
                     }
                 }
             }
             return dst;
         }
-        #endregion
+
+	    #endregion
 
         #region Static Encoder Methods
-        public static void ToFile(Bitmap bitmap, string filename)
+        public static void ToFile(IBitmap bitmap, string filename)
         {
-            FileStream stream = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            Stream stream = FileStreamFactory.Create(filename, "rw");
             ToStream(bitmap, stream);
-            stream.Close();
+            stream.Dispose();
         }
-        public static byte[] ToArray(Bitmap bitmap)
+        public static byte[] ToArray(IBitmap bitmap)
         {
             MemoryStream stream = new MemoryStream();
             ToStream(bitmap, stream);
             return stream.ToArray();
         }
-        public static void ToStream(Bitmap bitmap, Stream stream)
+        public static void ToStream(IBitmap bitmap, Stream stream)
         {
             throw new NotImplementedException();
         }

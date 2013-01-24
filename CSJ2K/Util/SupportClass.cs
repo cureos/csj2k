@@ -800,7 +800,7 @@ internal class SupportClass
 			{
 				s += (char) i;
 			}
-			reader.Close();
+			reader.Dispose();
             		this.inStringReader = new BackStringReader(s);
 			this.init();
 		}		
@@ -821,7 +821,7 @@ internal class SupportClass
 		/// <param name="stream">Stream to be parsed.</param>
 		public StreamTokenizerSupport(System.IO.Stream stream)
 		{
-			this.inStream = new BackInputStream(new System.IO.BufferedStream(stream), 2);
+			this.inStream = new BackInputStream(stream, 2);
 			this.init();
 		}
 		
@@ -1731,7 +1731,6 @@ internal class SupportClass
 			this.Name = Name;
 		}
 
-#if DOTNET
 		/// <summary>
 		/// Initializes a new instance of the Thread class.
 		/// </summary>
@@ -1751,7 +1750,6 @@ internal class SupportClass
 			threadField = new System.Threading.Thread(Start);
 			this.Name = Name;
 		} 
-#endif
 	      
 		/// <summary>
 		/// This method has no functionality unless the method is overridden

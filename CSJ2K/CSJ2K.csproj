@@ -142,6 +142,9 @@
     <Compile Include="Icc\Tags\ICCSignatureType.cs" />
     <Compile Include="Icc\Tags\ICCMeasurementType.cs" />
     <Compile Include="J2kImage.cs" />
+    <Compile Include="Util\BitmapAdapter.cs" />
+    <Compile Include="Util\BitmapFactory.cs" />
+    <Compile Include="Util\BitmapImpl.cs" />
     <Compile Include="Util\FileInfoFactory.cs" />
     <Compile Include="Util\EndianBinaryReader.cs" />
     <Compile Include="Icc\ICCMatrixBasedInputProfile.cs" />
@@ -343,6 +346,8 @@
     <Compile Include="Util\FileInfoAdapter.cs" />
     <Compile Include="Util\FileInfoImpl.cs" />
     <Compile Include="Util\FileStreamFactory.cs" />
+    <Compile Include="Util\IBitmap.cs" />
+    <Compile Include="Util\IBitmapAdapter.cs" />
     <Compile Include="Util\IFileInfo.cs" />
     <Compile Include="Util\IFileInfoAdapter.cs" />
     <Compile Include="Util\IFileStreamFactory.cs" />
