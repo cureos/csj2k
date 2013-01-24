@@ -41,6 +41,7 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using System.Collections.Generic;
 using CSJ2K.j2k.codestream;
 using CSJ2K.j2k.io;
 namespace CSJ2K.j2k.util
@@ -227,7 +228,7 @@ namespace CSJ2K.j2k.util
 			short marker;
 			int halfMarker;
 			int tileEnd;
-			System.Collections.ArrayList markPos = System.Collections.ArrayList.Synchronized(new System.Collections.ArrayList(10));
+			System.Collections.Generic.List<System.Int32> markPos = new List<int>(10);
 			
 			// Find position of first SOT marker
 			marker = (short) fi.readUnsignedShort(); // read SOC marker
@@ -573,7 +574,7 @@ namespace CSJ2K.j2k.util
 					prem -= np;
 				}
 			}
-			temp.Close();
+			temp.Dispose();
 		}
 		
 		/// <summary> This method writes the new codestream to the file. 

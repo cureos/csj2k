@@ -87,11 +87,11 @@ namespace CSJ2K.j2k.util
 		public StreamMsgLogger(System.IO.Stream outstr, System.IO.Stream errstr, int lw)
 		{
 			System.IO.StreamWriter temp_writer;
-			temp_writer = new System.IO.StreamWriter(outstr, System.Text.Encoding.Default);
+			temp_writer = new System.IO.StreamWriter(outstr, System.Text.Encoding.UTF8);
 			temp_writer.AutoFlush = true;
 			out_Renamed = temp_writer;
 			System.IO.StreamWriter temp_writer2;
-			temp_writer2 = new System.IO.StreamWriter(errstr, System.Text.Encoding.Default);
+			temp_writer2 = new System.IO.StreamWriter(errstr, System.Text.Encoding.UTF8);
 			temp_writer2.AutoFlush = true;
 			err = temp_writer2;
 			mp = new MsgPrinter(lw);

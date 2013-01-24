@@ -40,6 +40,7 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using System.Collections.Generic;
 using CSJ2K.j2k.codestream;
 using CSJ2K.j2k.wavelet;
 using CSJ2K.j2k.image;
@@ -146,7 +147,7 @@ namespace CSJ2K.j2k.entropy
 			// resolution level, 1= index of first component, 2=index of first  
 			// layer not included, 3= index of first resolution level not
 			// included, 4= index of  first component not included
-			System.Collections.ArrayList progression = System.Collections.ArrayList.Synchronized(new System.Collections.ArrayList(10));
+			System.Collections.Generic.List<Progression> progression = new List<Progression>(10);
 			int tmp = 0;
 			Progression curProg = null;
 			

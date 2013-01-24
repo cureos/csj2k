@@ -305,7 +305,6 @@
     <Compile Include="j2k\util\ProgressWatch.cs" />
     <Compile Include="j2k\util\StreamMsgLogger.cs" />
     <Compile Include="j2k\util\StringFormatException.cs" />
-    <Compile Include="j2k\util\ThreadPool.cs" />
     <Compile Include="j2k\wavelet\analysis\AnWTFilter.cs" />
     <Compile Include="j2k\wavelet\analysis\AnWTFilterFloat.cs" />
     <Compile Include="j2k\wavelet\analysis\AnWTFilterFloatLift9x7.cs" />

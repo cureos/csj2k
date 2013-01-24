@@ -42,6 +42,7 @@
 * */
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using CSJ2K.j2k.quantization.quantizer;
 using CSJ2K.j2k.wavelet.analysis;
 using CSJ2K.j2k.codestream;
@@ -52,6 +53,7 @@ using CSJ2K.j2k.image;
 using CSJ2K.j2k.util;
 using CSJ2K.j2k.io;
 using CSJ2K.j2k;
+
 namespace CSJ2K.j2k.entropy.encoder
 {
 	
@@ -145,7 +147,7 @@ namespace CSJ2K.j2k.entropy.encoder
 		/// <summary>The pool of threads, for the threaded implementation. It is null, if
 		/// non threaded implementation is used 
 		/// </summary>
-		private ThreadPool tPool;
+//		private ThreadPool tPool;
 		
 		/// <summary>The queue of idle compressors. Used in multithreaded
 		/// implementation only 
@@ -742,6 +744,29 @@ namespace CSJ2K.j2k.entropy.encoder
 					Enclosing_Instance.completedComps[c].Add(this);
 				}
 			}
+
+			public virtual void Run(object state)
+			{
+				// Start the code-block compression
+				try
+				{
+#if DO_TIMING
+					long stime = 0L;
+					stime = (System.DateTime.Now.Ticks - 621355968000000000) / 10000;
+#endif
+					CSJ2K.j2k.entropy.encoder.StdEntropyCoder.compressCodeBlock(c, ccb, Enclosing_Instance.srcblkT[idx], Enclosing_Instance.mqT[idx], Enclosing_Instance.boutT[idx], Enclosing_Instance.outT[idx], Enclosing_Instance.stateT[idx], Enclosing_Instance.distbufT[idx], Enclosing_Instance.ratebufT[idx], Enclosing_Instance.istermbufT[idx], Enclosing_Instance.symbufT[idx], Enclosing_Instance.ctxtbufT[idx], options, rev, lcType, tType);
+#if DO_TIMING
+					time[c] += (System.DateTime.Now.Ticks - 621355968000000000) / 10000 - stime;
+#endif
+				}
+				finally
+				{
+					// Join the queue of completed compression, even if exceptions 
+					// occurred.
+					Enclosing_Instance.completedComps[c].Add(this);
+					((System.Threading.ManualResetEvent)state).Set();
+				}
+			}
 			
 			/// <summary> Returns the wall time spent by this compressor for component 'c'
 			/// since the last call to this method (or the creation of this
@@ -828,7 +853,7 @@ namespace CSJ2K.j2k.entropy.encoder
 			maxCBlkWidth = cblks.MaxCBlkWidth;
 			maxCBlkHeight = cblks.MaxCBlkHeight;
 			
-            nt = Environment.ProcessorCount;
+            nt = 1/*Environment.ProcessorCount */;
             /*
 			// Get the number of threads to use, or default to one
 			try
@@ -857,7 +882,7 @@ namespace CSJ2K.j2k.entropy.encoder
 			{
 				FacilityManager.getMsgLogger().printmsg(CSJ2K.j2k.util.MsgLogger_Fields.INFO, "Using multithreaded entropy coder " + "with " + nt + " compressor threads.");
 				tsl = nt;
-				tPool = new ThreadPool(nt, (System.Int32) SupportClass.ThreadClass.Current().Priority + THREADS_PRIORITY_INC, "StdEntropyCoder");
+//				tPool = new ThreadPool(nt, (System.Int32) SupportClass.ThreadClass.Current().Priority + THREADS_PRIORITY_INC, "StdEntropyCoder");
 				idleComps = new List<Compressor>();
 				completedComps = new List<Compressor>[src.NumComps];
 				nBusyComps = new int[src.NumComps];
@@ -874,7 +899,7 @@ namespace CSJ2K.j2k.entropy.encoder
 			else
 			{
 				tsl = 1;
-				tPool = null;
+//				tPool = null;
 				idleComps = null;
 				completedComps = null;
 				nBusyComps = null;
@@ -1084,7 +1109,7 @@ namespace CSJ2K.j2k.entropy.encoder
 #if DO_TIMING
 			long stime = 0L; // Start time for timed sections
 #endif
-			if (tPool == null)
+			if (c == 0/**/)
 			{
 				// Use single threaded implementation
 				// Get code-block data from source
@@ -1129,6 +1154,7 @@ namespace CSJ2K.j2k.entropy.encoder
 				stime = (System.DateTime.Now.Ticks - 621355968000000000) / 10000;
 #endif
 				// Give data to all free compressors, using the current component
+				ManualResetEvent manualReset = new ManualResetEvent(false);
 				while (!finishedTileComponent[c] && !(idleComps.Count == 0))
 				{
 					// Get an idle compressor
@@ -1161,7 +1187,9 @@ namespace CSJ2K.j2k.entropy.encoder
 						nBusyComps[c]++;
 						ccb = null;
 						// Send compressor to execution in thread pool
-						tPool.runTarget(compr, completedComps[c]);
+						manualReset.Reset();
+						System.Threading.ThreadPool.QueueUserWorkItem(compr.Run, manualReset);
+						//tPool.runTarget(compr, completedComps[c]);
 					}
 					else
 					{
@@ -1178,22 +1206,25 @@ namespace CSJ2K.j2k.entropy.encoder
 					lock (completedComps[c])
 					{
 						// If no compressor is done, wait until one is
-						if ((completedComps[c].Count == 0))
-						{
+//						if ((completedComps[c].Count == 0))
+//						{
+						Exception exception = null;
 							try
 							{
 #if DO_TIMING
 								time[c] += (System.DateTime.Now.Ticks - 621355968000000000) / 10000 - stime;
 #endif
-								System.Threading.Monitor.Wait(completedComps[c]);
+								manualReset.WaitOne();
+//								System.Threading.Monitor.Wait(completedComps[c]);
 #if DO_TIMING
 								stime = (System.DateTime.Now.Ticks - 621355968000000000) / 10000;
 #endif
 							}
-							catch (System.Threading.ThreadInterruptedException e)
+							catch (System.Exception e)
 							{
+								exception = e;
 							}
-						}
+//						}
 						// Remove the thread from the completed queue and put it
 						// on the idle queue
 						compr = (Compressor) SupportClass.StackSupport.Pop(completedComps[c]);
@@ -1201,7 +1232,8 @@ namespace CSJ2K.j2k.entropy.encoder
 						nBusyComps[c]--;
 						idleComps.Add(compr);
 						// Check targets error condition
-						tPool.checkTargetErrors();
+						if (exception != null) throw exception;
+//						tPool.checkTargetErrors();
 						// Get the result of compression and return that.
 #if DO_TIMING
 						time[c] += (System.DateTime.Now.Ticks - 621355968000000000) / 10000 - stime;
@@ -1212,7 +1244,7 @@ namespace CSJ2K.j2k.entropy.encoder
 				else
 				{
 					// Check targets error condition
-					tPool.checkTargetErrors();
+//					tPool.checkTargetErrors();
 					// Printing timing info if necessary
 #if DO_TIMING
 					time[c] += (System.DateTime.Now.Ticks - 621355968000000000) / 10000 - stime;

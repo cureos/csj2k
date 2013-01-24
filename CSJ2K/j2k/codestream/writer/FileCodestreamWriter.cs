@@ -41,6 +41,7 @@
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
 using System;
+using CSJ2K.Util;
 using CSJ2K.j2k.codestream;
 namespace CSJ2K.j2k.codestream.writer
 {
@@ -200,7 +201,7 @@ namespace CSJ2K.j2k.codestream.writer
 		public FileCodestreamWriter(System.String fname, int mb):base(mb)
 		{
 			//UPGRADE_TODO: Constructor 'java.io.FileOutputStream.FileOutputStream' was converted to 'System.IO.FileStream.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioFileOutputStreamFileOutputStream_javalangString'"
-			out_Renamed = new System.IO.BufferedStream(new System.IO.FileStream(fname, System.IO.FileMode.Create), DEF_BUF_LEN);
+			out_Renamed = FileStreamFactory.Create(fname, "rw");
 			initSOP_EPHArrays();
 		}
 		
@@ -415,7 +416,7 @@ namespace CSJ2K.j2k.codestream.writer
 			
 			ndata += 2; // Add two to length of codestream for EOC marker
 			
-			out_Renamed.Close();
+			out_Renamed.Dispose();
 		}
 		
 		/// <summary> Writes the header data in the codestream and actualize ndata with the

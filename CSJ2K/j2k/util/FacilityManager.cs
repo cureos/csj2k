@@ -40,8 +40,7 @@
 * 
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
-using System;
-using System.Collections.Generic;
+using CSJ2K.Util;
 
 namespace CSJ2K.j2k.util
 {
@@ -71,83 +70,14 @@ namespace CSJ2K.j2k.util
 	/// </seealso>
 	public class FacilityManager
 	{
-		/// <summary> Returns the ProgressWatch instance registered with the current
-		/// thread (the thread that calls this method). If the current
-		/// thread has no registered ProgressWatch, then the default one is used. 
-		/// 
-		/// </summary>
-		public static ProgressWatch ProgressWatch
-		{
-			get
-			{
-				ProgressWatch pw;
-				return (watchProgList.TryGetValue(SupportClass.ThreadClass.Current(), out pw))?pw:defWatchProg;
-			}
-			
-		}
-		
-		/// <summary>The loggers associated to different threads </summary>
-		//UPGRADE_NOTE: Final was removed from the declaration of 'loggerList '. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1003'"
-		private static readonly System.Collections.Generic.Dictionary<SupportClass.ThreadClass, MsgLogger> loggerList = new Dictionary<SupportClass.ThreadClass, MsgLogger>();
-		
 		/// <summary>The default logger, for threads that have none associated with them </summary>
-		private static MsgLogger defMsgLogger = new StreamMsgLogger(System.Console.OpenStandardOutput(), System.Console.OpenStandardError(), 78);
-		
-		/// <summary>The ProgressWatch instance associated to different threads </summary>
-		//UPGRADE_NOTE: Final was removed from the declaration of 'watchProgList '. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1003'"
-		private static readonly System.Collections.Generic.Dictionary<SupportClass.ThreadClass, ProgressWatch> watchProgList = new Dictionary<SupportClass.ThreadClass, ProgressWatch>();
-		
-		/// <summary>The default ProgressWatch for threads that have none
-		/// associated with them. 
-		/// </summary>
-		private static ProgressWatch defWatchProg = null;
-		
-		
-		internal static void  registerProgressWatch(SupportClass.ThreadClass t, ProgressWatch pw)
-		{
-			if (pw == null)
-			{
-				throw new System.NullReferenceException();
-			}
-			if (t == null)
-			{
-				defWatchProg = pw;
-			}
-			else
-			{
-				watchProgList[t] = pw;
-			}
-		}
-		
-		/// <summary> Registers the MsgLogger 'ml' as the logging facility of the
-		/// thread 't'. If any other logging facility was registered with
-		/// the thread 't' it is overriden by 'ml'. If 't' is null then
-		/// 'ml' is taken as the default message logger that is used for
-		/// threads that have no MsgLogger registered.
-		/// 
-		/// </summary>
-		/// <param name="t">The thread to associate with 'ml'
-		/// 
-		/// </param>
-		/// <param name="ml">The MsgLogger to associate with therad ml
-		/// 
-		/// </param>
-		internal static void  registerMsgLogger(SupportClass.ThreadClass t, MsgLogger ml)
-		{
-			if (ml == null)
-			{
-				throw new System.NullReferenceException();
-			}
-			if (t == null)
-			{
-				defMsgLogger = ml;
-			}
-			else
-			{
-				loggerList[t] = ml;
-			}
-		}
-		
+		private static MsgLogger defMsgLogger = 
+#if DOTNET
+			new StreamMsgLogger(System.Console.OpenStandardOutput(), System.Console.OpenStandardError(), 78);
+#else
+			new StreamMsgLogger(FileStreamFactory.Create("stdout.log", "rw"), FileStreamFactory.Create("stderr.log", "rw"), 78);
+#endif
+
 		/// <summary> Returns the MsgLogger registered with the current thread (the
 		/// thread that calls this method). If the current thread has no
 		/// registered MsgLogger then the default message logger is
@@ -160,27 +90,7 @@ namespace CSJ2K.j2k.util
 		/// </returns>
 		public static MsgLogger getMsgLogger()
 		{
-			MsgLogger ml;
-			return loggerList.TryGetValue(SupportClass.ThreadClass.Current(), out ml)?ml:defMsgLogger;
-		}
-		
-		/// <summary> Returns the MsgLogger registered with the thread 't' (the
-		/// thread that calls this method). If the thread 't' has no
-		/// registered MsgLogger then the default message logger is
-		/// returned.
-		/// 
-		/// </summary>
-		/// <param name="t">The thread for which to return the MsgLogger
-		/// 
-		/// </param>
-		/// <returns> The MsgLogger registerd for the current thread, or the
-		/// default one if there is none registered for it.
-		/// 
-		/// </returns>
-		internal static MsgLogger getMsgLogger(SupportClass.ThreadClass t)
-		{
-			MsgLogger ml = (MsgLogger) loggerList[t];
-			return (ml == null)?defMsgLogger:ml;
+			return defMsgLogger;
 		}
 	}
 }

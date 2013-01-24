@@ -49,18 +49,6 @@ namespace CSJ2K.Color.Boxes
 		/// <summary>offset to start of data in box </summary>
 		protected internal int dataStart;
 		
-		public JP2Box()
-		{
-			try
-			{
-				throw new ColorSpaceException("JP2Box empty ctor called!!");
-			}
-			catch (ColorSpaceException e)
-			{
-				SupportClass.WriteStackTrace(e, Console.Error); throw e;
-			}
-		}
-		
 		/// <summary> Construct a JP2Box from an input image.</summary>
 		/// <param name="in">RandomAccessIO jp2 image
 		/// </param>

@@ -731,15 +731,12 @@ namespace CSJ2K.j2k.entropy.encoder
 			
 			SubbandAn root, sb;
 			int cblkToEncode = 0;
-			int nEncCblk = 0;
-			ProgressWatch pw = FacilityManager.ProgressWatch;
 			
 			//Get all coded code-blocks Goto first tile
 			src.setTile(0, 0);
 			for (t = 0; t < numTiles; t++)
 			{
 				//loop on tiles
-				nEncCblk = 0;
 				cblkToEncode = 0;
 				for (c = 0; c < numComps; c++)
 				{
@@ -766,10 +763,6 @@ namespace CSJ2K.j2k.entropy.encoder
 						}
 					}
 				}
-				if (pw != null)
-				{
-					pw.initProgressWatch(0, cblkToEncode, "Encoding tile " + t + "...");
-				}
 				
 				for (c = 0; c < numComps; c++)
 				{
@@ -781,13 +774,7 @@ namespace CSJ2K.j2k.entropy.encoder
 #if DO_TIMING
 						stime = (System.DateTime.Now.Ticks - 621355968000000000) / 10000;
 #endif
-						
-						if (pw != null)
-						{
-							nEncCblk++;
-							pw.updateProgressWatch(nEncCblk, null);
-						}
-						
+												
 						subb = ccb.sb;
 						
 						//Get the coded code-block resolution level index
@@ -825,11 +812,6 @@ namespace CSJ2K.j2k.entropy.encoder
 						initTime += (System.DateTime.Now.Ticks - 621355968000000000) / 10000 - stime;
 #endif
 					}
-				}
-				
-				if (pw != null)
-				{
-					pw.terminateProgressWatch();
 				}
 				
 				//Goto next tile
