@@ -15,7 +15,7 @@ namespace CSJ2K.Util
 
 		static BitmapFactory()
 		{
-			RegisterAdapter(new BitmapAdapter());
+			RegisterAdapter(new DotnetBitmapAdapter());
 		}
 
 		#endregion

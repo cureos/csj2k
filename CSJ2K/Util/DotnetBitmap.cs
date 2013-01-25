@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 
 namespace CSJ2K.Util
 {
-	internal class BitmapImpl : IBitmap
+	internal class DotnetBitmap : IBitmap
 	{
 		#region FIELDS
 
@@ -14,7 +14,7 @@ namespace CSJ2K.Util
 
 		#region CONSTRUCTORS
 
-		internal BitmapImpl(int width, int height, int numberOfComponents)
+		internal DotnetBitmap(int width, int height, int numberOfComponents)
 		{
 			PixelFormat pixelFormat;
 			switch (numberOfComponents)

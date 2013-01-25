@@ -3,7 +3,7 @@ using System.IO;
 
 namespace CSJ2K.Util
 {
-	internal class FileInfoImpl : IFileInfo
+	internal class DotnetFileInfo : IFileInfo
 	{
 		#region FIELDS
 
@@ -13,9 +13,9 @@ namespace CSJ2K.Util
 
 		#region CONSTRUCTORS
 
-		internal FileInfoImpl(string name)
+		internal DotnetFileInfo(string fileName)
 		{
-			_fileInfo = new FileInfo(name);
+			_fileInfo = new FileInfo(fileName);
 		}
 
 		#endregion

@@ -15,7 +15,7 @@ namespace CSJ2K.Util
 
 		static FileInfoFactory()
 		{
-			RegisterAdapter(new FileInfoAdapter());
+			RegisterAdapter(new DotnetFileInfoAdapter());
 		}
 
 		#endregion
@@ -29,10 +29,10 @@ namespace CSJ2K.Util
 			_adapter = adapter;
 		}
 
-		internal static IFileInfo Create(string name)
+		internal static IFileInfo Create(string fileName)
 		{
-			if (name == null) throw new ArgumentNullException("name");
-			return _adapter.CreateFileInfo(name);
+			if (fileName == null) throw new ArgumentNullException("fileName");
+			return _adapter.CreateFileInfo(fileName);
 		}
 
 		#endregion

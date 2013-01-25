@@ -4,7 +4,7 @@
 	{
 		#region METHODS
 
-		IFileInfo CreateFileInfo(string name);
+		IFileInfo CreateFileInfo(string fileName);
 
 		#endregion
 	}

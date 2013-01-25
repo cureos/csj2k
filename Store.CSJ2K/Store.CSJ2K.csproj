@@ -9,7 +9,7 @@
     <ProjectGuid>{5A0B7BDC-D0FD-4F25-A473-4AE14604D3DD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Store.CSJ2K</RootNamespace>
+    <RootNamespace>CSJ2K</RootNamespace>
     <AssemblyName>Store.CSJ2K</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
@@ -106,10 +106,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StoreFileInfo.cs" />
+    <Compile Include="StoreJ2kImage.cs" />
+    <Compile Include="Util\StoreFileStream.cs" />
+    <Compile Include="Util\StoreBitmap.cs" />
+    <Compile Include="Util\StoreBitmapAdapter.cs" />
+    <Compile Include="Util\StoreFileInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StoreFileInfoAdapter.cs" />
-    <Compile Include="StoreFileStreamAdapter.cs" />
+    <Compile Include="Util\StoreFileInfoAdapter.cs" />
+    <Compile Include="Util\StoreFileStreamAdapter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="WriteableBitmapEx.WinRT">
+      <HintPath>..\packages\WriteableBitmapEx.1.0.6.0\lib\NetCore45\WriteableBitmapEx.WinRT.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
