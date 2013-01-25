@@ -1,8 +1,8 @@
 ﻿using System;
+using System.IO;
 using CSJ2K;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
@@ -33,20 +33,15 @@ namespace Store.CSJ2K.Test
 	    private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
 	    {
 		    var picker = new FileOpenPicker { SuggestedStartLocation = PickerLocationId.DocumentsLibrary };
-			picker.FileTypeFilter.Add(".jp2");
+		    picker.FileTypeFilter.Add(".jp2");
 		    var file = await picker.PickSingleFileAsync();
-		    if (file != null)
+		    if (file == null) return;
+
+		    using (var stream = await file.OpenAsync(FileAccessMode.Read))
 		    {
-			    using (var stream = await file.OpenAsync(FileAccessMode.Read))
-			    {
-				    var reader = new DataReader(stream);
-				    await reader.LoadAsync((uint)stream.Size);
-				    var bytes = new byte[(int)stream.Size];
-				    reader.ReadBytes(bytes);
-				    var image = (WriteableBitmap)J2kImage.FromBytes(bytes).BitmapObject;
-				    DecodedImage.Source = image;
-				    ImageName.Text = file.Path;
-			    }
+			    var image = (WriteableBitmap)J2kImage.FromStream(stream.AsStreamForRead()).BitmapObject;
+			    DecodedImage.Source = image;
+			    ImageName.Text = file.Path;
 		    }
 	    }
 
