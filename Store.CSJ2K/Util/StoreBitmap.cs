@@ -7,7 +7,10 @@ namespace CSJ2K.Util
 	{
 		#region FIELDS
 
+		private const int SizeOfArgb = 4;
+
 		private readonly WriteableBitmap _bitmap;
+		private readonly byte[] _bytes;
 		private readonly int _numberOfComponents;
 
 		#endregion
@@ -17,6 +20,7 @@ namespace CSJ2K.Util
 		internal StoreBitmap(int width, int height, int numberOfComponents)
 		{
 			_bitmap = new WriteableBitmap(width, height);
+			_bytes = new byte[SizeOfArgb * width * height];
 			_numberOfComponents = numberOfComponents;
 		}
 
@@ -26,7 +30,7 @@ namespace CSJ2K.Util
 
 		public object BitmapObject
 		{
-			get { return _bitmap; }
+			get { return _bitmap.FromByteArray(_bytes); }
 		}
 
 		#endregion
@@ -35,30 +39,25 @@ namespace CSJ2K.Util
 
 		public void FillRow(int rowIndex, int lineIndex, int rowWidth, byte[] rowValues)
 		{
-			var bytes = new int[4 * rowWidth];
 			switch (_numberOfComponents)
 			{
 				case 1:
 				case 3:
-					var i = 0;
+					var i = SizeOfArgb * (rowIndex + lineIndex * rowWidth);
 					var j = 0;
 					for (var k = 0; k < rowWidth; ++k)
 					{
-						bytes[i++] = rowValues[j++];
-						bytes[i++] = rowValues[j++];
-						bytes[i++] = rowValues[j++];
-						bytes[i++] = 0xff;
+						_bytes[i++] = rowValues[j++];
+						_bytes[i++] = rowValues[j++];
+						_bytes[i++] = rowValues[j++];
+						_bytes[i++] = 0xff;
 					}
 					break;
 				case 4:
-					Array.Copy(rowValues, bytes, 4 * rowWidth);
+					Array.Copy(rowValues, 0, _bytes, SizeOfArgb * (rowIndex + lineIndex * rowWidth), SizeOfArgb * rowWidth);
 					break;
 				default:
 					throw new InvalidOperationException("Number of components must be one of 1, 3 or 4.");
-			}
-			using (var context = _bitmap.GetBitmapContext())
-			{
-				BitmapContext.BlockCopy(bytes, 0, context, 4 * (rowIndex + lineIndex * rowWidth), 4 * rowWidth);
 			}
 		}
 		

@@ -4,7 +4,7 @@
 	{
 		public IBitmap CreateBitmap(int width, int height, int numberOfComponents)
 		{
-			throw new System.NotImplementedException();
+			return new StoreBitmap(width, height, numberOfComponents);
 		}
 	}
 }
