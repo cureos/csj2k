@@ -1,10 +1,10 @@
 ﻿namespace CSJ2K.Util
 {
-	internal class DotnetFileInfoAdapter : IFileInfoAdapter
+	internal class DotnetFileInfoCreator : IFileInfoCreator
 	{
 		#region METHODS
 
-		public IFileInfo CreateFileInfo(string fileName)
+		public IFileInfo Create(string fileName)
 		{
 			return new DotnetFileInfo(fileName);
 		}

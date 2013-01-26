@@ -245,7 +245,7 @@ namespace CSJ2K.j2k.image.input
 		/// <param name="inName">The input file name.
 		/// 
 		/// </param>
-		public ImgReaderPGX(System.String inName):this(FileInfoFactory.Create(inName))
+		public ImgReaderPGX(System.String inName):this(FileInfoFactory.New(inName))
 		{
 		}
 		

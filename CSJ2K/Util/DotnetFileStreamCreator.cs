@@ -3,11 +3,11 @@ using System.IO;
 
 namespace CSJ2K.Util
 {
-	public class DotnetFileStreamAdapter : IFileStreamAdapter
+	public class DotnetFileStreamCreator : IFileStreamCreator
 	{
 		#region METHODS
 
-		public Stream CreateFileStream(string path, string mode)
+		public Stream Create(string path, string mode)
 		{
 			if (mode.Equals("rw", StringComparison.OrdinalIgnoreCase))
 				return new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);

@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 
 namespace CSJ2K.Util
 {
-	internal class DotnetBitmap : IBitmap
+	internal class WinformsBitmapWrapper : IBitmapWrapper
 	{
 		#region FIELDS
 
@@ -14,14 +14,12 @@ namespace CSJ2K.Util
 
 		#region CONSTRUCTORS
 
-		internal DotnetBitmap(int width, int height, int numberOfComponents)
+		internal WinformsBitmapWrapper(int width, int height, int numberOfComponents)
 		{
 			PixelFormat pixelFormat;
 			switch (numberOfComponents)
 			{
 				case 1:
-					pixelFormat = PixelFormat.Format24bppRgb;
-					break;
 				case 3:
 					pixelFormat = PixelFormat.Format24bppRgb;
 					break;
@@ -39,7 +37,7 @@ namespace CSJ2K.Util
 
 		#region PROPERTIES
 
-		public object BitmapObject { get { return _bitmap; } }
+		public object Bitmap { get { return _bitmap; } }
 
 		#endregion
 

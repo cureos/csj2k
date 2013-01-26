@@ -201,7 +201,7 @@ namespace CSJ2K.j2k.image.output
 		/// <seealso cref="DataBlk">
 		/// 
 		/// </seealso>
-		public ImgWriterPPM(System.String fname, BlkImgDataSrc imgSrc, int n1, int n2, int n3):this(FileInfoFactory.Create(fname), imgSrc, n1, n2, n3)
+		public ImgWriterPPM(System.String fname, BlkImgDataSrc imgSrc, int n1, int n2, int n3):this(FileInfoFactory.New(fname), imgSrc, n1, n2, n3)
 		{
 		}
 		

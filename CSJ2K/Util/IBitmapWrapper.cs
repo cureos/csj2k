@@ -1,10 +1,10 @@
 ﻿namespace CSJ2K.Util
 {
-	public interface IBitmap
+	public interface IBitmapWrapper
 	{
 		#region PROPERTIES
 
-		object BitmapObject { get; }
+		object Bitmap { get; }
 
 		#endregion
 

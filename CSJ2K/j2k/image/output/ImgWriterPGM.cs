@@ -160,7 +160,7 @@ namespace CSJ2K.j2k.image.output
 		/// <param name="c">The index of the component from where to get the data.
 		/// 
 		/// </param>
-		public ImgWriterPGM(System.String fname, BlkImgDataSrc imgSrc, int c):this(FileInfoFactory.Create(fname), imgSrc, c)
+		public ImgWriterPGM(System.String fname, BlkImgDataSrc imgSrc, int c):this(FileInfoFactory.New(fname), imgSrc, c)
 		{
 		}
 		

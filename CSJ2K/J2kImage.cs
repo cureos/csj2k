@@ -28,20 +28,20 @@ namespace CSJ2K
     {
 
         #region Static Decoder Methods
-        public static IBitmap FromFile(string filename)
+        public static IBitmapWrapper FromFile(string filename)
         {
-            Stream stream = FileStreamFactory.Create(filename, "r");
-            IBitmap img = FromStream(stream);
+            Stream stream = FileStreamFactory.New(filename, "r");
+            IBitmapWrapper img = FromStream(stream);
             stream.Dispose();
             return (img);
         }
 
-        public static IBitmap FromBytes(byte[] j2kdata)
+        public static IBitmapWrapper FromBytes(byte[] j2kdata)
         {
             return FromStream(new MemoryStream(j2kdata));
         }
 
-        public static IBitmap FromStream(Stream stream)
+        public static IBitmapWrapper FromStream(Stream stream)
         {
             RandomAccessIO in_stream = new ISRandomAccessIO(stream);
 
@@ -198,7 +198,7 @@ namespace CSJ2K
             int bytesPerPixel = (numComps == 4 ? 4 : 3);
 
             // **** Copy to Bitmap ****
-			var dst = BitmapFactory.Create(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps);
+			var dst = BitmapWrapperFactory.New(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps);
 
 	        Coord numTiles = decodedImage.getNumTiles(null);
 
@@ -292,19 +292,19 @@ namespace CSJ2K
 	    #endregion
 
         #region Static Encoder Methods
-        public static void ToFile(IBitmap bitmap, string filename)
+        public static void ToFile(IBitmapWrapper bitmap, string filename)
         {
-            Stream stream = FileStreamFactory.Create(filename, "rw");
+            Stream stream = FileStreamFactory.New(filename, "rw");
             ToStream(bitmap, stream);
             stream.Dispose();
         }
-        public static byte[] ToArray(IBitmap bitmap)
+        public static byte[] ToArray(IBitmapWrapper bitmap)
         {
             MemoryStream stream = new MemoryStream();
             ToStream(bitmap, stream);
             return stream.ToArray();
         }
-        public static void ToStream(IBitmap bitmap, Stream stream)
+        public static void ToStream(IBitmapWrapper bitmap, Stream stream)
         {
             throw new NotImplementedException();
         }

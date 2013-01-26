@@ -7,7 +7,7 @@ namespace CSJ2K.Util
 	{
 		#region FIELDS
 
-		private static IFileStreamAdapter _adapter;
+		private static IFileStreamCreator _creator;
 
 		#endregion
 
@@ -16,7 +16,7 @@ namespace CSJ2K.Util
 
 		static FileStreamFactory()
 		{
-			RegisterAdapter(new DotnetFileStreamAdapter());
+			RegisterCreator(new DotnetFileStreamCreator());
 		}
 
 		#endregion
@@ -24,20 +24,20 @@ namespace CSJ2K.Util
 
 		#region METHODS
 
-		public static void RegisterAdapter(IFileStreamAdapter adapter)
+		public static void RegisterCreator(IFileStreamCreator creator)
 		{
-			if (adapter == null) throw new ArgumentNullException("adapter");
-			if (_adapter != null) throw new InvalidOperationException("File stream adapter can only be registered once.");
-			_adapter = adapter;
+			if (creator == null) throw new ArgumentNullException("creator");
+			if (_creator != null) throw new InvalidOperationException("File stream creator can only be registered once.");
+			_creator = creator;
 		}
 
-		internal static Stream Create(string path, string mode)
+		internal static Stream New(string path, string mode)
 		{
-			if (_adapter == null) throw new InvalidOperationException("No file stream adapter is registered.");
+			if (_creator == null) throw new InvalidOperationException("No file stream creator is registered.");
 			if (path == null) throw new ArgumentNullException("path");
 			if (mode == null) throw new ArgumentNullException("mode");
 
-			return _adapter.CreateFileStream(path, mode);
+			return _creator.Create(path, mode);
 		}
 		
 		#endregion

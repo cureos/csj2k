@@ -142,10 +142,10 @@
     <Compile Include="Icc\Tags\ICCSignatureType.cs" />
     <Compile Include="Icc\Tags\ICCMeasurementType.cs" />
     <Compile Include="J2kImage.cs" />
-    <Compile Include="Util\DotnetBitmapAdapter.cs" />
-    <Compile Include="Util\BitmapFactory.cs" />
-    <Compile Include="Util\DotnetBitmap.cs" />
-    <Compile Include="Util\DotnetFileStreamAdapter.cs" />
+    <Compile Include="Util\WinformsBitmapWrapperCreator.cs" />
+    <Compile Include="Util\BitmapWrapperFactory.cs" />
+    <Compile Include="Util\WinformsBitmapWrapper.cs" />
+    <Compile Include="Util\DotnetFileStreamCreator.cs" />
     <Compile Include="Util\FileInfoFactory.cs" />
     <Compile Include="Util\EndianBinaryReader.cs" />
     <Compile Include="Icc\ICCMatrixBasedInputProfile.cs" />
@@ -343,14 +343,14 @@
     <Compile Include="j2k\wavelet\WTDecompSpec.cs" />
     <Compile Include="j2k\wavelet\WTFilterSpec.cs" />
     <Compile Include="Util\EndianBinaryWriter.cs" />
-    <Compile Include="Util\DotnetFileInfoAdapter.cs" />
+    <Compile Include="Util\DotnetFileInfoCreator.cs" />
     <Compile Include="Util\DotnetFileInfo.cs" />
     <Compile Include="Util\FileStreamFactory.cs" />
-    <Compile Include="Util\IBitmap.cs" />
-    <Compile Include="Util\IBitmapAdapter.cs" />
+    <Compile Include="Util\IBitmapWrapper.cs" />
+    <Compile Include="Util\IBitmapWrapperCreator.cs" />
     <Compile Include="Util\IFileInfo.cs" />
-    <Compile Include="Util\IFileInfoAdapter.cs" />
-    <Compile Include="Util\IFileStreamAdapter.cs" />
+    <Compile Include="Util\IFileInfoCreator.cs" />
+    <Compile Include="Util\IFileStreamCreator.cs" />
     <Compile Include="Util\SupportClass.cs">
       <SubType>Code</SubType>
     </Compile>

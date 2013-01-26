@@ -6,7 +6,7 @@ namespace CSJ2K.Util
 	{
 		#region FIELDS
 
-		private static IFileInfoAdapter _adapter;
+		private static IFileInfoCreator _creator;
 
 		#endregion
 
@@ -15,7 +15,7 @@ namespace CSJ2K.Util
 
 		static FileInfoFactory()
 		{
-			RegisterAdapter(new DotnetFileInfoAdapter());
+			RegisterCreator(new DotnetFileInfoCreator());
 		}
 
 		#endregion
@@ -23,16 +23,18 @@ namespace CSJ2K.Util
 
 		#region METHODS
 
-		public static void RegisterAdapter(IFileInfoAdapter adapter)
+		public static void RegisterCreator(IFileInfoCreator creator)
 		{
-			if (_adapter != null) throw new InvalidOperationException("File info adapter can only be registered once.");
-			_adapter = adapter;
+			if (_creator != null) throw new InvalidOperationException("File info creator can only be registered once.");
+			_creator = creator;
 		}
 
-		internal static IFileInfo Create(string fileName)
+		internal static IFileInfo New(string fileName)
 		{
+			if (_creator == null) throw new InvalidOperationException("No file info creator is registered.");
 			if (fileName == null) throw new ArgumentNullException("fileName");
-			return _adapter.CreateFileInfo(fileName);
+
+			return _creator.Create(fileName);
 		}
 
 		#endregion

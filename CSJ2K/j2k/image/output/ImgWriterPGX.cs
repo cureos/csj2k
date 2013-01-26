@@ -250,7 +250,7 @@ namespace CSJ2K.j2k.image.output
 		/// <seealso cref="DataBlk">
 		/// 
 		/// </seealso>
-		public ImgWriterPGX(System.String fname, BlkImgDataSrc imgSrc, int c, bool isSigned):this(FileInfoFactory.Create(fname), imgSrc, c, isSigned)
+		public ImgWriterPGX(System.String fname, BlkImgDataSrc imgSrc, int c, bool isSigned):this(FileInfoFactory.New(fname), imgSrc, c, isSigned)
 		{
 		}
 		

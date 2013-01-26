@@ -234,7 +234,7 @@ namespace CSJ2K.j2k.io
 		/// <exception cref="java.io.IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
-		protected internal BufferedRandomAccessFile(System.String name, System.String mode, int bufferSize):this(FileInfoFactory.Create(name), mode, bufferSize)
+		protected internal BufferedRandomAccessFile(System.String name, System.String mode, int bufferSize):this(FileInfoFactory.New(name), mode, bufferSize)
 		{
 		}
 		

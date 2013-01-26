@@ -181,7 +181,7 @@ internal class SupportClass
 		/// <returns>The new System.IO.FileStream</returns>
 		public static System.IO.Stream CreateRandomAccessFile(System.String fileName, System.String mode)
 		{
-			return FileStreamFactory.Create(fileName, mode);
+			return FileStreamFactory.New(fileName, mode);
 		}
 
 		/// <summary>
