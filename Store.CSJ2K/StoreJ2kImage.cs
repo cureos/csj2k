@@ -28,9 +28,9 @@ namespace CSJ2K
 		public static void Initialize()
 		 {
 			 FacilityManager.DefaultMsgLogger = new StreamMsgLogger(OutputStream, ErrorStream, 132);
-			 BitmapFactory.RegisterAdapter(new StoreBitmapAdapter());
-			 FileInfoFactory.RegisterAdapter(new StoreFileInfoAdapter());
-			 FileStreamFactory.RegisterAdapter(new StoreFileStreamAdapter());
+			 BitmapWrapperFactory.RegisterCreator(new WriteableBitmapWrapperCreator());
+			 FileInfoFactory.RegisterCreator(new StoreFileInfoCreator());
+			 FileStreamFactory.RegisterCreator(new StoreFileStreamCreator());
 		 }
 	}
 }

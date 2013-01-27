@@ -3,9 +3,9 @@ using CSJ2K.Util;
 
 namespace Store.CSJ2K
 {
-	public class StoreFileStreamAdapter : IFileStreamAdapter
+	public class StoreFileStreamCreator : IFileStreamCreator
 	{
-		public Stream CreateFileStream(string path, string mode)
+		public Stream Create(string path, string mode)
 		{
 			return new StoreFileStream(path, mode);
 		}

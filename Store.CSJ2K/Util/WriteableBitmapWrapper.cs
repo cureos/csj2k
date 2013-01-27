@@ -3,34 +3,36 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace CSJ2K.Util
 {
-	internal class StoreBitmap : IBitmap
+	internal class WriteableBitmapWrapper : IBitmapWrapper
 	{
 		#region FIELDS
 
 		private const int SizeOfArgb = 4;
 
-		private readonly WriteableBitmap _bitmap;
-		private readonly byte[] _bytes;
+		private readonly int _width;
+		private readonly int _height;
 		private readonly int _numberOfComponents;
+		private readonly byte[] _bytes;
 
 		#endregion
 
 		#region CONSTRUCTORS
 
-		internal StoreBitmap(int width, int height, int numberOfComponents)
+		internal WriteableBitmapWrapper(int width, int height, int numberOfComponents)
 		{
-			_bitmap = new WriteableBitmap(width, height);
-			_bytes = new byte[SizeOfArgb * width * height];
+			_width = width;
+			_height = height;
 			_numberOfComponents = numberOfComponents;
+			_bytes = new byte[SizeOfArgb * width * height];
 		}
 
 		#endregion
 
 		#region PROPERTIES
 
-		public object BitmapObject
+		public object Bitmap
 		{
-			get { return _bitmap.FromByteArray(_bytes); }
+			get { return BitmapFactory.New(_width, _height).FromByteArray(_bytes); }
 		}
 
 		#endregion

@@ -39,7 +39,7 @@ namespace Store.CSJ2K.Test
 
 		    using (var stream = await file.OpenAsync(FileAccessMode.Read))
 		    {
-			    var image = (WriteableBitmap)J2kImage.FromStream(stream.AsStreamForRead()).BitmapObject;
+			    var image = (WriteableBitmap)J2kImage.FromStream(stream.AsStreamForRead()).Bitmap;
 			    DecodedImage.Source = image;
 			    ImageName.Text = file.Path;
 		    }

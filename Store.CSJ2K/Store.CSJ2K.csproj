@@ -108,12 +108,12 @@
   <ItemGroup>
     <Compile Include="StoreJ2kImage.cs" />
     <Compile Include="Util\StoreFileStream.cs" />
-    <Compile Include="Util\StoreBitmap.cs" />
-    <Compile Include="Util\StoreBitmapAdapter.cs" />
+    <Compile Include="Util\WriteableBitmapWrapper.cs" />
+    <Compile Include="Util\WriteableBitmapWrapperCreator.cs" />
     <Compile Include="Util\StoreFileInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\StoreFileInfoAdapter.cs" />
-    <Compile Include="Util\StoreFileStreamAdapter.cs" />
+    <Compile Include="Util\StoreFileInfoCreator.cs" />
+    <Compile Include="Util\StoreFileStreamCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="WriteableBitmapEx.WinRT">
