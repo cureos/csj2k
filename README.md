@@ -1,10 +1,10 @@
-= Portable CSJ2K - A Managed JPEG2000 Codec
+# Portable CSJ2K - A Managed JPEG2000 Codec
 
 Copyright (c) 1999-2000 JJ2000 Partners, original C# port (c) 2007-21012 Jason Clary, adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013 Anders Gustafsson, Cureos AB   
 
 Licensed and distributable under the terms of the [BSD license](http://www.opensource.org/licenses/bsd-license.php)
 
-== Summary
+## Summary
 
 This is a Portable Class Library adaptation of [CSJ2K](http://csj2k.codeplex.com/), which provides JPEG 2000 decoding and encoding functionality to .NET based platforms. *CSJ2K* is by itself a C# port of the Java 
 package *jj2000*, version 5.1. This Portable Class Library adaptation of *CSJ2K* makes it possible to implement JPEG decoding and encoding on the following platforms:
@@ -24,7 +24,9 @@ There are very basic Windows Store, WPF and Silverlight test applications for re
 The Portable Class Library provides interfaces for bitmap rendering, file I/O and logging. For all platforms except Windows Phone, the platform specific interface implementations are activated via MEF, 
 Managed Extensibility Framework. It is the responsiblity of the end application to satisfy the imports of these component parts once.
 
-== Links
+Please note that API for JPEG 2000 **encoding** is not yet implemented; only **decoding** is fully supported at this stage.
+
+## Links
 
 * [CSJ2K web site on Codeplex](http://csj2k.codeplex.com/)
 * [JJ2000 original site; link no longer appears to be working?](http://jj2000.epfl.ch/)
