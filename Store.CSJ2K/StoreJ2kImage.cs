@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using CSJ2K.Util;
 using CSJ2K.j2k.util;
-using Store.CSJ2K;
 
 namespace CSJ2K
 {
@@ -19,9 +18,9 @@ namespace CSJ2K
 
 		#region PROPERTIES
 
-		public static MemoryStream OutputStream { get; private set; }
+		public static Stream OutputStream { get; private set; }
 
-		public static MemoryStream ErrorStream { get; private set; }
+		public static Stream ErrorStream { get; private set; }
 
 		#endregion
 

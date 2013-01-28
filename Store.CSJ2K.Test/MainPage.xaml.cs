@@ -18,7 +18,7 @@ namespace Store.CSJ2K.Test
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace Store.CSJ2K.Test
 
 		    using (var stream = await file.OpenAsync(FileAccessMode.Read))
 		    {
-			    var image = (WriteableBitmap)J2kImage.FromStream(stream.AsStreamForRead()).Bitmap;
-			    DecodedImage.Source = image;
+			    var image = (WriteableBitmap)J2kImage.FromStream(stream.AsStreamForRead());
+				DecodedImage.Source = image;
 			    ImageName.Text = file.Path;
 		    }
 	    }

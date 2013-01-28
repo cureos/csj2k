@@ -28,20 +28,20 @@ namespace CSJ2K
     {
 
         #region Static Decoder Methods
-        public static IBitmapWrapper FromFile(string filename)
+        public static object FromFile(string filename)
         {
-            Stream stream = FileStreamFactory.New(filename, "r");
-            IBitmapWrapper img = FromStream(stream);
+            var stream = FileStreamFactory.New(filename, "r");
+            var img = FromStream(stream);
             stream.Dispose();
-            return (img);
+            return img;
         }
 
-        public static IBitmapWrapper FromBytes(byte[] j2kdata)
+        public static object FromBytes(byte[] j2kdata)
         {
             return FromStream(new MemoryStream(j2kdata));
         }
 
-        public static IBitmapWrapper FromStream(Stream stream)
+        public static object FromStream(Stream stream)
         {
             RandomAccessIO in_stream = new ISRandomAccessIO(stream);
 
@@ -286,7 +286,7 @@ namespace CSJ2K
                     }
                 }
             }
-            return dst;
+            return dst.Bitmap;
         }
 
 	    #endregion

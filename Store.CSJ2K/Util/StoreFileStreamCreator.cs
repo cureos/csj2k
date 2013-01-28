@@ -1,8 +1,9 @@
-﻿using System.IO;
-using CSJ2K.Util;
+﻿using System.Composition;
+using System.IO;
 
-namespace Store.CSJ2K
+namespace CSJ2K.Util
 {
+	[Export(typeof(IFileStreamCreator))]
 	public class StoreFileStreamCreator : IFileStreamCreator
 	{
 		public Stream Create(string path, string mode)
