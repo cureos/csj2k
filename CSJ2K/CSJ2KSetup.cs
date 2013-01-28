@@ -1,30 +1,50 @@
-﻿#if SILVERLIGHT
+﻿#if !WINDOWS_PHONE
+#if SILVERLIGHT
 using System.ComponentModel.Composition;
 #else
 using System.Composition;
 #endif
+#endif
+
 using CSJ2K.Util;
 
 namespace CSJ2K
 {
 	public class CSJ2KSetup
 	{
-		// ReSharper disable UnusedMember.Local
-		#region PROPETIES
+		#region PROPERTIES
 
+#if !WINDOWS_PHONE
 		[Import]
+#endif
 		public IFileInfoCreator FileInfoCreator { get; set; }
 
+#if !WINDOWS_PHONE
 		[Import]
+#endif
 		public IFileStreamCreator FileStreamCreator { get; set; }
 
+#if !WINDOWS_PHONE
 		[Import]
+#endif
 		public IBitmapWrapperCreator BitmapWrapperCreator { get; set; }
 
+#if !WINDOWS_PHONE
 		[Import]
+#endif
 		public IMsgLogger MsgLogger { get; set; }
 
 		#endregion
-		// ReSharper restore UnusedMember.Local
+
+		#region METHODS
+
+		public static void RegisterManually()
+		{
+#if WINDOWS_PHONE
+			var setup = new CSJ2KSetup { BitmapWrapperCreator = new WriteableBitmapWrapperCreator() };
+#endif
+		}
+
+		#endregion
 	}
 }
