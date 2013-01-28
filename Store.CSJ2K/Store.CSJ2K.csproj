@@ -106,14 +106,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CSJ2K\Util\StoreFileInfo.cs">
+      <Link>Util\StoreFileInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\StoreFileInfoCreator.cs">
+      <Link>Util\StoreFileInfoCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\StoreFileStream.cs">
+      <Link>Util\StoreFileStream.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\StoreFileStreamCreator.cs">
+      <Link>Util\StoreFileStreamCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapWrapper.cs">
+      <Link>Util\WriteableBitmapWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapWrapperCreator.cs">
+      <Link>Util\WriteableBitmapWrapperCreator.cs</Link>
+    </Compile>
     <Compile Include="StoreJ2kImage.cs" />
-    <Compile Include="Util\StoreFileStream.cs" />
-    <Compile Include="Util\WriteableBitmapWrapper.cs" />
-    <Compile Include="Util\WriteableBitmapWrapperCreator.cs" />
-    <Compile Include="Util\StoreFileInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\StoreFileInfoCreator.cs" />
-    <Compile Include="Util\StoreFileStreamCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Composition.AttributedModel">
@@ -138,6 +150,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>
