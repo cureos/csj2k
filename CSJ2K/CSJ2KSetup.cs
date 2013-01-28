@@ -36,15 +36,15 @@ namespace CSJ2K
 
 		#endregion
 
+#if WINDOWS_PHONE
 		#region METHODS
 
 		public static void RegisterManually()
 		{
-#if WINDOWS_PHONE
 			var setup = new CSJ2KSetup { BitmapWrapperCreator = new WriteableBitmapWrapperCreator() };
-#endif
 		}
 
 		#endregion
+#endif
 	}
 }
