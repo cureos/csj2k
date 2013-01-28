@@ -1,9 +1,9 @@
 ﻿namespace CSJ2K.Util
 {
-#if SILVERLIGHT
-	[System.ComponentModel.Composition.Export(typeof(IFileInfoCreator))]
-#elif !DOTNET
+#if NETFX_CORE
 	[System.Composition.Export(typeof(IFileInfoCreator))]
+#elif !DOTNET
+	[System.ComponentModel.Composition.Export(typeof(IFileInfoCreator))]
 #endif
 	public class DotnetFileInfoCreator : IFileInfoCreator
 	{

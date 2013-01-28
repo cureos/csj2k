@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Composition;
+using System.ComponentModel.Composition;
 using CSJ2K.j2k.util;
 
 namespace CSJ2K.Util

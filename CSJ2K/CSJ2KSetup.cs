@@ -1,8 +1,8 @@
 ﻿#if !WINDOWS_PHONE
-#if SILVERLIGHT
-using System.ComponentModel.Composition;
-#else
+#if NETFX_CORE
 using System.Composition;
+#else
+using System.ComponentModel.Composition;
 #endif
 #endif
 

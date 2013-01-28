@@ -4,7 +4,7 @@ using System.IO;
 namespace CSJ2K.Util
 {
 #if !DOTNET
-	[System.Composition.Export(typeof(IFileStreamCreator))]
+	[System.ComponentModel.Composition.Export(typeof(IFileStreamCreator))]
 #endif
 	public class DotnetFileStreamCreator : IFileStreamCreator
 	{
