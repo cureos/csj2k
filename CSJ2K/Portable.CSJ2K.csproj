@@ -262,6 +262,7 @@
     <Compile Include="Util\IFileInfo.cs" />
     <Compile Include="Util\IFileInfoCreator.cs" />
     <Compile Include="Util\IFileStreamCreator.cs" />
+    <Compile Include="Util\IMsgLogger.cs" />
     <Compile Include="Util\SupportClass.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

@@ -44,10 +44,5 @@ namespace Store.CSJ2K.Test
 			    ImageName.Text = file.Path;
 		    }
 	    }
-
-	    private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
-	    {
-			StoreJ2kImage.Initialize();
-	    }
     }
 }

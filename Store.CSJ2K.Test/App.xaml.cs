@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Composition;
+using System.Composition.Hosting;
+using System.Reflection;
+using CSJ2K;
+using CSJ2K.Util;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -47,7 +52,11 @@ namespace Store.CSJ2K.Test
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
-            }
+
+				// Implement platform-specific interfaces
+				new ContainerConfiguration().WithAssembly(typeof(WriteableBitmapWrapperCreator).GetTypeInfo().Assembly)
+											.CreateContainer().SatisfyImports(new CSJ2KSetup());
+			}
 
             if (rootFrame.Content == null)
             {

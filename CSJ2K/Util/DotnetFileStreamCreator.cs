@@ -3,8 +3,21 @@ using System.IO;
 
 namespace CSJ2K.Util
 {
+#if !DOTNET
+	[System.Composition.Export(typeof(IFileStreamCreator))]
+#endif
 	public class DotnetFileStreamCreator : IFileStreamCreator
 	{
+#if !DOTNET
+		#region CONSTRUCTORS
+
+		public DotnetFileStreamCreator()
+		{
+			FileStreamFactory.RegisterCreator(this);
+		}
+
+		#endregion
+#endif
 		#region METHODS
 
 		public Stream Create(string path, string mode)

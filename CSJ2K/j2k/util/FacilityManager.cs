@@ -82,9 +82,7 @@ namespace CSJ2K.j2k.util
 		static FacilityManager()
 		{
 #if DOTNET
-			DefaultMsgLogger = new StreamMsgLogger(System.Console.OpenStandardOutput(), System.Console.OpenStandardError(), 78);
-#else
-			DefaultMsgLogger = null;
+			_defMsgLogger = new StreamMsgLogger(System.Console.OpenStandardOutput(), System.Console.OpenStandardError(), 78);
 #endif
 		}
 

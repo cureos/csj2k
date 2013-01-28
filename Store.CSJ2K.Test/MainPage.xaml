@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Loaded="MainPage_OnLoaded">
+    mc:Ignorable="d">
 
     <StackPanel Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Button Content="Select JP2 File"  Click="ButtonBase_OnClick"/>

@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System.Composition;
+using System.Composition.Hosting;
+using System.Windows;
 using CSJ2K;
+using CSJ2K.Util;
 
 namespace WPF.CSJ2K.Test
 {
@@ -10,7 +13,8 @@ namespace WPF.CSJ2K.Test
 	{
 		private void App_OnStartup(object sender, StartupEventArgs e)
 		{
-			WpfJ2kImage.Initialize();
+			new ContainerConfiguration().WithAssembly(typeof(WriteableBitmapWrapperCreator).Assembly)
+			                            .CreateContainer().SatisfyImports(new CSJ2KSetup());
 		}
 	}
 }
