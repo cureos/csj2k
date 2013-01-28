@@ -1,4 +1,8 @@
-﻿using System.Composition;
+﻿#if SILVERLIGHT
+using System.ComponentModel.Composition;
+#else
+using System.Composition;
+#endif
 
 namespace CSJ2K.Util
 {

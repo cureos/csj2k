@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.CSJ2K", "WPF.CSJ2K\WPF.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.CSJ2K.Test", "WPF.CSJ2K.Test\WPF.CSJ2K.Test.csproj", "{39606097-7698-46A7-99AF-3A4533D8EE70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SL.CSJ2K", "SL.CSJ2K\SL.CSJ2K.csproj", "{8F724FF1-1A1D-4521-B379-BF2348022DEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SL.CSJ2K.Test", "SL.CSJ2K.Test\SL.CSJ2K.Test.csproj", "{2E9DB835-9117-42E6-BF88-727DE2CCB375}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{39606097-7698-46A7-99AF-3A4533D8EE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39606097-7698-46A7-99AF-3A4533D8EE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39606097-7698-46A7-99AF-3A4533D8EE70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F724FF1-1A1D-4521-B379-BF2348022DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F724FF1-1A1D-4521-B379-BF2348022DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F724FF1-1A1D-4521-B379-BF2348022DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F724FF1-1A1D-4521-B379-BF2348022DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9DB835-9117-42E6-BF88-727DE2CCB375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9DB835-9117-42E6-BF88-727DE2CCB375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9DB835-9117-42E6-BF88-727DE2CCB375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9DB835-9117-42E6-BF88-727DE2CCB375}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

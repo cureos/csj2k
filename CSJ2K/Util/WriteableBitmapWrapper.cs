@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace CSJ2K.Util
 {
-	internal class WriteableBitmapWrapper : IBitmapWrapper
+	public class WriteableBitmapWrapper : IBitmapWrapper
 	{
 		#region FIELDS
 

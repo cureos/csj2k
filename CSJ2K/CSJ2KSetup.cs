@@ -1,4 +1,8 @@
-﻿using System.Composition;
+﻿#if SILVERLIGHT
+using System.ComponentModel.Composition;
+#else
+using System.Composition;
+#endif
 using CSJ2K.Util;
 
 namespace CSJ2K
@@ -9,16 +13,16 @@ namespace CSJ2K
 		#region PROPETIES
 
 		[Import]
-		private IFileInfoCreator FileInfoCreator { get; set; }
+		public IFileInfoCreator FileInfoCreator { get; set; }
 
 		[Import]
-		private IFileStreamCreator FileStreamCreator { get; set; }
+		public IFileStreamCreator FileStreamCreator { get; set; }
 
 		[Import]
-		private IBitmapWrapperCreator BitmapWrapperCreator { get; set; }
+		public IBitmapWrapperCreator BitmapWrapperCreator { get; set; }
 
 		[Import]
-		private IMsgLogger MsgLogger { get; set; }
+		public IMsgLogger MsgLogger { get; set; }
 
 		#endregion
 		// ReSharper restore UnusedMember.Local

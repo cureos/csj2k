@@ -24,15 +24,13 @@ namespace WPF.CSJ2K.Test
 					          Multiselect = false,
 					          Title = "Select JPEG 2000 file"
 				          };
+			if (!dlg.ShowDialog(this).GetValueOrDefault()) return;
 
-			if (dlg.ShowDialog(this).GetValueOrDefault())
+			using (var stream = dlg.OpenFile())
 			{
-				using (var stream = dlg.OpenFile())
-				{
-					var image = (WriteableBitmap)J2kImage.FromStream(stream);
-					DecodedImage.Source = image;
-					ImageName.Text = dlg.FileName;
-				}
+				var image = (WriteableBitmap)J2kImage.FromStream(stream);
+				DecodedImage.Source = image;
+				ImageName.Text = dlg.FileName;
 			}
 		}
 	}
