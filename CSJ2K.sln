@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.CSJ2K", "Store.CSJ2K\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.CSJ2K.Test", "Store.CSJ2K.Test\Store.CSJ2K.Test.csproj", "{D185AD42-72EB-4760-9A07-4D67C6CE50B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.CSJ2K", "WPF.CSJ2K\WPF.CSJ2K.csproj", "{68ADB736-925C-4423-AA99-EBB14DA0D2C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.CSJ2K.Test", "WPF.CSJ2K.Test\WPF.CSJ2K.Test.csproj", "{39606097-7698-46A7-99AF-3A4533D8EE70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{D185AD42-72EB-4760-9A07-4D67C6CE50B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D185AD42-72EB-4760-9A07-4D67C6CE50B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D185AD42-72EB-4760-9A07-4D67C6CE50B8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{68ADB736-925C-4423-AA99-EBB14DA0D2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68ADB736-925C-4423-AA99-EBB14DA0D2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68ADB736-925C-4423-AA99-EBB14DA0D2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68ADB736-925C-4423-AA99-EBB14DA0D2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39606097-7698-46A7-99AF-3A4533D8EE70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39606097-7698-46A7-99AF-3A4533D8EE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39606097-7698-46A7-99AF-3A4533D8EE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39606097-7698-46A7-99AF-3A4533D8EE70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

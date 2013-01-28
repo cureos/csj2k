@@ -1,0 +1,10 @@
+﻿<Window x:Class="WPF.CSJ2K.Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <StackPanel>
+        <Button Content="Select JP2 File" Click="ButtonBase_OnClick" HorizontalAlignment="Left" Padding="12,3" Margin="3"/>
+        <Image x:Name="DecodedImage" Stretch="None" HorizontalAlignment="Left" Margin="3,0,3,3"/>
+        <TextBlock FontSize="18" x:Name="ImageName" Margin="3,0"/>
+    </StackPanel>
+</Window>
