@@ -1,20 +1,23 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using System.IO;
 
 namespace CSJ2K.Util
 {
-	[Export(typeof(IFileStreamCreator))]
-	public class DotnetFileStreamCreator : IFileStreamCreator
+#if MEF
+	[System.ComponentModel.Composition.Export(typeof(IFileStreamCreator))]
+#endif
+	public class SilverlightFileStreamCreator : IFileStreamCreator
 	{
+#if MEF
 		#region CONSTRUCTORS
 
-		public DotnetFileStreamCreator()
+		public SilverlightFileStreamCreator()
 		{
 			FileStreamFactory.RegisterCreator(this);
 		}
 
 		#endregion
+#endif
 
 		#region METHODS
 
@@ -23,6 +26,11 @@ namespace CSJ2K.Util
 			throw new NotImplementedException("File stream I/O not implemented for Silverlight.");
 		}
 		
+		public static void Register()
+		{
+			FileStreamFactory.RegisterCreator(new SilverlightFileStreamCreator());
+		}
+
 		#endregion
 	}
 }

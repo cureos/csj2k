@@ -1,4 +1,4 @@
-﻿#if !WINDOWS_PHONE
+﻿#if MEF
 #if NETFX_CORE
 using System.Composition;
 #else
@@ -14,37 +14,53 @@ namespace CSJ2K
 	{
 		#region PROPERTIES
 
-#if !WINDOWS_PHONE
+#if MEF
 		[Import]
 #endif
 		public IFileInfoCreator FileInfoCreator { get; set; }
 
-#if !WINDOWS_PHONE
+#if MEF
 		[Import]
 #endif
 		public IFileStreamCreator FileStreamCreator { get; set; }
 
-#if !WINDOWS_PHONE
+#if MEF
 		[Import]
 #endif
 		public IBitmapWrapperCreator BitmapWrapperCreator { get; set; }
 
-#if !WINDOWS_PHONE
+#if MEF
 		[Import]
 #endif
 		public IMsgLogger MsgLogger { get; set; }
 
 		#endregion
 
-#if WINDOWS_PHONE
 		#region METHODS
 
-		public static void RegisterManually()
+		public static void RegisterCreators()
 		{
-			var setup = new CSJ2KSetup { BitmapWrapperCreator = new WriteableBitmapWrapperCreator() };
+#if NETFX_CORE
+			StoreMsgLogger.Register();
+			StoreFileInfoCreator.Register();
+			StoreFileStreamCreator.Register();
+			WriteableBitmapWrapperCreator.Register();
+#elif SILVERLIGHT
+#if WINDOWS_PHONE
+			WriteableBitmapWrapperCreator.Register();
+#else
+			SilverlightMsgLogger.Register();
+			SilverlightFileStreamCreator.Register();
+			WriteableBitmapWrapperCreator.Register();
+#endif
+#else
+			DotnetMsgLogger.Register();
+			DotnetFileInfoCreator.Register();
+			DotnetFileStreamCreator.Register();
+			WriteableBitmapWrapperCreator.Register();
+#endif
 		}
 
 		#endregion
-#endif
 	}
 }

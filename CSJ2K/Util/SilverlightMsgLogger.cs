@@ -1,16 +1,28 @@
-﻿using System.ComponentModel.Composition;
-using System.IO;
+﻿using System.IO;
 using System.IO.IsolatedStorage;
 using CSJ2K.j2k.util;
 
 namespace CSJ2K.Util
 {
-	[Export(typeof(IMsgLogger))]
+#if MEF
+	[System.ComponentModel.Composition.Export(typeof(IMsgLogger))]
+#endif
 	public class SilverlightMsgLogger : IMsgLogger
 	{
+#if MEF
 		#region CONSTRUCTORS
 
 		public SilverlightMsgLogger()
+		{
+			Register();
+		}
+
+		#endregion
+#endif
+
+		#region METHODS
+
+		public static void Register()
 		{
 			using (var isolatedFile = IsolatedStorageFile.GetUserStoreForApplication())
 			{
@@ -20,7 +32,7 @@ namespace CSJ2K.Util
 						new IsolatedStorageFileStream("csj2k.err", FileMode.Create, FileAccess.ReadWrite, isolatedFile), 78);
 			}
 		}
-
+		
 		#endregion
 	}
 }

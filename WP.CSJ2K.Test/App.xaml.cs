@@ -61,7 +61,7 @@ namespace WP.CSJ2K.Test
 		// This code will not execute when the application is reactivated
 		private void Application_Launching(object sender, LaunchingEventArgs e)
 		{
-			CSJ2KSetup.RegisterManually();
+			CSJ2KSetup.RegisterCreators();
 		}
 
 		// Code to execute when the application is activated (brought to foreground)

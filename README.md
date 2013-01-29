@@ -1,6 +1,6 @@
 # Portable CSJ2K - A Managed JPEG2000 Codec
 
-Copyright (c) 1999-2000 JJ2000 Partners, original C# port (c) 2007-21012 Jason Clary, adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013 Anders Gustafsson, Cureos AB   
+Copyright (c) 1999-2000 JJ2000 Partners, original C# port (c) 2007-2012 Jason Clary, adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013 Anders Gustafsson, Cureos AB   
 
 Licensed and distributable under the terms of the [BSD license](http://www.opensource.org/licenses/bsd-license.php)
 
@@ -19,12 +19,20 @@ The code is still applicable to .NET 2.0 and later as well; the Windows Forms ba
 Along with the *CSJ2K* Portable Class Library there are also platform specific complementary libraries for bitmap processing and file handling. In particular, the .NET Framework complementary library implements bitmap processing
 for `WriteableBitmap`, thus facilitating JPEG 2000 decoding in WPF based applications.
 
-There are very basic Windows Store, WPF and Silverlight test applications for reading and displaying JPEG 2000 files. There is also a Windows Phone 8 application, although this application has not yet been confirmed to work.
+Included are very basic Windows Store, WPF and Silverlight test applications for reading and displaying JPEG 2000 files. There is also a Windows Phone 8 application, although this application has not yet been confirmed to work.
 
-The Portable Class Library provides interfaces for bitmap rendering, file I/O and logging. For all platforms except Windows Phone, the platform specific interface implementations are activated via MEF, 
-Managed Extensibility Framework. It is the responsiblity of the end application to satisfy the imports of these component parts once.
+The Portable Class Library provides interfaces for bitmap rendering, file I/O and logging. It is the responsiblity of the end application to register implementations of these interfaces before JPEG 2000 decoding and encoding
+can be performed. A static convenience method available on all platforms is implemented for this purpose:
 
-Please note that API for JPEG 2000 **encoding** is not yet implemented; only **decoding** is fully supported at this stage.
+```csharp
+CSJ2KSetup.RegisterCreators();
+```
+
+Please note that a public API for JPEG 2000 **encoding** is not yet provided; only **decoding** is easily performed at this stage.
+
+## Dependencies
+
+The `WriteableBitmap` implementation makes use of the [WriteableBitmap Extensions library](http://writeablebitmapex.codeplex.com/).
 
 ## Links
 

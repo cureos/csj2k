@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.Windows;
+﻿using System.Windows;
 using CSJ2K;
 
 namespace WPF.CSJ2K.Test
@@ -12,7 +10,13 @@ namespace WPF.CSJ2K.Test
 	{
 		private void App_OnStartup(object sender, StartupEventArgs e)
 		{
-			new CompositionContainer(new AssemblyCatalog(typeof(CSJ2KSetup).Assembly)).SatisfyImportsOnce(new CSJ2KSetup());
+#if MEF
+			System.ComponentModel.Composition.AttributedModelServices.SatisfyImportsOnce(
+				new System.ComponentModel.Composition.Hosting.CompositionContainer(
+					new System.ComponentModel.Composition.Hosting.AssemblyCatalog(typeof(CSJ2KSetup).Assembly)), new CSJ2KSetup());
+#else
+			CSJ2KSetup.RegisterCreators();
+#endif
 		}
 	}
 }

@@ -5,11 +5,11 @@ using Windows.Storage;
 
 namespace CSJ2K.Util
 {
-    public class StoreFileInfo : IFileInfo
+    internal class StoreFileInfo : IFileInfo
 	{
 		#region CONSTRUCTORS
 
-		public StoreFileInfo(string fileName)
+		internal StoreFileInfo(string fileName)
 		{
 			FullName = fileName;
 		}

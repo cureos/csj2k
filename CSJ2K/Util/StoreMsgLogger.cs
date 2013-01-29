@@ -1,33 +1,47 @@
 ﻿using System;
-using System.Composition;
 using System.IO;
+using System.Threading.Tasks;
 using CSJ2K.j2k.util;
+using Windows.Storage;
 
 namespace CSJ2K.Util
 {
-	[Export(typeof(IMsgLogger))]
+#if MEF
+	[System.Composition.Export(typeof(IMsgLogger))]
+#endif
 	public class StoreMsgLogger : IMsgLogger
 	{
+#if MEF
 		#region CONSTRUCTORS
-
-		static StoreMsgLogger()
-		{
-			OutputStream = new MemoryStream();
-			ErrorStream = new MemoryStream();
-		}
 
 		public StoreMsgLogger()
 		{
-			FacilityManager.DefaultMsgLogger = new StreamMsgLogger(OutputStream, ErrorStream, 132);
+			Register();
 		}
 
 		#endregion
+#endif
 
-		#region PROPERTIES
+		#region METHODS
 
-		public static Stream OutputStream { get; private set; }
+		public static void Register()
+		{
+			Task.Run(async () =>
+			{
+				var outFile =
+					await
+					ApplicationData.Current.LocalFolder.CreateFileAsync("csj2k.out",
+																		CreationCollisionOption.ReplaceExisting);
+				var outputStream = (await outFile.OpenAsync(FileAccessMode.ReadWrite)).AsStreamForWrite();
+				var errFile =
+					await
+					ApplicationData.Current.LocalFolder.CreateFileAsync("csj2k.err",
+																		CreationCollisionOption.ReplaceExisting);
+				var errorStream = (await errFile.OpenAsync(FileAccessMode.ReadWrite)).AsStreamForWrite();
 
-		public static Stream ErrorStream { get; private set; }
+				FacilityManager.DefaultMsgLogger = new StreamMsgLogger(outputStream, errorStream, 132);
+			});
+		}
 
 		#endregion
 	}

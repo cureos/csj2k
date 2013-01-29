@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Composition;
-using System.Composition.Hosting;
 using System.Reflection;
 using CSJ2K;
 using CSJ2K.Util;
@@ -54,9 +52,14 @@ namespace Store.CSJ2K.Test
                 Window.Current.Content = rootFrame;
 
 				// Implement platform-specific interfaces
-				new ContainerConfiguration().WithAssembly(typeof(WriteableBitmapWrapperCreator).GetTypeInfo().Assembly)
-											.CreateContainer().SatisfyImports(new CSJ2KSetup());
-			}
+#if MEF
+	            System.Composition.CompositionContextExtensions.SatisfyImports(
+		            new System.Composition.Hosting.ContainerConfiguration().WithAssembly(
+			            typeof(WriteableBitmapWrapperCreator).GetTypeInfo().Assembly).CreateContainer(), new CSJ2KSetup());
+#else
+				CSJ2KSetup.RegisterCreators();
+#endif
+            }
 
             if (rootFrame.Content == null)
             {

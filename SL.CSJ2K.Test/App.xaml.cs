@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using System.Windows;
 using CSJ2K;
 
@@ -20,7 +19,11 @@ namespace SL.CSJ2K.Test
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
 			RootVisual = new MainPage();
-			CompositionInitializer.SatisfyImports(new CSJ2KSetup());
+#if MEF
+			System.ComponentModel.Composition.CompositionInitializer.SatisfyImports(new CSJ2KSetup());
+#else
+			CSJ2KSetup.RegisterCreators();
+#endif
 		}
 
 		private void Application_Exit(object sender, EventArgs e)
