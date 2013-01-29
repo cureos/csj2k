@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>CSJ2K</id>
+        <version>0.9.0.1</version>
+        <title>CSJ2K JPEG 2000 codec library</title>
+        <authors>Anders Gustafsson,Jason S. Clary,JJ2000 Partners</authors>
+        <owners>Cureos AB</owners>
+        <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
+        <projectUrl>https://github.com/cureos/csj2k</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Portable Class Library for decoding and encoding JPEG2000 images from Windows Store, Windows Phone, Silverlight and .NET (WPF and Windows Forms) applications.</description>
+        <summary>Portable JPEG 2000 codec library</summary>
+        <releaseNotes>0.9.0.1:
+PCL library incorrectly located in 0.9.0; corrected.</releaseNotes>
+        <copyright>(c) 1999-2000 JJ2000 Partners, original C# port (c) 2007-2012 Jason S. Clary, adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013 Anders Gustafsson, Cureos AB</copyright>
+        <language>en-US</language>
+        <tags>JPEG2000 codec Silverlight WindowsPhone WP8 WPF .NET WinRT Metro Windows Store</tags>
+        <dependencies>
+            <dependency id="WriteableBitmapEx" version="1.0.6.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.dll" target="lib\net40-client\Portable.CSJ2K.dll" />
+        <file src="..\WPF.CSJ2K\bin\Release\WPF.CSJ2K.dll" target="lib\net40-client\WPF.CSJ2K.dll" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.dll" target="lib\netcore45\Portable.CSJ2K.dll" />
+        <file src="..\Store.CSJ2K\bin\Release\Store.CSJ2K.dll" target="lib\netcore45\Store.CSJ2K.dll" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.dll" target="lib\sl40\Portable.CSJ2K.dll" />
+        <file src="..\SL.CSJ2K\Bin\Release\SL.CSJ2K.dll" target="lib\sl40\SL.CSJ2K.dll" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.dll" target="lib\wp8\Portable.CSJ2K.dll" />
+        <file src="..\WP.CSJ2K\Bin\Release\WP.CSJ2K.dll" target="lib\wp8\WP.CSJ2K.dll" />
+    </files>
+</package>

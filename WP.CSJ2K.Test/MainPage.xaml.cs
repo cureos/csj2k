@@ -1,41 +1,19 @@
-﻿using System.Windows;
+﻿using System.Net;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using CSJ2K;
-using Microsoft.Phone.Tasks;
 
 namespace WP.CSJ2K.Test
 {
 	public partial class MainPage
 	{
-		#region FIELDS
-
-		private readonly PhotoChooserTask _photoChooserTask;
-
-		#endregion 
-
 		// Constructor
 		public MainPage()
 		{
 			InitializeComponent();
 
-			_photoChooserTask = new PhotoChooserTask();
-			_photoChooserTask.Completed += PhotoChooserTaskOnCompleted;
-
 			// Sample code to localize the ApplicationBar
 			//BuildLocalizedApplicationBar();
-		}
-
-		void PhotoChooserTaskOnCompleted(object sender, PhotoResult e)
-		{
-			if (e.Error == null && e.ChosenPhoto != null)
-			{
-				using (var stream = e.ChosenPhoto)
-				{
-					var image = (WriteableBitmap)J2kImage.FromStream(stream);
-					DecodedImage.Source = image;
-					ImageName.Text = e.OriginalFileName;
-				}
-			}
 		}
 
 		// Sample code for building a localized ApplicationBar
@@ -55,7 +33,13 @@ namespace WP.CSJ2K.Test
 		//}
 		private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
 		{
-			_photoChooserTask.Show();
+			var request = WebRequest.Create("http://www.microimages.com/gallery/jp2/1.jp2");
+			request.BeginGetResponse(ar =>
+				                         {
+					                         var response = request.EndGetResponse(ar);
+					                         DecodedImage.Source =
+						                         (WriteableBitmap)J2kImage.FromStream(response.GetResponseStream());
+				                         }, null);
 		}
 	}
 }
