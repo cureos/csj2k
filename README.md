@@ -1,6 +1,6 @@
 # Portable CSJ2K - A Managed JPEG2000 Codec
 
-Copyright (c) 1999-2000 JJ2000 Partners, original C# port (c) 2007-2012 Jason Clary, adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013 Anders Gustafsson, Cureos AB   
+Copyright (c) 1999-2000 JJ2000 Partners, original C# port (c) 2007-2012 Jason S. Clary, adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013 Anders Gustafsson, Cureos AB   
 
 Licensed and distributable under the terms of the [BSD license](http://www.opensource.org/licenses/bsd-license.php)
 
