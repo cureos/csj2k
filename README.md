@@ -21,6 +21,12 @@ for `WriteableBitmap`, thus facilitating JPEG 2000 decoding in WPF based applica
 
 Included are very basic Windows Store, WPF and Silverlight test applications for reading and displaying JPEG 2000 files. There is also a Windows Phone 8 application, although this application has not yet been confirmed to work.
 
+## Installation
+
+Apart from buidling the relevant class libraries from source, prebuilt packages for the supported platforms can also be obtained via [NuGet](https://nuget.org/packages/CSJ2K/).
+
+## Usage
+
 The Portable Class Library provides interfaces for bitmap rendering, file I/O and logging. It is the responsiblity of the end application to register implementations of these interfaces before JPEG 2000 decoding and encoding
 can be performed. A static convenience method available on all platforms is implemented for this purpose:
 
@@ -28,11 +34,24 @@ can be performed. A static convenience method available on all platforms is impl
 CSJ2KSetup.RegisterCreators();
 ```
 
+To decode a JPEG 2000 encoded image, call one of the following methods:
+
+```csharp
+    public class J2kImage
+    {
+        public static object FromFile(string filename);
+        public static object FromBytes(byte[] j2kdata);
+        public static object FromStream(Stream stream);
+	}
+```
+
+The returned `object` is a regular bitmap, typically a `WriteableBitmap` or, in the case of the Windows Forms targeted library, a `System.Drawing.Bitmap`.
+
 Please note that a public API for JPEG 2000 **encoding** is not yet provided; only **decoding** is easily performed at this stage.
 
 ## Dependencies
 
-The `WriteableBitmap` implementation makes use of the [WriteableBitmap Extensions library](http://writeablebitmapex.codeplex.com/).
+The `WriteableBitmap` implementations make use of the [WriteableBitmap Extensions library](http://writeablebitmapex.codeplex.com/).
 
 ## Links
 
