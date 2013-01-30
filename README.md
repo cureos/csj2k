@@ -37,13 +37,15 @@ CSJ2KSetup.RegisterCreators();
 To decode a JPEG 2000 encoded image, call one of the following methods:
 
 ```csharp
-    public class J2kImage
-    {
-        public static object FromFile(string filename);
-        public static object FromBytes(byte[] j2kdata);
-        public static object FromStream(Stream stream);
-	}
+public class J2kImage
+{
+	public static object FromStream(Stream stream);
+	public static object FromBytes(byte[] j2kdata);
+	public static object FromFile(string filename);
+}
 ```
+
+`J2kImage.FromFile(string)` is not sufficiently implemented for Silverlight and Windows Phone. Regardless of platform, `J2kImage.FromStream(Stream)` is the recommended method when applicable.
 
 The returned `object` is a regular bitmap, typically a `WriteableBitmap` or, in the case of the Windows Forms targeted library, a `System.Drawing.Bitmap`.
 
