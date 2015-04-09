@@ -136,7 +136,7 @@ namespace CSJ2K.j2k.image.input
 		/// 
 		/// </exception>
 		//UPGRADE_TODO: Class 'java.io.RandomAccessFile' was converted to 'System.IO.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioRandomAccessFile'"
-		private ImgReaderPPM(System.IO.Stream in_Renamed)
+		public ImgReaderPPM(System.IO.Stream in_Renamed)
 		{
 			this.in_Renamed = in_Renamed;
 			
