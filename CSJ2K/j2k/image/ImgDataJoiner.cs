@@ -238,7 +238,7 @@ namespace CSJ2K.j2k.image
         private readonly int nc;
         
         /// <summary>The list of input ImgData </summary>
-        private readonly IList<BlkImgDataSrc> imageData;
+        private readonly IList<ImgReader> imageData;
         
         /// <summary>The component index associated with each ImgData </summary>
         private readonly IList<int> compIdx;
@@ -279,7 +279,7 @@ namespace CSJ2K.j2k.image
         /// <param name="cIdx">The component index associated with each ImgData.
         /// 
         /// </param>
-        public ImgDataJoiner(IList<BlkImgDataSrc> imD, IList<int> cIdx)
+        public ImgDataJoiner(IList<ImgReader> imD, IList<int> cIdx)
         {
             int i;
             int maxW, maxH;
