@@ -99,6 +99,7 @@
     <Compile Include="Icc\Types\ICCProfileVersion.cs" />
     <Compile Include="Icc\Types\XYZNumber.cs" />
     <Compile Include="J2kImage.cs" />
+    <Compile Include="ImageType.cs" />
     <Compile Include="j2k\codestream\CBlkCoordInfo.cs" />
     <Compile Include="j2k\codestream\CoordInfo.cs" />
     <Compile Include="j2k\codestream\CorruptedCodestreamException.cs" />
