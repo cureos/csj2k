@@ -40,12 +40,13 @@
 * 
 * Copyright (c) 1999/2000 JJ2000 Partners.
 * */
-using System;
-using CSJ2K.Util;
-
 namespace CSJ2K.j2k.io
 {
-	
+	using System;
+	using System.IO;
+
+	using CSJ2K.Util;
+
 	/// <summary> This class defines a Buffered Random Access File.  It implements the
 	/// <tt>BinaryDataInput</tt> and <tt>BinaryDataOutput</tt> interfaces so that
 	/// binary data input/output can be performed. This class is abstract since no
@@ -155,7 +156,43 @@ namespace CSJ2K.j2k.io
 		
 		/* The endianess of the class */
 		protected internal int byte_Ordering;
-		
+
+		/// <summary> Constructor. Always needs a size for the buffer.
+		/// 
+		/// </summary>
+		/// <param name="stream">The stream associated with the buffer
+		/// 
+		/// </param>
+		/// <param name="bufferSize">The number of bytes to buffer
+		/// 
+		/// </param>
+		/// <exception cref="IOException">If an I/O error ocurred.
+		/// 
+		/// </exception>
+		protected internal BufferedRandomAccessFile(Stream stream, int bufferSize)
+		{
+
+			fileName = String.Empty;
+			theFile = stream;
+			byteBuffer = new byte[bufferSize];
+			readNewBuffer(0);
+		}
+
+		/// <summary> Constructor. Uses the default value for the byte-buffer 
+		/// size (512 bytes).
+		/// 
+		/// </summary>
+		/// <param name="stream">The stream associated with the buffer
+		/// 
+		/// </param>
+		/// <exception cref="IOException">If an I/O error ocurred.
+		/// 
+		/// </exception>
+		protected internal BufferedRandomAccessFile(Stream stream)
+			: this(stream, 512)
+		{
+		}
+
 		/// <summary> Constructor. Always needs a size for the buffer.
 		/// 
 		/// </summary>
@@ -171,7 +208,7 @@ namespace CSJ2K.j2k.io
 		/// <param name="bufferSize">The number of bytes to buffer
 		/// 
 		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		protected internal BufferedRandomAccessFile(IFileInfo file, System.String mode, int bufferSize)
@@ -209,7 +246,7 @@ namespace CSJ2K.j2k.io
 		/// file already exists).
 		/// 
 		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		protected internal BufferedRandomAccessFile(IFileInfo file, System.String mode):this(file, mode, 512)
@@ -231,7 +268,7 @@ namespace CSJ2K.j2k.io
 		/// <param name="bufferSize">The number of bytes to buffer
 		/// 
 		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		protected internal BufferedRandomAccessFile(System.String name, System.String mode, int bufferSize):this(FileInfoFactory.New(name), mode, bufferSize)
@@ -251,7 +288,7 @@ namespace CSJ2K.j2k.io
 		/// file already exists).
 		/// 
 		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		protected internal BufferedRandomAccessFile(System.String name, System.String mode):this(name, mode, 512)
@@ -266,7 +303,7 @@ namespace CSJ2K.j2k.io
 		/// <param name="off">The offset where to move to.
 		/// 
 		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		protected internal void  readNewBuffer(int off)
@@ -310,7 +347,7 @@ namespace CSJ2K.j2k.io
 		/// <summary> Closes the buffered random access file
 		/// 
 		/// </summary>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		public virtual void  close()
@@ -330,7 +367,7 @@ namespace CSJ2K.j2k.io
 		/// <returns> The length of the stream, in bytes.
 		/// 
 		/// </returns>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		public virtual int length()
@@ -363,7 +400,7 @@ namespace CSJ2K.j2k.io
 		/// <exception cref="EOFException">If in read-only and seeking beyond EOF.
 		/// 
 		/// </exception>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		public virtual void  seek(int off)
@@ -392,14 +429,14 @@ namespace CSJ2K.j2k.io
 		/// <returns> The byte read.
 		/// 
 		/// </returns>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		/// <exception cref="java.io.EOFException">If the end of file was reached
 		/// 
 		/// </exception>
-        public byte readByte() { return read(); }
-        public byte readUnsignedByte() { return read(); }
+		public byte readByte() { return read(); }
+		public byte readUnsignedByte() { return read(); }
 		public byte read()
 		{
 			if (position < maxByte)
@@ -483,7 +520,7 @@ namespace CSJ2K.j2k.io
 		/// written.
 		/// 
 		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		public void  write(int b)
@@ -517,7 +554,7 @@ namespace CSJ2K.j2k.io
 		/// <param name="b">The byte to write.
 		/// 
 		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		public void  write(byte b)
@@ -557,7 +594,7 @@ namespace CSJ2K.j2k.io
 		/// <param name="length">The number of bytes from b to write 
 		/// 
 		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		public void  write(byte[] b, int offset, int length)
@@ -586,7 +623,7 @@ namespace CSJ2K.j2k.io
 		/// <param name="v">The value to write to the output
 		/// 
 		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		public void  writeByte(int v)
@@ -599,7 +636,7 @@ namespace CSJ2K.j2k.io
 		/// at the byte level.
 		/// 
 		/// </summary>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		public void  flush()
@@ -682,7 +719,7 @@ namespace CSJ2K.j2k.io
 		/// all the bytes could be skipped.
 		/// 
 		/// </exception>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
 		public virtual int skipBytes(int n)

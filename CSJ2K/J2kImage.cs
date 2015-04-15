@@ -767,7 +767,7 @@ namespace CSJ2K
 				try
 				{
 					CodestreamManipulator cm = new CodestreamManipulator(
-						outname,
+						outStream,
 						ntiles,
 						pktspertp,
 						pphMain,
@@ -816,7 +816,7 @@ namespace CSJ2K
 					}
 
 					var ffw = new FileFormatWriter(
-						outname,
+						outStream,
 						imgsrc.ImgHeight,
 						imgsrc.ImgWidth,
 						nc,
@@ -1076,14 +1076,14 @@ namespace CSJ2K
 		#endregion
 
 		/**
-     * Prints the error message 'msg' to standard err, prepending "ERROR" to
-     * it, and sets the exitCode to 'code'. An exit code different than 0
-     * indicates that there where problems.
-     *
-     * @param msg The error message
-     *
-     * @param code The exit code to set
-     * */
+	 * Prints the error message 'msg' to standard err, prepending "ERROR" to
+	 * it, and sets the exitCode to 'code'. An exit code different than 0
+	 * indicates that there where problems.
+	 *
+	 * @param msg The error message
+	 *
+	 * @param code The exit code to set
+	 * */
 		private static void error(String msg, int code)
 		{
 			//exitCode = code;

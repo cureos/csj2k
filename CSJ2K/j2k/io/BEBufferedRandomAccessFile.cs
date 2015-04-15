@@ -45,7 +45,8 @@ using CSJ2K.Util;
 
 namespace CSJ2K.j2k.io
 {
-	
+	using System.IO;
+
 	/// <summary> This class defines a Buffered Random Access File, where all I/O is
 	/// considered to be big-endian. It extends the
 	/// <tt>BufferedRandomAccessFile</tt> class.
@@ -62,6 +63,40 @@ namespace CSJ2K.j2k.io
 	/// </seealso>
 	public class BEBufferedRandomAccessFile:BufferedRandomAccessFile, RandomAccessIO, EndianType
 	{
+		/// <summary> Constructor. Always needs a size for the buffer.
+		/// 
+		/// </summary>
+		/// <param name="stream">The stream associated with the buffer
+		/// 
+		/// </param>
+		/// <param name="bufferSize">The number of bytes to buffer
+		/// 
+		/// </param>
+		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// 
+		/// </exception>
+		public BEBufferedRandomAccessFile(Stream stream, int bufferSize)
+			: base(stream, bufferSize)
+		{
+			byte_Ordering = CSJ2K.j2k.io.EndianType_Fields.BIG_ENDIAN;
+		}
+
+		/// <summary> Constructor. Uses the default value for the byte-buffer size (512
+		/// bytes).
+		/// 
+		/// </summary>
+		/// <param name="stream">The stream associated with the buffer
+		/// 
+		/// </param>
+		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// 
+		/// </exception>
+		public BEBufferedRandomAccessFile(Stream stream)
+			: base(stream)
+		{
+			byte_Ordering = CSJ2K.j2k.io.EndianType_Fields.BIG_ENDIAN;
+		}
+
 		/// <summary> Constructor. Always needs a size for the buffer.
 		/// 
 		/// </summary>
@@ -229,35 +264,35 @@ namespace CSJ2K.j2k.io
 		/// </exception>
 		public override void  writeFloat(float v)
 		{
-            // CONVERSION PROBLEM? OPTIMIZE!!!
-            //byte[] floatbytes = BitConverter.GetBytes(v);
-            //for (int i = floatbytes.Length-1; i >= 0 ; i--) write(floatbytes[i]);
+			// CONVERSION PROBLEM? OPTIMIZE!!!
+			//byte[] floatbytes = BitConverter.GetBytes(v);
+			//for (int i = floatbytes.Length-1; i >= 0 ; i--) write(floatbytes[i]);
 
 			//UPGRADE_ISSUE: Method 'java.lang.Float.floatToIntBits' was not converted. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1000_javalangFloatfloatToIntBits_float'"
-            //int intV = Float.floatToIntBits(v);
-            int intV = BitConverter.ToInt32(BitConverter.GetBytes(v), 0);
+			//int intV = Float.floatToIntBits(v);
+			int intV = BitConverter.ToInt32(BitConverter.GetBytes(v), 0);
 			write(SupportClass.URShift(intV, 24));
 			write(SupportClass.URShift(intV, 16));
 			write(SupportClass.URShift(intV, 8));
 			write(intV);
 		}
 
-        /// <summary> Writes the IEEE double value <tt>v</tt> (i.e., 64 bits) to the
-        /// output. Prior to writing, the output should be realigned at the byte
-        /// level.
-        /// 
-        /// </summary>
-        /// <param name="v">The value to write to the output
-        /// 
-        /// </param>
-        /// <exception cref="java.io.IOException">If an I/O error ocurred.
-        /// 
-        /// </exception>
-        public override void writeDouble(double v)
+		/// <summary> Writes the IEEE double value <tt>v</tt> (i.e., 64 bits) to the
+		/// output. Prior to writing, the output should be realigned at the byte
+		/// level.
+		/// 
+		/// </summary>
+		/// <param name="v">The value to write to the output
+		/// 
+		/// </param>
+		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// 
+		/// </exception>
+		public override void writeDouble(double v)
 		{
-            //byte[] doublebytes = BitConverter.GetBytes(v);
-            //for (int i = doublebytes.Length-1; i >= 0 ; i--) write(doublebytes[i]);
-           
+			//byte[] doublebytes = BitConverter.GetBytes(v);
+			//for (int i = doublebytes.Length-1; i >= 0 ; i--) write(doublebytes[i]);
+		   
 			//UPGRADE_ISSUE: Method 'java.lang.Double.doubleToLongBits' was not converted. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1000_javalangDoubledoubleToLongBits_double'"
 			//long longV = Double.doubleToLongBits(v);
 			long longV = BitConverter.ToInt64(BitConverter.GetBytes(v), 0);
@@ -269,24 +304,24 @@ namespace CSJ2K.j2k.io
 			write((int) (SupportClass.URShift(longV, 16)));
 			write((int) (SupportClass.URShift(longV, 8)));
 			write((int) (longV));
-            
+			
 		}
 
-        /// <summary> Reads a signed short (i.e. 16 bit) from the input. Prior to reading,
-        /// the input should be realigned at the byte level.
-        /// 
-        /// </summary>
-        /// <returns> The next byte-aligned signed short (16 bit) from the input.
-        /// 
-        /// </returns>
-        /// <exception cref="java.io.EOFException">If the end-of file was reached before
-        /// getting all the necessary data.
-        /// 
-        /// </exception>
-        /// <exception cref="java.io.IOException">If an I/O error ocurred.
-        /// 
-        /// </exception>
-        public override short readShort()
+		/// <summary> Reads a signed short (i.e. 16 bit) from the input. Prior to reading,
+		/// the input should be realigned at the byte level.
+		/// 
+		/// </summary>
+		/// <returns> The next byte-aligned signed short (16 bit) from the input.
+		/// 
+		/// </returns>
+		/// <exception cref="java.io.EOFException">If the end-of file was reached before
+		/// getting all the necessary data.
+		/// 
+		/// </exception>
+		/// <exception cref="java.io.IOException">If an I/O error ocurred.
+		/// 
+		/// </exception>
+		public override short readShort()
 		{
 			return (short) ((read() << 8) | (read()));
 		}
@@ -369,9 +404,9 @@ namespace CSJ2K.j2k.io
 		/// </exception>
 		public override long readLong()
 		{
-            //byte[] longbytes = new byte[8];
-            //for (int i = longbytes.Length-1; i >= 0; i--) longbytes[i] = read();
-            //return BitConverter.ToInt64(longbytes, 0);
+			//byte[] longbytes = new byte[8];
+			//for (int i = longbytes.Length-1; i >= 0; i--) longbytes[i] = read();
+			//return BitConverter.ToInt64(longbytes, 0);
 			return ((long)(((ulong) read() << 56) | ((ulong) read() << 48) | ((ulong) read() << 40) | ((ulong) read() << 32) | ((ulong) read() << 24) | ((ulong) read() << 16) | ((ulong) read() << 8) | ((ulong) read())));
 		}
 		
@@ -392,14 +427,14 @@ namespace CSJ2K.j2k.io
 		/// </exception>
 		public override float readFloat()
 		{
-            // CONVERSION PROBLEM?  OPTIMIZE!!!
-            //byte[] floatbytes = new byte[4];
-            //for (int i = floatbytes.Length-1; i >= 0 ; i--) floatbytes[i] = (byte)read();
-            //return BitConverter.ToSingle(floatbytes, 0);
+			// CONVERSION PROBLEM?  OPTIMIZE!!!
+			//byte[] floatbytes = new byte[4];
+			//for (int i = floatbytes.Length-1; i >= 0 ; i--) floatbytes[i] = (byte)read();
+			//return BitConverter.ToSingle(floatbytes, 0);
 
 			//UPGRADE_ISSUE: Method 'java.lang.Float.intBitsToFloat' was not converted. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1000_javalangFloatintBitsToFloat_int'"
-            //return Float.intBitsToFloat((read() << 24) | (read() << 16) | (read() << 8) | (read()));
-            return BitConverter.ToSingle(BitConverter.GetBytes((read() << 24) | (read() << 16) | (read() << 8) | (read())), 0);
+			//return Float.intBitsToFloat((read() << 24) | (read() << 16) | (read() << 8) | (read()));
+			return BitConverter.ToSingle(BitConverter.GetBytes((read() << 24) | (read() << 16) | (read() << 8) | (read())), 0);
 
 		}
 		
@@ -420,15 +455,15 @@ namespace CSJ2K.j2k.io
 		/// </exception>
 		public override double readDouble()
 		{
-            // CONVERSION PROBLEM?  OPTIMIZE!!!
-            //byte[] doublebytes = new byte[8];
-            //for (int i = doublebytes.Length-1; i >=0 ; i--) doublebytes[i] = (byte)read();
-            //return BitConverter.ToDouble(doublebytes, 0);
+			// CONVERSION PROBLEM?  OPTIMIZE!!!
+			//byte[] doublebytes = new byte[8];
+			//for (int i = doublebytes.Length-1; i >=0 ; i--) doublebytes[i] = (byte)read();
+			//return BitConverter.ToDouble(doublebytes, 0);
 
 			//UPGRADE_ISSUE: Method 'java.lang.Double.longBitsToDouble' was not converted. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1000_javalangDoublelongBitsToDouble_long'"
 			//return Double.longBitsToDouble(((long) read() << 56) | ((long) read() << 48) | ((long) read() << 40) | ((long) read() << 32) | ((long) read() << 24) | ((long) read() << 16) | ((long) read() << 8) | ((long) read()));
-            
-            return BitConverter.ToDouble(BitConverter.GetBytes(((long) read() << 56) | ((long) read() << 48) | ((long) read() << 40) | ((long) read() << 32) | ((long) read() << 24) | ((long) read() << 16) | ((long) read() << 8) | ((long) read())), 0);
+			
+			return BitConverter.ToDouble(BitConverter.GetBytes(((long) read() << 56) | ((long) read() << 48) | ((long) read() << 40) | ((long) read() << 32) | ((long) read() << 24) | ((long) read() << 16) | ((long) read() << 8) | ((long) read())), 0);
 
 		}
 		
