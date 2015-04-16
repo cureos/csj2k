@@ -1,6 +1,6 @@
 # Portable CSJ2K - A Managed JPEG2000 Codec
 
-Copyright (c) 1999-2000 JJ2000 Partners, original C# port (c) 2007-2012 Jason S. Clary, adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013 Anders Gustafsson, Cureos AB   
+Copyright (c) 1999-2000 JJ2000 Partners, original C# port (c) 2007-2012 Jason S. Clary, adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013-2015 Anders Gustafsson, Cureos AB   
 
 Licensed and distributable under the terms of the [BSD license](http://www.opensource.org/licenses/bsd-license.php)
 
@@ -39,9 +39,9 @@ To decode a JPEG 2000 encoded image, call one of the following methods:
 ```csharp
 public class J2kImage
 {
-	public static object FromStream(Stream stream);
-	public static object FromBytes(byte[] j2kdata);
-	public static object FromFile(string filename);
+	public static object FromStream(Stream);
+	public static object FromBytes(byte[]);
+	public static object FromFile(string);
 }
 ```
 
@@ -49,7 +49,14 @@ public class J2kImage
 
 The returned `object` is a regular bitmap, typically a `WriteableBitmap` or, in the case of the Windows Forms targeted library, a `System.Drawing.Bitmap`.
 
-Please note that a public API for JPEG 2000 **encoding** is not yet provided; only **decoding** is easily performed at this stage.
+To encode a portable bitmap image (PGM, PPM or PGX), call this method:
+
+```csharp
+public class J2kImage
+{
+	public static byte[] ToBytes(Stream inStream, ImageType, bool);
+}
+```
 
 ## Dependencies
 
