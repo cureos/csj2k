@@ -7,7 +7,7 @@
     mc:Ignorable="d">
 
     <StackPanel Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <Button Content="Select JP2 File"  Click="ButtonBase_OnClick"/>
+        <Button Content="Select File"  Click="ButtonBase_OnClick"/>
         <Image x:Name="DecodedImage" Stretch="None" HorizontalAlignment="Left"/>
         <TextBlock FontSize="18" x:Name="ImageName"/>
     </StackPanel>
