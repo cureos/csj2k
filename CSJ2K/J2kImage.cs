@@ -56,7 +56,7 @@ namespace CSJ2K
 			RandomAccessIO in_stream = new ISRandomAccessIO(stream);
 
 			// Initialize default parameters
-			ParameterList defpl = GetDefaultParameterList(decoder_pinfo);
+			ParameterList defpl = GetDefaultDecoderParameterList(decoder_pinfo);
 
 			// Create parameter list using defaults
 			ParameterList pl = new ParameterList(defpl);
@@ -303,10 +303,10 @@ namespace CSJ2K
 
 		#region Static Encoder Methods
 
-		public static Stream ToStream(Stream inStream, ImageType imageType, bool useFileFormat)
+		public static byte[] ToBytes(Stream inStream, ImageType imageType, bool useFileFormat)
 		{
 			// Initialize default parameters
-			ParameterList defpl = GetDefaultParameterList(encoder_pinfo);
+			ParameterList defpl = GetDefaultEncoderParameterList(encoder_pinfo);
 
 			// Create parameter list using defaults
 			ParameterList pl = new ParameterList(defpl);
@@ -604,139 +604,131 @@ namespace CSJ2K
 			}
 
 			// **** CodestreamWriter ****
-			var outStream = new MemoryStream();
-
-			CodestreamWriter bwriter;
-			try
+			using (var outStream = new MemoryStream())
 			{
-				// Rely on rate allocator to limit amount of data
-				bwriter = new FileCodestreamWriter(outStream, Int32.MaxValue);
-			}
-			catch (System.IO.IOException e)
-			{
-				error("Could not open output file" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
-				return null;
-			}
-
-			// **** Rate allocator ****
-			PostCompRateAllocator ralloc;
-			try
-			{
-				ralloc = PostCompRateAllocator.createInstance(ecoder, pl, rate, bwriter, encSpec);
-			}
-			catch (ArgumentException e)
-			{
-				error("Could not instantiate rate allocator" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
-				return null;
-			}
-
-			// **** HeaderEncoder ****
-			var headenc = new HeaderEncoder(imgsrc, imsigned, dwt, imgtiler, encSpec, rois, ralloc, pl);
-			ralloc.HeaderEncoder = headenc;
-
-			// **** Write header to be able to estimate header overhead ****
-			headenc.encodeMainHeader();
-
-			// **** Initialize rate allocator, with proper header
-			// overhead. This will also encode all the data ****
-			ralloc.initialize();
-
-			// **** Write header (final) ****
-			headenc.reset();
-			headenc.encodeMainHeader();
-
-			// Insert header into the codestream
-			bwriter.commitBitstreamHeader(headenc);
-
-			// **** Now do the rate-allocation and write result ****
-			ralloc.runAndWrite();
-
-			// **** Done ****
-			bwriter.close();
-
-			// **** Calculate file length ****
-			int fileLength = bwriter.Length;
-
-			// **** Tile-parts and packed packet headers ****
-			if (pktspertp > 0 || pphTile || pphMain)
-			{
-				//int headInc;
+				CodestreamWriter bwriter;
 				try
 				{
-					CodestreamManipulator cm = new CodestreamManipulator(
-						outStream,
-						ntiles,
-						pktspertp,
-						pphMain,
-						pphTile,
-						tempSop,
-						tempEph);
-					fileLength += cm.doCodestreamManipulation();
-					//String res="";
-					if (pktspertp > 0)
-					{
-						FacilityManager.getMsgLogger()
-							.println(
-								"Created tile-parts " + "containing at most " + pktspertp + " packets per tile.",
-								4,
-								6);
-					}
-					if (pphTile)
-					{
-						FacilityManager.getMsgLogger().println("Moved packet headers " + "to tile headers", 4, 6);
-					}
-					if (pphMain)
-					{
-						FacilityManager.getMsgLogger().println("Moved packet headers " + "to main header", 4, 6);
-					}
+					// Rely on rate allocator to limit amount of data
+					bwriter = new FileCodestreamWriter(outStream, Int32.MaxValue);
 				}
 				catch (System.IO.IOException e)
 				{
-					error(
-						"Error while creating tileparts or packed packet" + " headers"
-						+ ((e.Message != null) ? (":\n" + e.Message) : ""),
-						2);
+					error("Could not open output file" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
 					return null;
 				}
-			}
 
-			// **** File Format ****
-			if (useFileFormat)
-			{
+				// **** Rate allocator ****
+				PostCompRateAllocator ralloc;
 				try
 				{
-					int nc = imgsrc.NumComps;
-					int[] bpc = new int[nc];
-					for (int comp = 0; comp < nc; comp++)
-					{
-						bpc[comp] = imgsrc.getNomRangeBits(comp);
-					}
-
-					var ffw = new FileFormatWriter(
-						outStream,
-						imgsrc.ImgHeight,
-						imgsrc.ImgWidth,
-						nc,
-						bpc,
-						fileLength);
-					fileLength += ffw.writeFileFormat();
+					ralloc = PostCompRateAllocator.createInstance(ecoder, pl, rate, bwriter, encSpec);
 				}
-				catch (System.IO.IOException e)
+				catch (ArgumentException e)
 				{
-					throw new InvalidOperationException("Error while writing JP2 file format: " + e.Message);
+					error("Could not instantiate rate allocator" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
+					return null;
 				}
+
+				// **** HeaderEncoder ****
+				var headenc = new HeaderEncoder(imgsrc, imsigned, dwt, imgtiler, encSpec, rois, ralloc, pl);
+				ralloc.HeaderEncoder = headenc;
+
+				// **** Write header to be able to estimate header overhead ****
+				headenc.encodeMainHeader();
+
+				// **** Initialize rate allocator, with proper header
+				// overhead. This will also encode all the data ****
+				ralloc.initialize();
+
+				// **** Write header (final) ****
+				headenc.reset();
+				headenc.encodeMainHeader();
+
+				// Insert header into the codestream
+				bwriter.commitBitstreamHeader(headenc);
+
+				// **** Now do the rate-allocation and write result ****
+				ralloc.runAndWrite();
+
+				// **** Done ****
+				bwriter.close();
+
+				// **** Calculate file length ****
+				int fileLength = bwriter.Length;
+
+				// **** Tile-parts and packed packet headers ****
+				if (pktspertp > 0 || pphTile || pphMain)
+				{
+					//int headInc;
+					try
+					{
+						CodestreamManipulator cm = new CodestreamManipulator(
+							outStream,
+							ntiles,
+							pktspertp,
+							pphMain,
+							pphTile,
+							tempSop,
+							tempEph);
+						fileLength += cm.doCodestreamManipulation();
+						//String res="";
+						if (pktspertp > 0)
+						{
+							FacilityManager.getMsgLogger()
+								.println("Created tile-parts " + "containing at most " + pktspertp + " packets per tile.", 4, 6);
+						}
+						if (pphTile)
+						{
+							FacilityManager.getMsgLogger().println("Moved packet headers " + "to tile headers", 4, 6);
+						}
+						if (pphMain)
+						{
+							FacilityManager.getMsgLogger().println("Moved packet headers " + "to main header", 4, 6);
+						}
+					}
+					catch (System.IO.IOException e)
+					{
+						error(
+							"Error while creating tileparts or packed packet" + " headers" + ((e.Message != null) ? (":\n" + e.Message) : ""),
+							2);
+						return null;
+					}
+				}
+
+				// **** File Format ****
+				if (useFileFormat)
+				{
+					try
+					{
+						int nc = imgsrc.NumComps;
+						int[] bpc = new int[nc];
+						for (int comp = 0; comp < nc; comp++)
+						{
+							bpc[comp] = imgsrc.getNomRangeBits(comp);
+						}
+
+						var ffw = new FileFormatWriter(outStream, imgsrc.ImgHeight, imgsrc.ImgWidth, nc, bpc, fileLength);
+						fileLength += ffw.writeFileFormat();
+					}
+					catch (System.IO.IOException e)
+					{
+						throw new InvalidOperationException("Error while writing JP2 file format: " + e.Message);
+					}
+				}
+
+				// **** Close image reader ***
+				imgsrc.close();
+
+				return outStream.ToArray();
 			}
-
-			// **** Close image reader ***
-			imgsrc.close();
-
-			return outStream;
 		}
 
 		#endregion
 
-		#region Default Parameter Loader
-		public static ParameterList GetDefaultParameterList(string[][] pinfo)
+		#region Default Parameter Loaders
+
+		public static ParameterList GetDefaultDecoderParameterList(string[][] pinfo)
 		{
 			ParameterList pl = new ParameterList();
 			string[][] str;
@@ -775,6 +767,55 @@ namespace CSJ2K
 
 			return pl;
 		}
+
+		public static ParameterList GetDefaultEncoderParameterList(string[][] pinfo)
+		{
+			ParameterList pl = new ParameterList();
+			string[][] str;
+
+			str = pinfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			str = ForwCompTransf.ParameterInfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			str = AnWTFilter.ParameterInfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			str = ForwardWT.ParameterInfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			str = Quantizer.ParameterInfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			str = ROIScaler.ParameterInfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			str = EntropyCoder.ParameterInfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			str = HeaderEncoder.ParameterInfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			str = PostCompRateAllocator.ParameterInfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			str = PktEncoder.ParameterInfo;
+			if (str != null) for (int i = str.Length - 1; i >= 0; i--)
+					pl[str[i][0]] = str[i][3];
+
+			return pl;
+		}
+
 		#endregion
 
 		#region Decoder Parameters

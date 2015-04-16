@@ -292,7 +292,10 @@ namespace CSJ2K.j2k.util
 				// if parameter is not there
 				// Look in defaults
 				//UPGRADE_ISSUE: Field 'java.util.Properties.defaults' was not converted. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1000_javautilPropertiesdefaults_f'"
-				pval = defaults[pname];
+				if (!defaults.TryGetValue(pname, out pval))
+				{
+					return null;
+				}
 			}
 			return pval;
 		}

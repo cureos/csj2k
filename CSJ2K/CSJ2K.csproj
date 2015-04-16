@@ -141,6 +141,7 @@
     <Compile Include="Icc\Tags\ICCViewType.cs" />
     <Compile Include="Icc\Tags\ICCSignatureType.cs" />
     <Compile Include="Icc\Tags\ICCMeasurementType.cs" />
+    <Compile Include="ImageType.cs" />
     <Compile Include="J2kImage.cs" />
     <Compile Include="Util\WinformsBitmapWrapperCreator.cs" />
     <Compile Include="Util\BitmapWrapperFactory.cs" />
