@@ -184,7 +184,7 @@ namespace CSJ2K.j2k.util
 				return 0;
 			
 			// Open file for reading and writing
-			fi = new BEBufferedRandomAccessFile(stream);
+			fi = new BEBufferedRandomAccessFile(stream, false);
 			addedHeaderBytes -= fi.length();
 			
 			// Parse the codestream for SOT, SOP and EPH markers
@@ -195,7 +195,7 @@ namespace CSJ2K.j2k.util
 			
 			// Close file and overwrite with new file
 			fi.close();
-			fi = new BEBufferedRandomAccessFile(stream);
+			fi = new BEBufferedRandomAccessFile(stream, false);
 			
 			// Create tile-parts
 			createTileParts();

@@ -1,38 +1,32 @@
-#region Using Statements
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using CSJ2K;
-using CSJ2K.Color;
-using CSJ2K.Icc;
-using CSJ2K.Util;
-using CSJ2K.j2k;
-using CSJ2K.j2k.codestream;
-using CSJ2K.j2k.codestream.reader;
-using CSJ2K.j2k.decoder;
-using CSJ2K.j2k.entropy.decoder;
-using CSJ2K.j2k.fileformat.reader;
-using CSJ2K.j2k.image;
-using CSJ2K.j2k.image.invcomptransf;
-using CSJ2K.j2k.io;
-using CSJ2K.j2k.quantization.dequantizer;
-using CSJ2K.j2k.roi;
-using CSJ2K.j2k.util;
-using CSJ2K.j2k.wavelet.synthesis;
-#endregion
-
 namespace CSJ2K
 {
+	using System;
+	using System.IO;
+
+	using CSJ2K.Color;
+	using CSJ2K.Icc;
+	using CSJ2K.j2k.codestream;
+	using CSJ2K.j2k.codestream.reader;
 	using CSJ2K.j2k.codestream.writer;
+	using CSJ2K.j2k.decoder;
 	using CSJ2K.j2k.encoder;
+	using CSJ2K.j2k.entropy.decoder;
 	using CSJ2K.j2k.entropy.encoder;
+	using CSJ2K.j2k.fileformat.reader;
 	using CSJ2K.j2k.fileformat.writer;
+	using CSJ2K.j2k.image;
 	using CSJ2K.j2k.image.forwcomptransf;
 	using CSJ2K.j2k.image.input;
+	using CSJ2K.j2k.image.invcomptransf;
+	using CSJ2K.j2k.io;
+	using CSJ2K.j2k.quantization.dequantizer;
 	using CSJ2K.j2k.quantization.quantizer;
+	using CSJ2K.j2k.roi;
 	using CSJ2K.j2k.roi.encoder;
+	using CSJ2K.j2k.util;
 	using CSJ2K.j2k.wavelet.analysis;
+	using CSJ2K.j2k.wavelet.synthesis;
+	using CSJ2K.Util;
 
 	public class J2kImage
 	{
@@ -303,7 +297,7 @@ namespace CSJ2K
 
 		#region Static Encoder Methods
 
-		public static byte[] ToBytes(Stream inStream, ImageType imageType, bool useFileFormat)
+		public static byte[] ToBytes(Stream inStream, ImageType imageType)
 		{
 			// Initialize default parameters
 			ParameterList defpl = GetDefaultEncoderParameterList(encoder_pinfo);
@@ -311,6 +305,7 @@ namespace CSJ2K
 			// Create parameter list using defaults
 			ParameterList pl = new ParameterList(defpl);
 
+			bool useFileFormat = false;
 			bool pphTile = false;
 			bool pphMain = false;
 			bool tempSop = false;
@@ -318,7 +313,15 @@ namespace CSJ2K
 
 			// **** Get general parameters ****
 
-			// Check that we have the mandatory parameters
+			if (pl.getParameter("file_format").Equals("on"))
+			{
+				useFileFormat = true;
+				if (pl.getParameter("rate") != null && pl.getFloatParameter("rate") != defpl.getFloatParameter("rate"))
+				{
+					warning("Specified bit-rate applies only on the codestream but not on the whole file.");
+				}
+			}
+
 			if (pl.getParameter("tiles") == null)
 			{
 				error("No tiles option specified", 2);
@@ -612,7 +615,7 @@ namespace CSJ2K
 					// Rely on rate allocator to limit amount of data
 					bwriter = new FileCodestreamWriter(outStream, Int32.MaxValue);
 				}
-				catch (System.IO.IOException e)
+				catch (IOException e)
 				{
 					error("Could not open output file" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
 					return null;
@@ -687,7 +690,7 @@ namespace CSJ2K
 							FacilityManager.getMsgLogger().println("Moved packet headers " + "to main header", 4, 6);
 						}
 					}
-					catch (System.IO.IOException e)
+					catch (IOException e)
 					{
 						error(
 							"Error while creating tileparts or packed packet" + " headers" + ((e.Message != null) ? (":\n" + e.Message) : ""),
@@ -708,10 +711,11 @@ namespace CSJ2K
 							bpc[comp] = imgsrc.getNomRangeBits(comp);
 						}
 
+						outStream.Seek(0, SeekOrigin.Begin);
 						var ffw = new FileFormatWriter(outStream, imgsrc.ImgHeight, imgsrc.ImgWidth, nc, bpc, fileLength);
 						fileLength += ffw.writeFileFormat();
 					}
-					catch (System.IO.IOException e)
+					catch (IOException e)
 					{
 						throw new InvalidOperationException("Error while writing JP2 file format: " + e.Message);
 					}
@@ -938,7 +942,7 @@ namespace CSJ2K
 		  "JJ2000 automatically adds .jp2 extension when using 'file_format'"+
 		  "option. This option disables it when on.", "off"},
 		new string[] { "file_format", "[on|off]",
-		  "Puts the JPEG 2000 codestream in a JP2 file format wrapper.","off"},
+		  "Puts the JPEG 2000 codestream in a JP2 file format wrapper.","on"},
 		new string[] { "pph_tile", "[on|off]",
 		  "Packs the packet headers in the tile headers.","off"},
 		new string[] { "pph_main", "[on|off]",

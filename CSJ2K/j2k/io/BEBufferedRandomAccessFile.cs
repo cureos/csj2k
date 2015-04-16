@@ -66,83 +66,30 @@ namespace CSJ2K.j2k.io
 		/// <summary> Constructor. Always needs a size for the buffer.
 		/// 
 		/// </summary>
-		/// <param name="stream">The stream associated with the buffer
-		/// 
-		/// </param>
-		/// <param name="bufferSize">The number of bytes to buffer
-		/// 
-		/// </param>
+		/// <param name="stream">The stream associated with the buffer</param>
+		/// <param name="isReadOnly">Indicates whether file is read-only or not.</param>
+		/// <param name="bufferSize">The number of bytes to buffer</param>
 		/// <exception cref="java.io.IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
-		public BEBufferedRandomAccessFile(Stream stream, int bufferSize)
-			: base(stream, bufferSize)
+		public BEBufferedRandomAccessFile(Stream stream, bool isReadOnly, int bufferSize)
+			: base(stream, isReadOnly, bufferSize)
 		{
 			byte_Ordering = CSJ2K.j2k.io.EndianType_Fields.BIG_ENDIAN;
 		}
 
 		/// <summary> Constructor. Uses the default value for the byte-buffer size (512
 		/// bytes).
-		/// 
 		/// </summary>
-		/// <param name="stream">The stream associated with the buffer
-		/// 
-		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
-		/// 
-		/// </exception>
-		public BEBufferedRandomAccessFile(Stream stream)
-			: base(stream)
+		/// <param name="stream">The stream associated with the buffer</param>
+		/// <param name="isReadOnly">Indicates whether file is read-only or not.</param>
+		/// <exception cref="java.io.IOException">If an I/O error ocurred.</exception>
+		public BEBufferedRandomAccessFile(Stream stream, bool isReadOnly)
+			: base(stream, isReadOnly)
 		{
 			byte_Ordering = CSJ2K.j2k.io.EndianType_Fields.BIG_ENDIAN;
 		}
 
-		/// <summary> Constructor. Always needs a size for the buffer.
-		/// 
-		/// </summary>
-		/// <param name="file">The file associated with the buffer
-		/// 
-		/// </param>
-		/// <param name="mode">"r" for read, "rw" or "rw+" for read and write mode ("rw+"
-		/// opens the file for update whereas "rw" removes it
-		/// before. So the 2 modes are different only if the file
-		/// already exists).
-		/// 
-		/// </param>
-		/// <param name="bufferSize">The number of bytes to buffer
-		/// 
-		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
-		/// 
-		/// </exception>
-		public BEBufferedRandomAccessFile(IFileInfo file, System.String mode, int bufferSize)
-			: base(file, mode, bufferSize)
-		{
-			byte_Ordering = CSJ2K.j2k.io.EndianType_Fields.BIG_ENDIAN;
-		}
-
-		/// <summary> Constructor. Uses the default value for the byte-buffer size (512
-		/// bytes).
-		/// 
-		/// </summary>
-		/// <param name="file">The file associated with the buffer
-		/// 
-		/// </param>
-		/// <param name="mode">"r" for read, "rw" or "rw+" for read and write mode ("rw+"
-		/// opens the file for update whereas "rw" removes it
-		/// before. So the 2 modes are different only if the file
-		/// already exists).
-		/// 
-		/// </param>
-		/// <exception cref="java.io.IOException">If an I/O error ocurred.
-		/// 
-		/// </exception>
-		public BEBufferedRandomAccessFile(IFileInfo file, System.String mode)
-			: base(file, mode)
-		{
-			byte_Ordering = CSJ2K.j2k.io.EndianType_Fields.BIG_ENDIAN;
-		} 
-		
 		/// <summary> Constructor. Always needs a size for the buffer.
 		/// 
 		/// </summary>

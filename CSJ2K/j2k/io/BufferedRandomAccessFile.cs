@@ -163,17 +163,18 @@ namespace CSJ2K.j2k.io
 		/// <param name="stream">The stream associated with the buffer
 		/// 
 		/// </param>
+		/// <param name="isReadOnly">Indicates whether file is read-only or not.</param>
 		/// <param name="bufferSize">The number of bytes to buffer
 		/// 
 		/// </param>
 		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
-		protected internal BufferedRandomAccessFile(Stream stream, int bufferSize)
+		protected internal BufferedRandomAccessFile(Stream stream, bool isReadOnly, int bufferSize)
 		{
-
 			fileName = String.Empty;
 			theFile = stream;
+			this.isReadOnly = isReadOnly;
 			byteBuffer = new byte[bufferSize];
 			readNewBuffer(0);
 		}
@@ -185,11 +186,12 @@ namespace CSJ2K.j2k.io
 		/// <param name="stream">The stream associated with the buffer
 		/// 
 		/// </param>
+		/// <param name="isReadOnly">Indicates whether file is read-only or not.</param>
 		/// <exception cref="IOException">If an I/O error ocurred.
 		/// 
 		/// </exception>
-		protected internal BufferedRandomAccessFile(Stream stream)
-			: this(stream, 512)
+		protected internal BufferedRandomAccessFile(Stream stream, bool isReadOnly)
+			: this(stream, isReadOnly, 512)
 		{
 		}
 

@@ -158,7 +158,7 @@ namespace CSJ2K.j2k.fileformat.writer
 			try
 			{
 				// Read and buffer the codestream
-				fi = new BEBufferedRandomAccessFile(stream);
+				fi = new BEBufferedRandomAccessFile(stream, false);
 				codestream = new byte[clength];
 				fi.readFully(codestream, 0, clength);
 				

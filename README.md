@@ -54,7 +54,7 @@ To encode a portable bitmap image (PGM, PPM or PGX), call this method:
 ```csharp
 public class J2kImage
 {
-	public static byte[] ToBytes(Stream, ImageType, bool);
+	public static byte[] ToBytes(Stream, ImageType);
 }
 ```
 
