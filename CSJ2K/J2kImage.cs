@@ -303,24 +303,7 @@ namespace CSJ2K
 
 		#region Static Encoder Methods
 
-		public static void ToFile(Stream inStream, string filename)
-		{
-			using (var outStream = FileStreamFactory.New(filename, "rw"))
-			{
-				ToStream(inStream, outStream);
-			}
-		}
-
-		public static byte[] ToArray(Stream inStream)
-		{
-			using (var outStream = new MemoryStream())
-			{
-				ToStream(inStream, outStream);
-				return outStream.ToArray();
-			}
-		}
-
-		public static void ToStream(Stream inStream, Stream outStream)
+		public static Stream ToStream(Stream inStream, ImageType imageType, bool useFileFormat)
 		{
 			// Initialize default parameters
 			ParameterList defpl = GetDefaultParameterList(encoder_pinfo);
@@ -328,7 +311,6 @@ namespace CSJ2K
 			// Create parameter list using defaults
 			ParameterList pl = new ParameterList(defpl);
 
-			bool useFileFormat = false;
 			bool pphTile = false;
 			bool pphMain = false;
 			bool tempSop = false;
@@ -337,37 +319,10 @@ namespace CSJ2K
 			// **** Get general parameters ****
 
 			// Check that we have the mandatory parameters
-			if (pl.getParameter("o") == null)
-			{
-				error("Mandatory output file is missing (-o option)", 2);
-				return;
-			}
-			var outname = pl.getParameter("o");
-
-			if (pl.getParameter("file_format").Equals("on"))
-			{
-				useFileFormat = true;
-				if (pl.getParameter("rate") != null && pl.getFloatParameter("rate") != defpl.getFloatParameter("rate"))
-				{
-					warning("Specified bit-rate applies only on the " + "codestream but not on the whole file.");
-				}
-			}
-
-			if (useFileFormat)
-			{
-				String outext = null;
-				String outns = outname;
-				if (outname.LastIndexOf('.') != -1)
-				{
-					outext = outname.Substring(outname.LastIndexOf('.'), outname.Length);
-					outns = outname.Substring(0, outname.LastIndexOf('.'));
-				}
-			}
-
 			if (pl.getParameter("tiles") == null)
 			{
 				error("No tiles option specified", 2);
-				return;
+				return null;
 			}
 
 			if (pl.getParameter("pph_tile").Equals("on"))
@@ -410,7 +365,7 @@ namespace CSJ2K
 			if (pl.getParameter("rate") == null)
 			{
 				error("Target bitrate not specified", 2);
-				return;
+				return null;
 			}
 			float rate;
 			try
@@ -424,7 +379,7 @@ namespace CSJ2K
 			catch (FormatException e)
 			{
 				error("Invalid value in 'rate' option: " + pl.getParameter("rate"), 2);
-				return;
+				return null;
 			}
 			int pktspertp;
 			try
@@ -447,97 +402,37 @@ namespace CSJ2K
 			catch (FormatException e)
 			{
 				error("Invalid value in 'tile_parts' option: " + pl.getParameter("tile_parts"), 2);
-				return;
+				return null;
 			}
 
 			// **** ImgReader ****
-			var infiles = pl.getParameter("i").Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-			var ncomp = 0;
+			int ncomp;
 			var ppminput = false;
-			var imgReaders = new List<ImgReader>();
+			ImgReader imgsrc;
 
-			foreach (var infile in infiles)
+			switch (imageType)
 			{
-				try
-				{
-					if (imgReaders.Count < ncomp)
-					{
-						error("With PPM input format only 1 input file can " + "be specified", 2);
-						return;
-					}
-					String inext;
-					if (infile.LastIndexOf('.') != -1)
-					{
-						inext = infile.Substring(infile.LastIndexOf('.'), infile.Length);
-					}
-					else
-					{
-						inext = null;
-					}
-					if (".PGM".Equals(inext, StringComparison.OrdinalIgnoreCase))
-					{
-						// PGM file
-						imgReaders.Add(new ImgReaderPGM(inStream));
-						ncomp += 1;
-					}
-					else if (".PPM".Equals(inext, StringComparison.OrdinalIgnoreCase))
-					{
-						// PPM file
-						if (ncomp > 0)
-						{
-							error("With PPM input format only 1 input " + "file can be specified", 2);
-							return;
-						}
-						imgReaders.Add(new ImgReaderPPM(inStream));
-						ppminput = true;
-						ncomp += 3;
-					}
-					else
-					{
-						// Should be PGX
-						imgReaders.Add(new ImgReaderPGX(inStream));
-						ncomp += 1;
-					}
-				}
-				catch (IOException e)
-				{
-					error(
-						"Could not open or read from file " + infile + ((e.Message != null) ? (":\n" + e.Message) : ""),
-						3);
-					if (pl.getParameter("debug").Equals("on"))
-					{
-						error(e.StackTrace, 2); //e.printStackTrace();
-					}
-					else
-					{
-						error("Use '-debug' option for more details", 2);
-					}
-					return;
-				}
+				case ImageType.PGM:
+					imgsrc = new ImgReaderPGM(inStream);
+					ncomp = 1;
+					break;
+				case ImageType.PPM:
+					imgsrc = new ImgReaderPPM(inStream);
+					ncomp = 3;
+					ppminput = true;
+					break;
+				case ImageType.PGX:
+					imgsrc = new ImgReaderPGX(inStream);
+					ncomp = 1;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("imageType", "Invalid image type");
 			}
+
 			var imsigned = new bool[ncomp];
-
-			// **** ImgDataJoiner (if needed) ****
-			BlkImgDataSrc imgsrc;
-			int i;
-			if (ppminput || ncomp == 1)
+			for (var i = 0; i < ncomp; i++)
 			{
-				// Just one input
-				imgsrc = imgReaders[0];
-				for (i = 0; i < ncomp; i++)
-				{
-					imsigned[i] = imgReaders[0].isOrigSigned(i);
-				}
-			}
-			else
-			{
-				// More than one reader => join all readers into 1
-				var imgcmpidxs = new int[ncomp];
-				for (i = 0; i < ncomp; i++)
-				{
-					imsigned[i] = imgReaders[i].isOrigSigned(0);
-				}
-				imgsrc = new ImgDataJoiner(imgReaders, imgcmpidxs);
+				imsigned[i] = imgsrc.isOrigSigned(i);
 			}
 
 			// **** Tiler ****
@@ -549,14 +444,14 @@ namespace CSJ2K
 			if (stok.ttype != SupportClass.StreamTokenizerSupport.TT_NUMBER)
 			{
 				error("An error occurred while parsing the tiles option: " + pl.getParameter("tiles"), 2);
-				return;
+				return null;
 			}
 			var tw = (int)stok.nval;
 			stok.NextToken();
 			if (stok.ttype != SupportClass.StreamTokenizerSupport.TT_NUMBER)
 			{
 				error("An error occurred while parsing the tiles option: " + pl.getParameter("tiles"), 2);
-				return;
+				return null;
 			}
 			var th = (int)stok.nval;
 
@@ -613,7 +508,7 @@ namespace CSJ2K
 			catch (ArgumentException e)
 			{
 				error("Could not tile image" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
-				return;
+				return null;
 			}
 			int ntiles = imgtiler.getNumTiles();
 
@@ -642,7 +537,7 @@ namespace CSJ2K
 					"Could not instantiate forward component " + "transformation"
 					+ ((e.Message != null) ? (":\n" + e.Message) : ""),
 					2);
-				return;
+				return null;
 			}
 
 			// **** ImgDataConverter ****
@@ -658,7 +553,7 @@ namespace CSJ2K
 			catch (ArgumentException e)
 			{
 				error("Could not instantiate wavelet transform" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
-				return;
+				return null;
 			}
 
 			// **** Quantizer ****
@@ -670,7 +565,7 @@ namespace CSJ2K
 			catch (ArgumentException e)
 			{
 				error("Could not instantiate quantizer" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
-				return;
+				return null;
 			}
 
 			// **** ROIScaler ****
@@ -682,7 +577,7 @@ namespace CSJ2K
 			catch (ArgumentException e)
 			{
 				error("Could not instantiate ROI scaler" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
-				return;
+				return null;
 			}
 
 			// **** EntropyCoder ****
@@ -705,10 +600,12 @@ namespace CSJ2K
 			catch (ArgumentException e)
 			{
 				error("Could not instantiate entropy coder" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
-				return;
+				return null;
 			}
 
 			// **** CodestreamWriter ****
+			var outStream = new MemoryStream();
+
 			CodestreamWriter bwriter;
 			try
 			{
@@ -718,7 +615,7 @@ namespace CSJ2K
 			catch (System.IO.IOException e)
 			{
 				error("Could not open output file" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
-				return;
+				return null;
 			}
 
 			// **** Rate allocator ****
@@ -730,7 +627,7 @@ namespace CSJ2K
 			catch (ArgumentException e)
 			{
 				error("Could not instantiate rate allocator" + ((e.Message != null) ? (":\n" + e.Message) : ""), 2);
-				return;
+				return null;
 			}
 
 			// **** HeaderEncoder ****
@@ -799,7 +696,7 @@ namespace CSJ2K
 						"Error while creating tileparts or packed packet" + " headers"
 						+ ((e.Message != null) ? (":\n" + e.Message) : ""),
 						2);
-					return;
+					return null;
 				}
 			}
 
@@ -830,11 +727,10 @@ namespace CSJ2K
 				}
 			}
 
-			// **** Close image reader(s) ***
-			for (i = 0; i < imgReaders.Count; i++)
-			{
-				imgReaders[i].close();
-			}
+			// **** Close image reader ***
+			imgsrc.close();
+
+			return outStream;
 		}
 
 		#endregion
