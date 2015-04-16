@@ -1,6 +1,6 @@
 # Portable CSJ2K - A Managed JPEG2000 Codec
 
-Copyright (c) 1999-2000 JJ2000 Partners, original C# port (c) 2007-2012 Jason S. Clary, adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013-2015 Anders Gustafsson, Cureos AB   
+Copyright (c) 1999-2000 JJ2000 Partners; original C# port (c) 2007-2012 Jason S. Clary; C# encoding and adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013-2015 Anders Gustafsson, Cureos AB   
 
 Licensed and distributable under the terms of the [BSD license](http://www.opensource.org/licenses/bsd-license.php)
 
@@ -23,16 +23,18 @@ Included are very basic Windows Store, WPF and Silverlight test applications for
 
 ## Installation
 
-Apart from buidling the relevant class libraries from source, prebuilt packages for the supported platforms can also be obtained via [NuGet](https://nuget.org/packages/CSJ2K/).
+Apart from building the relevant class libraries from source, pre-built packages for the supported platforms can also be obtained via [NuGet](https://nuget.org/packages/CSJ2K/).
 
 ## Usage
 
-The Portable Class Library provides interfaces for bitmap rendering, file I/O and logging. It is the responsiblity of the end application to register implementations of these interfaces before JPEG 2000 decoding and encoding
+The Portable Class Library provides interfaces for bitmap rendering, file I/O and logging. It is the responsibility of the end application to register implementations of these interfaces before JPEG 2000 decoding and encoding
 can be performed. A static convenience method available on all platforms is implemented for this purpose:
 
 ```csharp
 CSJ2KSetup.RegisterCreators();
 ```
+
+### Decoding
 
 To decode a JPEG 2000 encoded image, call one of the following methods:
 
@@ -49,7 +51,9 @@ public class J2kImage
 
 The returned `object` is a regular bitmap, typically a `WriteableBitmap` or, in the case of the Windows Forms targeted library, a `System.Drawing.Bitmap`.
 
-To encode a portable bitmap image (*PGM*, *PPM* or *PGX*), call this method:
+### Encoding
+
+To encode an image of any of the formats *PGM* (Portable Graymap), *PPM* (Portable Pixmap) or *PGX* (JPEG2000 conformance testing format), call this method:
 
 ```csharp
 public class J2kImage
@@ -58,6 +62,10 @@ public class J2kImage
 }
 ```
 
+For *PGM* and *PPM* images, you would normally enter one `Stream` object in the argument list, whereas for *PGX* images, you may enter one `Stream` object per color component. Note that encoding currently does not support
+`Bitmap`/`WriteableBitmap` images; files in these formats need to be converted into any of the supported formats before invoking the encoder. Monochrome images are preferably converted into PGM and color images into PPM format
+before JPEG2000 encoding is applied.
+
 ## Dependencies
 
 The `WriteableBitmap` implementations make use of the [WriteableBitmap Extensions library](http://writeablebitmapex.codeplex.com/).
@@ -65,5 +73,4 @@ The `WriteableBitmap` implementations make use of the [WriteableBitmap Extension
 ## Links
 
 * [CSJ2K web site on Codeplex](http://csj2k.codeplex.com/)
-* [JJ2000 original site; link no longer appears to be working?](http://jj2000.epfl.ch/)
 * [Guide to the practical implementation of JPEG2000](http://www.jpeg.org/jpeg2000guide/guide/contents.html)

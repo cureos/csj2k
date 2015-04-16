@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>CSJ2K</id>
+        <version>0.9.1</version>
+        <title>CSJ2K JPEG 2000 codec library</title>
+        <authors>Anders Gustafsson, Jason S. Clary, JJ2000 Partners</authors>
+        <owners>Cureos AB</owners>
+        <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
+        <projectUrl>https://github.com/cureos/csj2k</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Portable Class Library for decoding and encoding JPEG2000 images from Windows Store, Windows Phone 7, Silverlight 4 and .NET (WPF and Windows Forms) applications.</description>
+        <summary>Portable JPEG 2000 codec library</summary>
+        <releaseNotes>version 0.9.1
+-------------
+* Default encoding method for PGM, PPM and PGX images implemented.</releaseNotes>
+        <copyright>(c) 1999-2000 JJ2000 Partners; 2007-2012 Jason S. Clary; 2013-2015 Anders Gustafsson, Cureos AB</copyright>
+        <language>en-US</language>
+        <tags>JPEG2000 codec Silverlight WindowsPhone WP7 WPF .NET WinRT Metro Windows Store</tags>
+        <dependencies>
+            <dependency id="WriteableBitmapEx" version="1.0.6.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.dll" target="lib\net40-client" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.pdb" target="lib\net40-client" />
+        <file src="..\WPF.CSJ2K\bin\Release\WPF.CSJ2K.dll" target="lib\net40-client" />
+        <file src="..\WPF.CSJ2K\bin\Release\WPF.CSJ2K.pdb" target="lib\net40-client" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.dll" target="lib\netcore45" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.pdb" target="lib\netcore45" />
+        <file src="..\Store.CSJ2K\bin\Release\Store.CSJ2K.dll" target="lib\netcore45" />
+        <file src="..\Store.CSJ2K\bin\Release\Store.CSJ2K.pdb" target="lib\netcore45" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.dll" target="lib\sl40" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.pdb" target="lib\sl40" />
+        <file src="..\SL.CSJ2K\Bin\Release\SL.CSJ2K.dll" target="lib\sl40" />
+        <file src="..\SL.CSJ2K\Bin\Release\SL.CSJ2K.pdb" target="lib\sl40" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.dll" target="lib\wp7" />
+        <file src="..\CSJ2K\bin\Release\Portable.CSJ2K.pdb" target="lib\wp7" />
+        <file src="..\WP.CSJ2K\bin\Release\WP.CSJ2K.dll" target="lib\wp7" />
+        <file src="..\WP.CSJ2K\bin\Release\WP.CSJ2K.pdb" target="lib\wp7" />
+    </files>
+</package>

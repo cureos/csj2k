@@ -1,9 +1,7 @@
 using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
-[assembly: CLSCompliantAttribute(true)]
+[assembly: CLSCompliant(true)]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -11,11 +9,11 @@ using System.Runtime.InteropServices;
 
 // TODO: Review the values of the assembly attributes
 
-[assembly: AssemblyTitle("")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyTitle("CSJ2K")]
+[assembly: AssemblyDescription("JPEG2000 codec class library")]
+[assembly: AssemblyCompany("Cureos AB")]
+[assembly: AssemblyProduct("CSJ2K")]
+[assembly: AssemblyCopyright("Copyright ©  2013-2015 Cureos AB")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,7 +28,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("0.9.1")]
+[assembly: AssemblyFileVersion("0.9.1.50416")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
