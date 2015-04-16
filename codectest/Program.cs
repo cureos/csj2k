@@ -12,20 +12,27 @@ namespace codectest
 		{
 			File.Delete("file11.jp2");
 			File.Delete("file12.jp2");
+			File.Delete("file13.jp2");
 
-			using (var ppm1 = File.OpenRead("a1_mono.ppm"))
+			using (var ppm = File.OpenRead("a1_mono.ppm"))
 			{
-				var enc1 = J2kImage.ToBytes(ppm1, ImageType.PGM, false);
-				File.WriteAllBytes("file11.jp2", enc1);
+				var enc = J2kImage.ToBytes(ppm, ImageType.PGM, false);
+				File.WriteAllBytes("file11.jp2", enc);
 			}
 
-			using (var ppm2 = File.OpenRead("a2_colr.ppm"))
+			using (var ppm = File.OpenRead("a2_colr.ppm"))
 			{
-				var enc2 = J2kImage.ToBytes(ppm2, ImageType.PPM, false);
-				File.WriteAllBytes("file12.jp2", enc2);
+				var enc = J2kImage.ToBytes(ppm, ImageType.PPM, false);
+				File.WriteAllBytes("file12.jp2", enc);
 			}
 
-			for (int i = 1; i <= 12; i++)
+			using (var ppm = File.OpenRead("c1p0_05_0.pgx"))
+			{
+				var enc = J2kImage.ToBytes(ppm, ImageType.PGX, false);
+				File.WriteAllBytes("file13.jp2", enc);
+			}
+
+			for (int i = 1; i <= 13; i++)
 			{
 				try
 				{

@@ -75,6 +75,9 @@
     <None Include="a2_colr.ppm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="c1p0_05_0.pgx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="file1.jp2">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
