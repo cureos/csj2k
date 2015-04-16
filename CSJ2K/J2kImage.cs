@@ -414,11 +414,7 @@ namespace CSJ2K
 			var ppminput = false;
 			ImgReader imageReader;
 
-			var bytes = new byte[2];
-			inStream.Position = 0;
-			inStream.Read(bytes, 0, 2);
-			inStream.Position = 0;
-			var imgType = Encoding.UTF8.GetString(bytes, 0, 2);
+			var imgType = GetImageType(inStream);
 
 			switch (imgType)
 			{
@@ -670,7 +666,6 @@ namespace CSJ2K
 				// **** Tile-parts and packed packet headers ****
 				if (pktspertp > 0 || pphTile || pphMain)
 				{
-					//int headInc;
 					try
 					{
 						CodestreamManipulator cm = new CodestreamManipulator(
@@ -1049,6 +1044,21 @@ namespace CSJ2K
 			FacilityManager.getMsgLogger().printmsg(MsgLogger_Fields.WARNING, msg);
 		}
 
-
+		private static string GetImageType(Stream inStream)
+		{
+			try
+			{
+				var bytes = new byte[2];
+				inStream.Position = 0;
+				inStream.Read(bytes, 0, 2);
+				inStream.Position = 0;
+				var imgType = Encoding.UTF8.GetString(bytes, 0, 2);
+				return imgType;
+			}
+			catch
+			{
+				return null;
+			}
+		}
 	}
 }

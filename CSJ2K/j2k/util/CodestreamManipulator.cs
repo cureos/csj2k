@@ -193,9 +193,8 @@ namespace CSJ2K.j2k.util
 			// Read and buffer the tile headers, packet headers and packet data
 			readAndBuffer(fi);
 			
-			// Close file and overwrite with new file
-			fi.close();
-			fi = new BEBufferedRandomAccessFile(stream, false);
+			// Rewind and overwrite with new contents
+			fi.seek(0);
 			
 			// Create tile-parts
 			createTileParts();

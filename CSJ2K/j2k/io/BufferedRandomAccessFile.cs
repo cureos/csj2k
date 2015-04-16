@@ -359,7 +359,6 @@ namespace CSJ2K.j2k.io
 			*/
 			flush();
 			byteBuffer = null; // Release the byte-buffer reference
-			theFile.Dispose();
 		}
 		
 		/// <summary> Returns the current length of the stream, in bytes, taking into

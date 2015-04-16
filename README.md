@@ -49,12 +49,12 @@ public class J2kImage
 
 The returned `object` is a regular bitmap, typically a `WriteableBitmap` or, in the case of the Windows Forms targeted library, a `System.Drawing.Bitmap`.
 
-To encode a portable bitmap image (PGM, PPM or PGX), call this method:
+To encode a portable bitmap image (*PGM*, *PPM* or *PGX*), call this method:
 
 ```csharp
 public class J2kImage
 {
-	public static byte[] ToBytes(Stream, ImageType);
+	public static byte[] ToBytes(Stream);
 }
 ```
 
