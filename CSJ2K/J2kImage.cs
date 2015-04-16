@@ -2,6 +2,7 @@ namespace CSJ2K
 {
 	using System;
 	using System.IO;
+	using System.Text;
 
 	using CSJ2K.Color;
 	using CSJ2K.Icc;
@@ -297,7 +298,7 @@ namespace CSJ2K
 
 		#region Static Encoder Methods
 
-		public static byte[] ToBytes(Stream inStream, ImageType imageType)
+		public static byte[] ToBytes(Stream inStream)
 		{
 			// Initialize default parameters
 			ParameterList defpl = GetDefaultEncoderParameterList(encoder_pinfo);
@@ -411,31 +412,37 @@ namespace CSJ2K
 			// **** ImgReader ****
 			int ncomp;
 			var ppminput = false;
-			ImgReader imgsrc;
+			ImgReader imageReader;
 
-			switch (imageType)
+			var bytes = new byte[2];
+			inStream.Position = 0;
+			inStream.Read(bytes, 0, 2);
+			inStream.Position = 0;
+			var imgType = Encoding.UTF8.GetString(bytes, 0, 2);
+
+			switch (imgType)
 			{
-				case ImageType.PGM:
-					imgsrc = new ImgReaderPGM(inStream);
+				case "P5":
+					imageReader = new ImgReaderPGM(inStream);
 					ncomp = 1;
 					break;
-				case ImageType.PPM:
-					imgsrc = new ImgReaderPPM(inStream);
+				case "P6":
+					imageReader = new ImgReaderPPM(inStream);
 					ncomp = 3;
 					ppminput = true;
 					break;
-				case ImageType.PGX:
-					imgsrc = new ImgReaderPGX(inStream);
+				case "PG":
+					imageReader = new ImgReaderPGX(inStream);
 					ncomp = 1;
 					break;
 				default:
-					throw new ArgumentOutOfRangeException("imageType", "Invalid image type");
+					throw new ArgumentException("Invalid image type", "inStream");
 			}
 
 			var imsigned = new bool[ncomp];
 			for (var i = 0; i < ncomp; i++)
 			{
-				imsigned[i] = imgsrc.isOrigSigned(i);
+				imsigned[i] = imageReader.isOrigSigned(i);
 			}
 
 			// **** Tiler ****
@@ -506,7 +513,7 @@ namespace CSJ2K
 			Tiler imgtiler;
 			try
 			{
-				imgtiler = new Tiler(imgsrc, refx, refy, trefx, trefy, tw, th);
+				imgtiler = new Tiler(imageReader, refx, refy, trefx, trefy, tw, th);
 			}
 			catch (ArgumentException e)
 			{
@@ -516,7 +523,7 @@ namespace CSJ2K
 			int ntiles = imgtiler.getNumTiles();
 
 			// **** Encoder specifications ****
-			var encSpec = new EncoderSpecs(ntiles, ncomp, imgsrc, pl);
+			var encSpec = new EncoderSpecs(ntiles, ncomp, imageReader, pl);
 
 			// **** Component transformation ****
 			if (ppminput && pl.getParameter("Mct") != null && pl.getParameter("Mct").Equals("off"))
@@ -634,7 +641,7 @@ namespace CSJ2K
 				}
 
 				// **** HeaderEncoder ****
-				var headenc = new HeaderEncoder(imgsrc, imsigned, dwt, imgtiler, encSpec, rois, ralloc, pl);
+				var headenc = new HeaderEncoder(imageReader, imsigned, dwt, imgtiler, encSpec, rois, ralloc, pl);
 				ralloc.HeaderEncoder = headenc;
 
 				// **** Write header to be able to estimate header overhead ****
@@ -704,15 +711,15 @@ namespace CSJ2K
 				{
 					try
 					{
-						int nc = imgsrc.NumComps;
+						int nc = imageReader.NumComps;
 						int[] bpc = new int[nc];
 						for (int comp = 0; comp < nc; comp++)
 						{
-							bpc[comp] = imgsrc.getNomRangeBits(comp);
+							bpc[comp] = imageReader.getNomRangeBits(comp);
 						}
 
 						outStream.Seek(0, SeekOrigin.Begin);
-						var ffw = new FileFormatWriter(outStream, imgsrc.ImgHeight, imgsrc.ImgWidth, nc, bpc, fileLength);
+						var ffw = new FileFormatWriter(outStream, imageReader.ImgHeight, imageReader.ImgWidth, nc, bpc, fileLength);
 						fileLength += ffw.writeFileFormat();
 					}
 					catch (IOException e)
@@ -722,7 +729,7 @@ namespace CSJ2K
 				}
 
 				// **** Close image reader ***
-				imgsrc.close();
+				imageReader.close();
 
 				return outStream.ToArray();
 			}
