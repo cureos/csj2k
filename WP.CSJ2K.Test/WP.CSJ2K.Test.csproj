@@ -115,6 +115,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\codectest\file1.jp2">
+      <Link>Resources\file1.jp2</Link>
+    </EmbeddedResource>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
