@@ -59,8 +59,9 @@
     <Reference Include="System.Core">
       <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
     </Reference>
-    <Reference Include="WriteableBitmapEx">
-      <HintPath>..\packages\WriteableBitmapEx.1.0.6.0\lib\sl4\WriteableBitmapEx.dll</HintPath>
+    <Reference Include="WriteableBitmapEx, Version=1.5.0.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
+      <HintPath>..\packages\WriteableBitmapEx.1.5.0.0\lib\sl4\WriteableBitmapEx.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
