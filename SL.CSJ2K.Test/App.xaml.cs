@@ -1,65 +1,65 @@
-﻿using System;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
+
+using System;
 using System.Windows;
 using CSJ2K;
 
 namespace SL.CSJ2K.Test
 {
-	public partial class App
-	{
+    public partial class App
+    {
 
-		public App()
-		{
-			Startup += Application_Startup;
-			Exit += Application_Exit;
-			UnhandledException += Application_UnhandledException;
+        public App()
+        {
+            Startup += Application_Startup;
+            Exit += Application_Exit;
+            UnhandledException += Application_UnhandledException;
 
-			InitializeComponent();
-		}
+            InitializeComponent();
+        }
 
-		private void Application_Startup(object sender, StartupEventArgs e)
-		{
-			RootVisual = new MainPage();
-#if MEF
-			System.ComponentModel.Composition.CompositionInitializer.SatisfyImports(new CSJ2KSetup());
-#else
-			CSJ2KSetup.RegisterCreators();
-#endif
-		}
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            RootVisual = new MainPage();
+            CSJ2KSetup.RegisterCreators();
+        }
 
-		private void Application_Exit(object sender, EventArgs e)
-		{
+        private void Application_Exit(object sender, EventArgs e)
+        {
 
-		}
+        }
 
-		private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
-		{
-			// If the app is running outside of the debugger then report the exception using
-			// the browser's exception mechanism. On IE this will display it a yellow alert 
-			// icon in the status bar and Firefox will display a script error.
-			if (!System.Diagnostics.Debugger.IsAttached)
-			{
+        private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
+        {
+            // If the app is running outside of the debugger then report the exception using
+            // the browser's exception mechanism. On IE this will display it a yellow alert 
+            // icon in the status bar and Firefox will display a script error.
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
 
-				// NOTE: This will allow the application to continue running after an exception has been thrown
-				// but not handled. 
-				// For production applications this error handling should be replaced with something that will 
-				// report the error to the website and stop the application.
-				e.Handled = true;
-				Deployment.Current.Dispatcher.BeginInvoke(() => ReportErrorToDOM(e));
-			}
-		}
+                // NOTE: This will allow the application to continue running after an exception has been thrown
+                // but not handled. 
+                // For production applications this error handling should be replaced with something that will 
+                // report the error to the website and stop the application.
+                e.Handled = true;
+                Deployment.Current.Dispatcher.BeginInvoke(() => ReportErrorToDOM(e));
+            }
+        }
 
-		private void ReportErrorToDOM(ApplicationUnhandledExceptionEventArgs e)
-		{
-			try
-			{
-				string errorMsg = e.ExceptionObject.Message + e.ExceptionObject.StackTrace;
-				errorMsg = errorMsg.Replace('"', '\'').Replace("\r\n", @"\n");
+        private void ReportErrorToDOM(ApplicationUnhandledExceptionEventArgs e)
+        {
+            try
+            {
+                string errorMsg = e.ExceptionObject.Message + e.ExceptionObject.StackTrace;
+                errorMsg = errorMsg.Replace('"', '\'').Replace("\r\n", @"\n");
 
-				System.Windows.Browser.HtmlPage.Window.Eval("throw new Error(\"Unhandled Error in Silverlight Application " + errorMsg + "\");");
-			}
-			catch (Exception)
-			{
-			}
-		}
-	}
+                System.Windows.Browser.HtmlPage.Window.Eval(
+                    "throw new Error(\"Unhandled Error in Silverlight Application " + errorMsg + "\");");
+            }
+            catch (Exception)
+            {
+            }
+        }
+    }
 }

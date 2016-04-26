@@ -1,36 +1,25 @@
-﻿using System;
-using System.IO;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K.Util
 {
-#if MEF
-	[System.ComponentModel.Composition.Export(typeof(IFileStreamCreator))]
-#endif
-	public class SilverlightFileStreamCreator : IFileStreamCreator
-	{
-#if MEF
-		#region CONSTRUCTORS
+    using System;
+    using System.IO;
 
-		public SilverlightFileStreamCreator()
-		{
-			FileStreamFactory.RegisterCreator(this);
-		}
+    public class SilverlightFileStreamCreator : IFileStreamCreator
+    {
+        #region METHODS
 
-		#endregion
-#endif
+        public Stream Create(string path, string mode)
+        {
+            throw new NotImplementedException("File stream I/O not implemented for Silverlight.");
+        }
 
-		#region METHODS
+        public static void Register()
+        {
+            FileStreamFactory.RegisterCreator(new SilverlightFileStreamCreator());
+        }
 
-		public Stream Create(string path, string mode)
-		{
-			throw new NotImplementedException("File stream I/O not implemented for Silverlight.");
-		}
-		
-		public static void Register()
-		{
-			FileStreamFactory.RegisterCreator(new SilverlightFileStreamCreator());
-		}
-
-		#endregion
-	}
+        #endregion
+    }
 }

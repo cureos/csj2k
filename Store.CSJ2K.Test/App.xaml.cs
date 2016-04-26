@@ -1,13 +1,14 @@
-﻿using System;
-using System.Reflection;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
+
+using System;
+
 using CSJ2K;
-using CSJ2K.Util;
+
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
 namespace Store.CSJ2K.Test
 {
@@ -51,14 +52,8 @@ namespace Store.CSJ2K.Test
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
 
-				// Implement platform-specific interfaces
-#if MEF
-	            System.Composition.CompositionContextExtensions.SatisfyImports(
-		            new System.Composition.Hosting.ContainerConfiguration().WithAssembly(
-			            typeof(WriteableBitmapWrapperCreator).GetTypeInfo().Assembly).CreateContainer(), new CSJ2KSetup());
-#else
-				CSJ2KSetup.RegisterCreators();
-#endif
+                // Implement platform-specific interfaces
+                CSJ2KSetup.RegisterCreators();
             }
 
             if (rootFrame.Content == null)

@@ -1,31 +1,24 @@
-﻿using System;
-using CSJ2K.j2k.util;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K.Util
 {
-#if MEF
-	[System.ComponentModel.Composition.Export(typeof(IMsgLogger))]
-#endif
-	public class DotnetMsgLogger : IMsgLogger
-	{
-#if MEF
-		#region CONSTRUCTORS
+    using System;
 
-		public DotnetMsgLogger()
-		{
-			Register();
-		}
+    using CSJ2K.j2k.util;
 
-		#endregion
-#endif
+    public class DotnetMsgLogger : IMsgLogger
+    {
+        #region METHODS
 
-		#region METHODS
+        public static void Register()
+        {
+            FacilityManager.DefaultMsgLogger = new StreamMsgLogger(
+                Console.OpenStandardOutput(),
+                Console.OpenStandardError(),
+                78);
+        }
 
-		public static void Register()
-		{
-			FacilityManager.DefaultMsgLogger = new StreamMsgLogger(Console.OpenStandardOutput(), Console.OpenStandardError(), 78);
-		}
-
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -1,37 +1,23 @@
-﻿namespace CSJ2K.Util
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
+
+namespace CSJ2K.Util
 {
-#if MEF
-#if NETFX_CORE
-	[System.Composition.Export(typeof(IFileInfoCreator))]
-#else
-	[System.ComponentModel.Composition.Export(typeof(IFileInfoCreator))]
-#endif
-#endif
-	public class DotnetFileInfoCreator : IFileInfoCreator
-	{
-#if MEF
-		#region CONSTRUCTORS
+    public class DotnetFileInfoCreator : IFileInfoCreator
+    {
 
-		public DotnetFileInfoCreator()
-		{
-			FileInfoFactory.RegisterCreator(this);
-		}
+        #region METHODS
 
-		#endregion
-#endif
+        public IFileInfo Create(string fileName)
+        {
+            return new DotnetFileInfo(fileName);
+        }
 
-		#region METHODS
+        public static void Register()
+        {
+            FileInfoFactory.RegisterCreator(new DotnetFileInfoCreator());
+        }
 
-		public IFileInfo Create(string fileName)
-		{
-			return new DotnetFileInfo(fileName);
-		}
-
-		public static void Register()
-		{
-			FileInfoFactory.RegisterCreator(new DotnetFileInfoCreator());
-		}
-
-		#endregion
-	}
+        #endregion
+    }
 }

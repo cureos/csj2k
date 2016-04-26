@@ -1,35 +1,24 @@
-﻿using System.IO;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K.Util
 {
-#if MEF
-	[System.Composition.Export(typeof(IFileStreamCreator))]
-#endif
-	public class StoreFileStreamCreator : IFileStreamCreator
-	{
-#if MEF
-		#region CONSTRUCTORS
+    using System.IO;
 
-		public StoreFileStreamCreator()
-		{
-			FileStreamFactory.RegisterCreator(this);
-		}
-		
-		#endregion
-#endif
+    public class StoreFileStreamCreator : IFileStreamCreator
+    {
+        #region METHODS
 
-		#region METHODS
+        public Stream Create(string path, string mode)
+        {
+            return new StoreFileStream(path, mode);
+        }
 
-		public Stream Create(string path, string mode)
-		{
-			return new StoreFileStream(path, mode);
-		}
-		
-		public static void Register()
-		{
-			FileStreamFactory.RegisterCreator(new StoreFileStreamCreator());
-		}
+        public static void Register()
+        {
+            FileStreamFactory.RegisterCreator(new StoreFileStreamCreator());
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

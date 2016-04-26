@@ -1,41 +1,22 @@
-﻿#if MEF
-#if NETFX_CORE
-using System.Composition;
-#else
-using System.ComponentModel.Composition;
-#endif
-#endif
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K.Util
 {
-#if MEF
-	[Export(typeof(IBitmapWrapperCreator))]
-#endif
-	public class WriteableBitmapWrapperCreator : IBitmapWrapperCreator
-	{
-#if MEF
-		#region CONSTRUCTORS
+    public class WriteableBitmapWrapperCreator : IBitmapWrapperCreator
+    {
+        #region METHODS
 
-		public WriteableBitmapWrapperCreator()
-		{
-			BitmapWrapperFactory.RegisterCreator(this);
-		}
+        public IBitmapWrapper Create(int width, int height, int numberOfComponents)
+        {
+            return new WriteableBitmapWrapper(width, height, numberOfComponents);
+        }
 
-		#endregion
-#endif
+        public static void Register()
+        {
+            BitmapWrapperFactory.RegisterCreator(new WriteableBitmapWrapperCreator());
+        }
 
-		#region METHODS
-
-		public IBitmapWrapper Create(int width, int height, int numberOfComponents)
-		{
-			return new WriteableBitmapWrapper(width, height, numberOfComponents);
-		}
-		
-		public static void Register()
-		{
-			BitmapWrapperFactory.RegisterCreator(new WriteableBitmapWrapperCreator());
-		}
-
-		#endregion
-	}
+        #endregion
+    }
 }

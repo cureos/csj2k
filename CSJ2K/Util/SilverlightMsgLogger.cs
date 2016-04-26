@@ -1,38 +1,29 @@
-﻿using System.IO;
-using System.IO.IsolatedStorage;
-using CSJ2K.j2k.util;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K.Util
 {
-#if MEF
-	[System.ComponentModel.Composition.Export(typeof(IMsgLogger))]
-#endif
-	public class SilverlightMsgLogger : IMsgLogger
-	{
-#if MEF
-		#region CONSTRUCTORS
+    using System.IO;
+    using System.IO.IsolatedStorage;
 
-		public SilverlightMsgLogger()
-		{
-			Register();
-		}
+    using CSJ2K.j2k.util;
 
-		#endregion
-#endif
+    public class SilverlightMsgLogger : IMsgLogger
+    {
+        #region METHODS
 
-		#region METHODS
+        public static void Register()
+        {
+            using (var isolatedFile = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                FacilityManager.DefaultMsgLogger =
+                    new StreamMsgLogger(
+                        new IsolatedStorageFileStream("csj2k.out", FileMode.Create, FileAccess.ReadWrite, isolatedFile),
+                        new IsolatedStorageFileStream("csj2k.err", FileMode.Create, FileAccess.ReadWrite, isolatedFile),
+                        78);
+            }
+        }
 
-		public static void Register()
-		{
-			using (var isolatedFile = IsolatedStorageFile.GetUserStoreForApplication())
-			{
-				FacilityManager.DefaultMsgLogger =
-					new StreamMsgLogger(
-						new IsolatedStorageFileStream("csj2k.out", FileMode.Create, FileAccess.ReadWrite, isolatedFile),
-						new IsolatedStorageFileStream("csj2k.err", FileMode.Create, FileAccess.ReadWrite, isolatedFile), 78);
-			}
-		}
-		
-		#endregion
-	}
+        #endregion
+    }
 }

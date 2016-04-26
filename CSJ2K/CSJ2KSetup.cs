@@ -1,66 +1,49 @@
-﻿#if MEF
-#if NETFX_CORE
-using System.Composition;
-#else
-using System.ComponentModel.Composition;
-#endif
-#endif
-
-using CSJ2K.Util;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K
 {
-	public class CSJ2KSetup
-	{
-		#region PROPERTIES
+    using CSJ2K.Util;
 
-#if MEF
-		[Import]
-#endif
-		public IFileInfoCreator FileInfoCreator { get; set; }
+    public class CSJ2KSetup
+    {
+        #region PROPERTIES
 
-#if MEF
-		[Import]
-#endif
-		public IFileStreamCreator FileStreamCreator { get; set; }
+        public IFileInfoCreator FileInfoCreator { get; set; }
 
-#if MEF
-		[Import]
-#endif
-		public IBitmapWrapperCreator BitmapWrapperCreator { get; set; }
+        public IFileStreamCreator FileStreamCreator { get; set; }
 
-#if MEF
-		[Import]
-#endif
-		public IMsgLogger MsgLogger { get; set; }
+        public IBitmapWrapperCreator BitmapWrapperCreator { get; set; }
 
-		#endregion
+        public IMsgLogger MsgLogger { get; set; }
 
-		#region METHODS
+        #endregion
 
-		public static void RegisterCreators()
-		{
+        #region METHODS
+
+        public static void RegisterCreators()
+        {
 #if NETFX_CORE
-			StoreMsgLogger.Register();
-			StoreFileInfoCreator.Register();
-			StoreFileStreamCreator.Register();
-			WriteableBitmapWrapperCreator.Register();
+            StoreMsgLogger.Register();
+            StoreFileInfoCreator.Register();
+            StoreFileStreamCreator.Register();
+            WriteableBitmapWrapperCreator.Register();
 #elif SILVERLIGHT
 #if WINDOWS_PHONE
-			WriteableBitmapWrapperCreator.Register();
+            WriteableBitmapWrapperCreator.Register();
 #else
-			SilverlightMsgLogger.Register();
-			SilverlightFileStreamCreator.Register();
-			WriteableBitmapWrapperCreator.Register();
+            SilverlightMsgLogger.Register();
+            SilverlightFileStreamCreator.Register();
+            WriteableBitmapWrapperCreator.Register();
 #endif
 #else
-			DotnetMsgLogger.Register();
-			DotnetFileInfoCreator.Register();
-			DotnetFileStreamCreator.Register();
-			WriteableBitmapWrapperCreator.Register();
+            DotnetMsgLogger.Register();
+            DotnetFileInfoCreator.Register();
+            DotnetFileStreamCreator.Register();
+            WriteableBitmapWrapperCreator.Register();
 #endif
-		}
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }
