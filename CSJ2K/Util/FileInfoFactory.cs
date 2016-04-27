@@ -1,42 +1,37 @@
-﻿using System;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K.Util
 {
-	public static class FileInfoFactory
-	{
-		#region FIELDS
+    using System;
 
-		private static IFileInfoCreator _creator;
+    public static class FileInfoFactory
+    {
+        #region FIELDS
 
-		#endregion
+        private static IFileInfoCreator _creator;
 
-#if DOTNET
-		#region CONSTRUCTORS
+        #endregion
 
-		static FileInfoFactory()
-		{
-			RegisterCreator(new DotnetFileInfoCreator());
-		}
+        #region CONSTRUCTORS
 
-		#endregion
-#endif
+        static FileInfoFactory()
+        {
+            _creator = Setup.GetSinglePlatformInstance<IFileInfoCreator>();
+        }
 
-		#region METHODS
+        #endregion
 
-		public static void RegisterCreator(IFileInfoCreator creator)
-		{
-			if (_creator != null) throw new InvalidOperationException("File info creator can only be registered once.");
-			_creator = creator;
-		}
+        #region METHODS
 
-		internal static IFileInfo New(string fileName)
-		{
-			if (_creator == null) throw new InvalidOperationException("No file info creator is registered.");
-			if (fileName == null) throw new ArgumentNullException("fileName");
+        internal static IFileInfo New(string fileName)
+        {
+            if (_creator == null) throw new InvalidOperationException("No file info creator is registered.");
+            if (fileName == null) throw new ArgumentNullException("fileName");
 
-			return _creator.Create(fileName);
-		}
+            return _creator.Create(fileName);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

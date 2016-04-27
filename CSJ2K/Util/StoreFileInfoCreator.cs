@@ -12,11 +12,6 @@ namespace CSJ2K.Util
             return new StoreFileInfo(name);
         }
 
-        public static void Register()
-        {
-            FileInfoFactory.RegisterCreator(new StoreFileInfoCreator());
-        }
-
         #endregion
     }
 }

@@ -13,17 +13,12 @@ namespace CSJ2K
         {
 #if NETFX_CORE
             StoreMsgLogger.Register();
-            StoreFileInfoCreator.Register();
-            StoreFileStreamCreator.Register();
 #elif SILVERLIGHT
 #if !WINDOWS_PHONE
             SilverlightMsgLogger.Register();
-            SilverlightFileStreamCreator.Register();
 #endif
 #else
             DotnetMsgLogger.Register();
-            DotnetFileInfoCreator.Register();
-            DotnetFileStreamCreator.Register();
 #endif
         }
 

@@ -13,11 +13,6 @@ namespace CSJ2K.Util
             return new DotnetFileInfo(fileName);
         }
 
-        public static void Register()
-        {
-            FileInfoFactory.RegisterCreator(new DotnetFileInfoCreator());
-        }
-
         #endregion
     }
 }

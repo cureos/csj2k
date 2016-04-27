@@ -15,11 +15,6 @@ namespace CSJ2K.Util
             throw new NotImplementedException("File stream I/O not implemented for Silverlight.");
         }
 
-        public static void Register()
-        {
-            FileStreamFactory.RegisterCreator(new SilverlightFileStreamCreator());
-        }
-
         #endregion
     }
 }

@@ -14,11 +14,6 @@ namespace CSJ2K.Util
             return new StoreFileStream(path, mode);
         }
 
-        public static void Register()
-        {
-            FileStreamFactory.RegisterCreator(new StoreFileStreamCreator());
-        }
-
         #endregion
     }
 }
