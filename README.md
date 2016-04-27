@@ -1,25 +1,29 @@
-# Portable CSJ2K - A Managed JPEG2000 Codec
+# CSJ2K - A Managed and Portable JPEG2000 Codec
 
-Copyright (c) 1999-2000 JJ2000 Partners; original C# port (c) 2007-2012 Jason S. Clary; C# encoding and adaptation to Portable Class Library, Windows Store, Windows Phone, WPF and Silverlight extensions (c) 2013-2015 Anders Gustafsson, Cureos AB   
+Copyright (c) 1999-2000 JJ2000 Partners; original C# port (c) 2007-2012 Jason S. Clary; C# encoding and adaptation to Portable Class Library with platform specific support (c) 2013-2016 Anders Gustafsson, Cureos AB   
 
 Licensed and distributable under the terms of the [BSD license](http://www.opensource.org/licenses/bsd-license.php)
+
+**NOTE! The following information applies to the upcoming version 2.0 of CSJ2K. Please consult earlier commits for details about 0.9.x versions of CSJ2K.**
 
 ## Summary
 
 This is a Portable Class Library adaptation of [CSJ2K](http://csj2k.codeplex.com/), which provides JPEG 2000 decoding and encoding functionality to .NET based platforms. *CSJ2K* is by itself a C# port of the Java 
 package *jj2000*, version 5.1. This Portable Class Library adaptation of *CSJ2K* makes it possible to implement JPEG decoding and encoding on the following platforms:
 
-* Windows Store apps
-* Windows Phone version 7 and higher
-* Silverlight version 4 and higher
+* Windows Universal Platform (8.1 and 10)
+* Windows Phone Silverlight version 8 and higher
+* Silverlight version 5
 * .NET Framework version 4 and higher
+* Xamarin iOS
+* Xamarin Android
 
-The code is still applicable to .NET 2.0 and later as well; the Windows Forms based original class library is maintained here for reference.
+The code is still applicable to .NET 3.5 and later as well; a .NET 3.5 dedicated class library is maintained here for reference.
 
 Along with the *CSJ2K* Portable Class Library there are also platform specific complementary libraries for bitmap processing and file handling. In particular, the .NET Framework complementary library implements bitmap processing
 for `WriteableBitmap`, thus facilitating JPEG 2000 decoding in WPF based applications.
 
-Included are very basic Windows Store, WPF and Silverlight test applications for reading and displaying JPEG 2000 files. There is also a Windows Phone 8 application, although this application has not yet been confirmed to work.
+Included are very basic Universal Windows 8.1, WPF, Windows Phone 8 Silverlight, Silverlight 5 and Xamarin Android test applications for reading and displaying JPEG 2000 files.
 
 ## Installation
 
@@ -27,12 +31,17 @@ Apart from building the relevant class libraries from source, pre-built packages
 
 ## Usage
 
-The Portable Class Library provides interfaces for bitmap rendering, file I/O and logging. It is the responsibility of the end application to register implementations of these interfaces before JPEG 2000 decoding and encoding
-can be performed. A static convenience method available on all platforms is implemented for this purpose:
+The Portable Class Library provides interfaces for bitmap rendering, file I/O and logging.
 
-```csharp
-CSJ2KSetup.RegisterCreators();
-```
+On .NET, both `System.Drawing.Bitmap` and `WriteableBitmap` images can be managed, but not simultaneously. By default, `WriteableBitmap` is managed. To work with `Bitmap` images instead, register the corresponding image creator:
+
+    BitmapImageCreator.Register();
+
+To switch back to `WriteableBitmap`:
+
+    WriteableBitmapCreator.Register();
+
+On other platforms, only one image manager is available and automatically selected.
 
 ### Decoding
 
@@ -41,34 +50,43 @@ To decode a JPEG 2000 encoded image, call one of the following methods:
 ```csharp
 public class J2kImage
 {
-	public static object FromStream(Stream);
-	public static object FromBytes(byte[]);
-	public static object FromFile(string);
+	public static IImage FromStream(Stream, ParameterList = null);
+	public static IImage FromBytes(byte[], ParameterList = null);
+	public static IImage FromFile(string, ParameterList = null);
 }
 ```
 
 `J2kImage.FromFile(string)` is not sufficiently implemented for Silverlight and Windows Phone. Regardless of platform, `J2kImage.FromStream(Stream)` is the recommended method when applicable.
 
-The returned `object` is a regular bitmap, typically a `WriteableBitmap` or, in the case of the Windows Forms targeted library, a `System.Drawing.Bitmap`.
+The returned `IImage` offers a "cast" method `As<T>()` to obtain an image in the type relevant for the platform. When using the `BitmapImageCreator` on .NET, a cast to `Bitmap` would suffice:
+
+    var bitmap = decodedImage.As<Bitmap>();
+	
+On platforms implementing `WriteableBitmap`, use:
+
+    var wbm = decodedImage.As<WriteableBitmap>();
+	
+On Android, use:
+
+    var bitmap = decodedImage.As<Android.Graphics.Bitmap>();
 
 ### Encoding
 
-To encode an image of any of the formats *PGM* (Portable Graymap), *PPM* (Portable Pixmap) or *PGX* (JPEG2000 conformance testing format), call this method:
+To encode an image of any of the formats *PGM* (Portable Graymap), *PPM* (Portable Pixmap) or *PGX* (JPEG2000 conformance testing format), call any of these methods:
 
 ```csharp
 public class J2kImage
 {
-	public static byte[] ToBytes(params Stream[]);
+	public static Stream ToStream(Stream, ParameterList = null);
+	public static Stream ToStream(Stream[], ParameterList = null);
+	public static byte[] ToBytes(Stream, ParameterList = null);
+	public static byte[] ToBytes(Stream[], ParameterList = null);
 }
 ```
 
 For *PGM* and *PPM* images, you would normally enter one `Stream` object in the argument list, whereas for *PGX* images, you may enter one `Stream` object per color component. Note that encoding currently does not support
 `Bitmap`/`WriteableBitmap` images; files in these formats need to be converted into any of the supported formats before invoking the encoder. Monochrome images are preferably converted into PGM and color images into PPM format
 before JPEG2000 encoding is applied.
-
-## Dependencies
-
-The `WriteableBitmap` implementations make use of the [WriteableBitmap Extensions library](http://writeablebitmapex.codeplex.com/).
 
 ## Links
 
