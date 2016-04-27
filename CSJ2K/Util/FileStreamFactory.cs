@@ -14,8 +14,6 @@ namespace CSJ2K.Util
 
         #endregion
 
-#if DOTNET
-
         #region CONSTRUCTORS
 
         static FileStreamFactory()
@@ -24,8 +22,6 @@ namespace CSJ2K.Util
         }
 
         #endregion
-
-#endif
 
         #region METHODS
 
