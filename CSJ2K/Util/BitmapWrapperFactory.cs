@@ -1,14 +1,15 @@
-﻿using System;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K.Util
 {
-	public class BitmapWrapperFactory
-	{
-		#region FIELDS
+    public class BitmapWrapperFactory
+    {
+        #region FIELDS
 
-		private static IBitmapWrapperCreator _creator;
+        private static IBitmapWrapperCreator _creator;
 
-		#endregion
+        #endregion
 
 #if DOTNET
 		#region CONSTRUCTORS
@@ -21,19 +22,18 @@ namespace CSJ2K.Util
 		#endregion
 #endif
 
-		#region METHODS
+        #region METHODS
 
-		public static void RegisterCreator(IBitmapWrapperCreator creator)
-		{
-			if (_creator != null) throw new InvalidOperationException("Bitmap creator can only be registered once.");
-			_creator = creator;
-		}
+        public static void RegisterCreator(IBitmapWrapperCreator creator)
+        {
+            _creator = creator;
+        }
 
-		internal static IBitmapWrapper New(int width, int height, int numberOfComponents)
-		{
-			return _creator.Create(width, height, numberOfComponents);
-		}
+        internal static IBitmapWrapper New(int width, int height, int numberOfComponents)
+        {
+            return _creator.Create(width, height, numberOfComponents);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -36,6 +36,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +54,12 @@
     </Compile>
     <Compile Include="..\CSJ2K\Util\DotnetMsgLogger.cs">
       <Link>Util\DotnetMsgLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\WinformsBitmapWrapper.cs">
+      <Link>Util\WinformsBitmapWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\WinformsBitmapWrapperCreator.cs">
+      <Link>Util\WinformsBitmapWrapperCreator.cs</Link>
     </Compile>
     <Compile Include="..\CSJ2K\Util\WriteableBitmapWrapper.cs">
       <Link>Util\WriteableBitmapWrapper.cs</Link>
