@@ -1,26 +1,15 @@
 ﻿// Copyright (c) 2007-2016 CSJ2K contributors.
 // Licensed under the BSD 3-Clause License.
 
+using System;
+using System.Runtime.InteropServices;
+
+using Android.Graphics;
+using Android.Util;
+
 namespace CSJ2K.Util
 {
-    using System;
-
-#if NETFX_CORE
-    using System.Reflection;
-    using System.Runtime.InteropServices.WindowsRuntime;
-    using Windows.UI.Xaml.Media;
-    using Windows.UI.Xaml.Media.Imaging;
-#elif SILVERLIGHT
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-#else
-    using System.Runtime.InteropServices;
-    using System.Windows;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-#endif
-
-    internal class WriteableBitmapImage : IImage
+    internal class AndroidBitmapImage : IImage
     {
         #region FIELDS
 
@@ -38,7 +27,7 @@ namespace CSJ2K.Util
 
         #region CONSTRUCTORS
 
-        internal WriteableBitmapImage(int width, int height, int numberOfComponents)
+        internal AndroidBitmapImage(int width, int height, int numberOfComponents)
         {
             _width = width;
             _height = height;
@@ -52,34 +41,19 @@ namespace CSJ2K.Util
 
         public T As<T>()
         {
-#if NETFX_CORE
-            if (!typeof(ImageSource).GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo()))
-#else
-            if (!typeof(ImageSource).IsAssignableFrom(typeof(T)))
-#endif
+            if (!typeof(Bitmap).IsAssignableFrom(typeof(T)))
             {
                 throw new InvalidCastException(
                     string.Format(
                         "Cannot cast to '{0}'; type must be assignable from '{1}'",
                         typeof(T).Name,
-                        typeof(ImageSource).Name));
+                        typeof(Bitmap).Name));
             }
 
-#if NETFX_CORE
-            var wbm = new WriteableBitmap(_width, _height);
-            _bytes.CopyTo(0, wbm.PixelBuffer, 0, _bytes.Length);
-#elif SILVERLIGHT
-            var wbm = new WriteableBitmap(_width, _height);
-            Buffer.BlockCopy(_bytes, 0, wbm.Pixels, 0, _bytes.Length);
-#else
-            var wbm = new WriteableBitmap(_width, _height, 96.0, 96.0, PixelFormats.Pbgra32, null);
-            wbm.Lock();
-            Marshal.Copy(_bytes, 0, wbm.BackBuffer, _bytes.Length);
-            wbm.AddDirtyRect(new Int32Rect(0, 0, _width, _height));
-            wbm.Unlock();
-#endif
+            var pixels = new int[_width * _height];
+            Buffer.BlockCopy(_bytes, 0, pixels, 0, _bytes.Length);
 
-            return (T)(object)wbm;
+            return (T)(object)Bitmap.CreateBitmap(pixels, _width, _height, Bitmap.Config.Argb8888);
         }
 
         public void FillRow(int rowIndex, int lineIndex, int rowWidth, byte[] rowValues)

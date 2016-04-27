@@ -1,50 +1,71 @@
-﻿using System;
-using System.IO;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K.Util
 {
-	internal class DotnetFileInfo : IFileInfo
-	{
-		#region FIELDS
+    using System;
+    using System.IO;
 
-		private readonly FileInfo _fileInfo;
+    internal class DotnetFileInfo : IFileInfo
+    {
+        #region FIELDS
 
-		#endregion
+        private readonly FileInfo _fileInfo;
 
-		#region CONSTRUCTORS
+        #endregion
 
-		internal DotnetFileInfo(string fileName)
-		{
-			_fileInfo = new FileInfo(fileName);
-		}
+        #region CONSTRUCTORS
 
-		#endregion
+        internal DotnetFileInfo(string fileName)
+        {
+            _fileInfo = new FileInfo(fileName);
+        }
 
-		#region PROPERTIES
+        #endregion
 
-		public string Name { get { return _fileInfo.Name; } }
+        #region PROPERTIES
 
-		public string FullName { get { return _fileInfo.FullName; } }
+        public string Name
+        {
+            get
+            {
+                return _fileInfo.Name;
+            }
+        }
 
-		public bool Exists { get { return _fileInfo.Exists; } }
+        public string FullName
+        {
+            get
+            {
+                return _fileInfo.FullName;
+            }
+        }
 
-		#endregion
+        public bool Exists
+        {
+            get
+            {
+                return _fileInfo.Exists;
+            }
+        }
 
-		#region METHODS
+        #endregion
 
-		public bool Delete()
-		{
-			try
-			{
-				_fileInfo.Delete();
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		} 
+        #region METHODS
 
-		#endregion
-	}
+        public bool Delete()
+        {
+            try
+            {
+                _fileInfo.Delete();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        #endregion
+    }
 }

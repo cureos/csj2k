@@ -10,7 +10,6 @@ using System.Resources;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CSJ2K Contributors")]
 [assembly: AssemblyProduct("CSJ2K")]
@@ -28,6 +27,5 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
-
 [assembly: AssemblyVersion("0.9.2")]
-[assembly: AssemblyFileVersion("0.9.2.1")]
+[assembly: AssemblyFileVersion("0.9.2.0")]
