@@ -1,18 +1,22 @@
-﻿using System;
-using System.Windows;
-#if NETFX_CORE
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.UI.Xaml.Media.Imaging;
-#elif SILVERLIGHT
-using System.Windows.Media.Imaging;
-#else
-using System.Runtime.InteropServices;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-#endif
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
 
 namespace CSJ2K.Util
 {
+    using System;
+
+#if NETFX_CORE
+    using System.Runtime.InteropServices.WindowsRuntime;
+    using Windows.UI.Xaml.Media.Imaging;
+#elif SILVERLIGHT
+    using System.Windows.Media.Imaging;
+#else
+    using System.Runtime.InteropServices;
+    using System.Windows;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+#endif
+
     internal class WriteableBitmapWrapper : IBitmapWrapper
     {
         #region FIELDS
