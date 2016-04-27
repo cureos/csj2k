@@ -13,7 +13,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CSJ2K Contributors")]
 [assembly: AssemblyProduct("CSJ2K")]
-[assembly: AssemblyCopyright("Copyright ©  2013-2016 CSJ2K Contributors")]
+[assembly: AssemblyCopyright("Copyright © 2007-2016 CSJ2K Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
@@ -27,5 +27,5 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("0.9.2")]
-[assembly: AssemblyFileVersion("0.9.2.0")]
+[assembly: AssemblyVersion("1.9.0")]
+[assembly: AssemblyFileVersion("1.9.0.0")]
