@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9C5FFA
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K", "CSJ2K\CSJ2K.csproj", "{1EA0F9BA-0194-4F08-9E55-89888D5A4724}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.NET35", "CSJ2K\CSJ2K.NET35.csproj", "{1EA0F9BA-0194-4F08-9E55-89888D5A4724}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codectest", "codectest\codectest.csproj", "{08EBCC10-76CD-4198-9F60-E8091432E4D8}"
 EndProject

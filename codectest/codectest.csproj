@@ -106,9 +106,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSJ2K\CSJ2K.csproj">
+    <ProjectReference Include="..\CSJ2K\CSJ2K.NET35.csproj">
       <Project>{1ea0f9ba-0194-4f08-9e55-89888d5a4724}</Project>
-      <Name>CSJ2K</Name>
+      <Name>CSJ2K.NET35</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
