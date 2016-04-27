@@ -19,6 +19,11 @@ namespace CSJ2K.Util
 
         #region METHODS
 
+        public static void Register()
+        {
+            ImageFactory.Register(new BitmapImageCreator());
+        }
+
         public IImage Create(int width, int height, int numberOfComponents)
         {
             return new BitmapImage(width, height, numberOfComponents);

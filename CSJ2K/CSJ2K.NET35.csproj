@@ -99,9 +99,11 @@
     <Reference Include="mscorlib">
       <Name>mscorlib</Name>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="J2kSetup.cs" />
@@ -341,6 +343,8 @@
     <Compile Include="Util\SupportClass.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Util\WriteableBitmapImage.cs" />
+    <Compile Include="Util\WriteableBitmapImageCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

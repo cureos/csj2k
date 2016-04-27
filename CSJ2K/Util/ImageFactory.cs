@@ -3,7 +3,7 @@
 
 namespace CSJ2K.Util
 {
-    public class ImageFactory
+    public static class ImageFactory
     {
         #region FIELDS
 
@@ -15,16 +15,17 @@ namespace CSJ2K.Util
 
         static ImageFactory()
         {
-#if DOTNET
-		    _creator = J2kSetup.GetSinglePlatformInstance<IImageCreator>();
-#else
             _creator = J2kSetup.GetDefaultPlatformInstance<IImageCreator>();
-#endif
         }
 
         #endregion
 
         #region METHODS
+
+        public static void Register(IImageCreator creator)
+        {
+            _creator = creator;
+        }
 
         internal static IImage New(int width, int height, int numberOfComponents)
         {

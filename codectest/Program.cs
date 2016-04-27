@@ -1,6 +1,8 @@
 // Copyright (c) 2007-2016 CSJ2K contributors.
 // Licensed under the BSD 3-Clause License.
 
+using CSJ2K.Util;
+
 namespace codectest
 {
     using System;
@@ -13,6 +15,8 @@ namespace codectest
     {
         private static void Main(string[] args)
         {
+            BitmapImageCreator.Register();
+
             File.Delete("file11.jp2");
             File.Delete("file12.jp2");
             File.Delete("file13.jp2");
