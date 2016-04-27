@@ -7,16 +7,13 @@ namespace CSJ2K.Util
 
     using CSJ2K.j2k.util;
 
-    public class DotnetMsgLogger : IMsgLogger
+    public class DotnetMsgLogger : StreamMsgLogger
     {
-        #region METHODS
+        #region CONSTRUCTORS
 
-        public static void Register()
+        public DotnetMsgLogger()
+            : base(Console.OpenStandardOutput(), Console.OpenStandardError(), 78)
         {
-            FacilityManager.DefaultMsgLogger = new StreamMsgLogger(
-                Console.OpenStandardOutput(),
-                Console.OpenStandardError(),
-                78);
         }
 
         #endregion

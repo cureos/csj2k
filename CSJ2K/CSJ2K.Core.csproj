@@ -210,7 +210,7 @@
     <Compile Include="j2k\util\FacilityManager.cs" />
     <Compile Include="j2k\util\ISRandomAccessIO.cs" />
     <Compile Include="j2k\util\MathUtil.cs" />
-    <Compile Include="j2k\util\MsgLogger.cs" />
+    <Compile Include="j2k\util\IMsgLogger.cs" />
     <Compile Include="j2k\util\MsgPrinter.cs" />
     <Compile Include="j2k\util\ParameterList.cs" />
     <Compile Include="j2k\util\ProgressWatch.cs" />
@@ -252,7 +252,7 @@
     <Compile Include="j2k\wavelet\WaveletTransform.cs" />
     <Compile Include="j2k\wavelet\WTDecompSpec.cs" />
     <Compile Include="j2k\wavelet\WTFilterSpec.cs" />
-    <Compile Include="Setup.cs" />
+    <Compile Include="J2kSetup.cs" />
     <Compile Include="Util\BitmapWrapperFactory.cs" />
     <Compile Include="Util\EndianBinaryReader.cs" />
     <Compile Include="Util\EndianBinaryWriter.cs" />

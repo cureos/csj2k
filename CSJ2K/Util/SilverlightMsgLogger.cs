@@ -8,19 +8,24 @@ namespace CSJ2K.Util
 
     using CSJ2K.j2k.util;
 
-    public class SilverlightMsgLogger : IMsgLogger
+    public class SilverlightMsgLogger : StreamMsgLogger
     {
+        #region CONSTRUCTORS
+
+        public SilverlightMsgLogger()
+            : base(GetIsolatedFileStream("csj2k.out"), GetIsolatedFileStream("csj2k.out"), 78)
+        {
+        }
+
+        #endregion
+
         #region METHODS
 
-        public static void Register()
+        private static Stream GetIsolatedFileStream(string fileName)
         {
             using (var isolatedFile = IsolatedStorageFile.GetUserStoreForApplication())
             {
-                FacilityManager.DefaultMsgLogger =
-                    new StreamMsgLogger(
-                        new IsolatedStorageFileStream("csj2k.out", FileMode.Create, FileAccess.ReadWrite, isolatedFile),
-                        new IsolatedStorageFileStream("csj2k.err", FileMode.Create, FileAccess.ReadWrite, isolatedFile),
-                        78);
+                return new IsolatedStorageFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, isolatedFile);
             }
         }
 

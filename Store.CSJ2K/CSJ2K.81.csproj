@@ -111,9 +111,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CSJ2K\CSJ2KSetup.cs">
-      <Link>CSJ2KSetup.cs</Link>
-    </Compile>
     <Compile Include="..\CSJ2K\Util\StoreFileInfo.cs">
       <Link>Util\StoreFileInfo.cs</Link>
     </Compile>

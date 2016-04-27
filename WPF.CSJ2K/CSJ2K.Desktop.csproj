@@ -40,9 +40,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CSJ2K\CSJ2KSetup.cs">
-      <Link>CSJ2KSetup.cs</Link>
-    </Compile>
     <Compile Include="..\CSJ2K\Util\DotnetFileInfo.cs">
       <Link>Util\DotnetFileInfo.cs</Link>
     </Compile>

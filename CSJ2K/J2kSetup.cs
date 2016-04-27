@@ -13,7 +13,7 @@ namespace CSJ2K
     /// <summary>
     /// Setup helper methods for initializing library.
     /// </summary>
-    internal static class Setup
+    internal static class J2kSetup
     {
         #region FIELDS
 

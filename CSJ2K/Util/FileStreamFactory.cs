@@ -20,7 +20,7 @@ namespace CSJ2K.Util
 
         static FileStreamFactory()
         {
-            _creator = Setup.GetSinglePlatformInstance<IFileStreamCreator>();
+            _creator = J2kSetup.GetSinglePlatformInstance<IFileStreamCreator>();
         }
 
         #endregion

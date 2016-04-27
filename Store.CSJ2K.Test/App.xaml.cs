@@ -1,17 +1,15 @@
 ﻿// Copyright (c) 2007-2016 CSJ2K contributors.
 // Licensed under the BSD 3-Clause License.
 
-using System;
-
-using CSJ2K;
-
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-
 namespace Store.CSJ2K.Test
 {
+    using System;
+
+    using Windows.ApplicationModel;
+    using Windows.ApplicationModel.Activation;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -51,9 +49,6 @@ namespace Store.CSJ2K.Test
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
-
-                // Implement platform-specific interfaces
-                CSJ2KSetup.RegisterCreators();
             }
 
             if (rootFrame.Content == null)

@@ -16,9 +16,9 @@ namespace CSJ2K.Util
         static BitmapWrapperFactory()
         {
 #if DOTNET
-		    _creator = Setup.GetSinglePlatformInstance<IBitmapWrapperCreator>();
+		    _creator = J2kSetup.GetSinglePlatformInstance<IBitmapWrapperCreator>();
 #else
-            _creator = Setup.GetDefaultPlatformInstance<IBitmapWrapperCreator>();
+            _creator = J2kSetup.GetDefaultPlatformInstance<IBitmapWrapperCreator>();
 #endif
         }
 

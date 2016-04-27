@@ -1,12 +1,11 @@
 ﻿// Copyright (c) 2007-2016 CSJ2K contributors.
 // Licensed under the BSD 3-Clause License.
 
-using System;
-using System.Windows;
-using CSJ2K;
-
 namespace SL.CSJ2K.Test
 {
+    using System;
+    using System.Windows;
+
     public partial class App
     {
 
@@ -22,12 +21,10 @@ namespace SL.CSJ2K.Test
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             RootVisual = new MainPage();
-            CSJ2KSetup.RegisterCreators();
         }
 
         private void Application_Exit(object sender, EventArgs e)
         {
-
         }
 
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)

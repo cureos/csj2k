@@ -17,7 +17,7 @@ namespace CSJ2K.Util
 
         static FileInfoFactory()
         {
-            _creator = Setup.GetSinglePlatformInstance<IFileInfoCreator>();
+            _creator = J2kSetup.GetSinglePlatformInstance<IFileInfoCreator>();
         }
 
         #endregion
