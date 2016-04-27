@@ -1,6 +1,6 @@
 ﻿namespace CSJ2K.Util
 {
-	internal class WinformsBitmapWrapperCreator : IBitmapWrapperCreator
+	public class WinformsBitmapWrapperCreator : IBitmapWrapperCreator
 	{
 		#region METHODS
 
@@ -8,7 +8,12 @@
 		{
 			return new WinformsBitmapWrapper(width, height, numberOfComponents);
 		}
-		
-		#endregion
-	}
+
+        public static void Register()
+        {
+            BitmapWrapperFactory.RegisterCreator(new WinformsBitmapWrapperCreator());
+        }
+
+        #endregion
+    }
 }
