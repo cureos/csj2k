@@ -7,18 +7,6 @@ namespace CSJ2K
 
     public class CSJ2KSetup
     {
-        #region PROPERTIES
-
-        public IFileInfoCreator FileInfoCreator { get; set; }
-
-        public IFileStreamCreator FileStreamCreator { get; set; }
-
-        public IBitmapWrapperCreator BitmapWrapperCreator { get; set; }
-
-        public IMsgLogger MsgLogger { get; set; }
-
-        #endregion
-
         #region METHODS
 
         public static void RegisterCreators()
