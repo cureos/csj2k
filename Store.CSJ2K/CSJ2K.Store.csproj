@@ -105,9 +105,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\CSJ2K\Portable.CSJ2K.csproj">
+    <ProjectReference Include="..\CSJ2K\CSJ2K.Core.csproj">
       <Project>{a790cc27-4086-4d2a-bf7b-c02337df4d21}</Project>
-      <Name>Portable.CSJ2K</Name>
+      <Name>CSJ2K.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

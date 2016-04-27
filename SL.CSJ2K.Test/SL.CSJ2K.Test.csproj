@@ -92,13 +92,13 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSJ2K\Portable.CSJ2K.csproj">
+    <ProjectReference Include="..\CSJ2K\CSJ2K.Core.csproj">
       <Project>{a790cc27-4086-4d2a-bf7b-c02337df4d21}</Project>
-      <Name>Portable.CSJ2K</Name>
+      <Name>CSJ2K.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SL.CSJ2K\SL.CSJ2K.csproj">
+    <ProjectReference Include="..\SL.CSJ2K\CSJ2K.Silverlight.csproj">
       <Project>{8f724ff1-1a1d-4521-b379-bf2348022def}</Project>
-      <Name>SL.CSJ2K</Name>
+      <Name>CSJ2K.Silverlight</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
