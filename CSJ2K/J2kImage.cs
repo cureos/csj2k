@@ -38,7 +38,7 @@ namespace CSJ2K
 
         #region Static Decoder Methods
 
-        public static object FromFile(string filename, ParameterList parameters = null)
+        public static IImage FromFile(string filename, ParameterList parameters = null)
         {
             using (var stream = FileStreamFactory.New(filename, "r"))
             {
@@ -46,7 +46,7 @@ namespace CSJ2K
             }
         }
 
-        public static object FromBytes(byte[] j2kdata, ParameterList parameters = null)
+        public static IImage FromBytes(byte[] j2kdata, ParameterList parameters = null)
         {
             using (var stream = new MemoryStream(j2kdata))
             {
@@ -54,7 +54,7 @@ namespace CSJ2K
             }
         }
 
-        public static object FromStream(Stream stream, ParameterList parameters = null)
+        public static IImage FromStream(Stream stream, ParameterList parameters = null)
         {
             RandomAccessIO in_stream = new ISRandomAccessIO(stream);
 
@@ -300,7 +300,8 @@ namespace CSJ2K
                     }
                 }
             }
-            return dst.Bitmap;
+
+            return dst;
         }
 
         #endregion

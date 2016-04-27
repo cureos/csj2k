@@ -41,7 +41,7 @@ namespace codectest
                 {
                     HiPerfTimer timer = new HiPerfTimer();
                     timer.Start();
-                    Bitmap image = (Bitmap)J2kImage.FromFile("file" + i + ".jp2");
+                    Bitmap image = J2kImage.FromFile("file" + i + ".jp2").As<Bitmap>();
                     timer.Stop();
                     Console.WriteLine("file" + i + ": " + timer.Duration + " seconds");
 

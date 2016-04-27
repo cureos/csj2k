@@ -1,5 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Media.Imaging;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
+
+using System.Windows;
+using System.Windows.Media;
+
 using CSJ2K;
 
 namespace WP.CSJ2K.Test
@@ -35,7 +39,7 @@ namespace WP.CSJ2K.Test
         {
             using (var stream = typeof(MainPage).Assembly.GetManifestResourceStream("WP.CSJ2K.Test.Resources.file1.jp2"))
             {
-                DecodedImage.Source = (WriteableBitmap)J2kImage.FromStream(stream);
+                DecodedImage.Source = J2kImage.FromStream(stream).As<ImageSource>();
             }
         }
     }

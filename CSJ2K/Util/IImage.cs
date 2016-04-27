@@ -5,13 +5,9 @@ namespace CSJ2K.Util
 {
     public interface IImage
     {
-        #region PROPERTIES
-
-        object Bitmap { get; }
-
-        #endregion
-
         #region METHODS
+
+        T As<T>();
 
         void FillRow(int rowIndex, int lineIndex, int rowWidth, byte[] rowValues);
 
