@@ -1,7 +1,10 @@
-﻿namespace CSJ2K.Util
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
+
+namespace CSJ2K.Util
 {
-	public interface IBitmapWrapperCreator
-	{
-		IBitmapWrapper Create(int width, int height, int numberOfComponents);
-	}
+    public interface IBitmapWrapperCreator : IDefaultable
+    {
+        IBitmapWrapper Create(int width, int height, int numberOfComponents);
+    }
 }

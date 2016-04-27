@@ -15,20 +15,15 @@ namespace CSJ2K
             StoreMsgLogger.Register();
             StoreFileInfoCreator.Register();
             StoreFileStreamCreator.Register();
-            WriteableBitmapWrapperCreator.Register();
 #elif SILVERLIGHT
-#if WINDOWS_PHONE
-            WriteableBitmapWrapperCreator.Register();
-#else
+#if !WINDOWS_PHONE
             SilverlightMsgLogger.Register();
             SilverlightFileStreamCreator.Register();
-            WriteableBitmapWrapperCreator.Register();
 #endif
 #else
             DotnetMsgLogger.Register();
             DotnetFileInfoCreator.Register();
             DotnetFileStreamCreator.Register();
-            WriteableBitmapWrapperCreator.Register();
 #endif
         }
 

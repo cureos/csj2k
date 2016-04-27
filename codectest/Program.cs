@@ -8,15 +8,11 @@ namespace codectest
     using System.IO;
 
     using CSJ2K;
-    using CSJ2K.Util;
 
     internal class Program
     {
         private static void Main(string[] args)
         {
-            CSJ2KSetup.RegisterCreators();
-            WinformsBitmapWrapperCreator.Register();
-
             File.Delete("file11.jp2");
             File.Delete("file12.jp2");
             File.Delete("file13.jp2");

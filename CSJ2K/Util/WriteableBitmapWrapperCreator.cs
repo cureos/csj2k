@@ -5,16 +5,26 @@ namespace CSJ2K.Util
 {
     public class WriteableBitmapWrapperCreator : IBitmapWrapperCreator
     {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets whether or not this type is classified as a default manager.
+        /// </summary>
+        public bool IsDefault
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        #endregion
+
         #region METHODS
 
         public IBitmapWrapper Create(int width, int height, int numberOfComponents)
         {
             return new WriteableBitmapWrapper(width, height, numberOfComponents);
-        }
-
-        public static void Register()
-        {
-            BitmapWrapperFactory.RegisterCreator(new WriteableBitmapWrapperCreator());
         }
 
         #endregion

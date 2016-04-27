@@ -106,13 +106,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSJ2K\CSJ2K.Core.csproj">
-      <Project>{a790cc27-4086-4d2a-bf7b-c02337df4d21}</Project>
-      <Name>CSJ2K.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WPF.CSJ2K\CSJ2K.Desktop.csproj">
-      <Project>{68adb736-925c-4423-aa99-ebb14da0d2c9}</Project>
-      <Name>CSJ2K.Desktop</Name>
+    <ProjectReference Include="..\CSJ2K\CSJ2K.csproj">
+      <Project>{1ea0f9ba-0194-4f08-9e55-89888d5a4724}</Project>
+      <Name>CSJ2K</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

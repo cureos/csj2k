@@ -11,16 +11,18 @@ namespace CSJ2K.Util
 
         #endregion
 
+        #region CONSTRUCTORS
+
+        static BitmapWrapperFactory()
+        {
 #if DOTNET
-		#region CONSTRUCTORS
-
-		static BitmapWrapperFactory()
-		{
-			RegisterCreator(new WinformsBitmapWrapperCreator());
-		}
-
-		#endregion
+		    _creator = Setup.GetSinglePlatformInstance<IBitmapWrapperCreator>();
+#else
+            _creator = Setup.GetDefaultPlatformInstance<IBitmapWrapperCreator>();
 #endif
+        }
+
+        #endregion
 
         #region METHODS
 
