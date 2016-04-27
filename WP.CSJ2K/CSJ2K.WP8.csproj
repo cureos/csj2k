@@ -85,6 +85,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\CSJ2K\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\CSJ2K\Util\WriteableBitmapImage.cs">
       <Link>Util\WriteableBitmapImage.cs</Link>
     </Compile>

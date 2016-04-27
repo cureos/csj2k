@@ -40,6 +40,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CSJ2K\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\CSJ2K\Util\BitmapImage.cs">
       <Link>Util\BitmapImage.cs</Link>
     </Compile>

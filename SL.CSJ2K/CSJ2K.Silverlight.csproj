@@ -61,6 +61,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CSJ2K\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\CSJ2K\Util\DotnetFileInfo.cs">
       <Link>Util\DotnetFileInfo.cs</Link>
     </Compile>
