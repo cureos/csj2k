@@ -128,9 +128,8 @@
     <Compile Include="J2kImage.cs" />
     <Compile Include="Util\DotnetMsgLogger.cs" />
     <Compile Include="Util\IDefaultable.cs" />
-    <Compile Include="Util\WinformsBitmapWrapperCreator.cs" />
-    <Compile Include="Util\BitmapWrapperFactory.cs" />
-    <Compile Include="Util\WinformsBitmapWrapper.cs" />
+    <Compile Include="Util\BitmapImageCreator.cs" />
+    <Compile Include="Util\BitmapImage.cs" />
     <Compile Include="Util\DotnetFileStreamCreator.cs" />
     <Compile Include="Util\FileInfoFactory.cs" />
     <Compile Include="Util\EndianBinaryReader.cs" />
@@ -332,11 +331,12 @@
     <Compile Include="Util\DotnetFileInfoCreator.cs" />
     <Compile Include="Util\DotnetFileInfo.cs" />
     <Compile Include="Util\FileStreamFactory.cs" />
-    <Compile Include="Util\IBitmapWrapper.cs" />
-    <Compile Include="Util\IBitmapWrapperCreator.cs" />
+    <Compile Include="Util\IImage.cs" />
+    <Compile Include="Util\IImageCreator.cs" />
     <Compile Include="Util\IFileInfo.cs" />
     <Compile Include="Util\IFileInfoCreator.cs" />
     <Compile Include="Util\IFileStreamCreator.cs" />
+    <Compile Include="Util\ImageFactory.cs" />
     <Compile Include="Util\SupportClass.cs">
       <SubType>Code</SubType>
     </Compile>

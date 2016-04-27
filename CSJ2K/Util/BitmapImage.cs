@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 
 namespace CSJ2K.Util
 {
-	internal class WinformsBitmapWrapper : IBitmapWrapper
+	internal class BitmapImage : IImage
 	{
 		#region FIELDS
 
@@ -14,7 +14,7 @@ namespace CSJ2K.Util
 
 		#region CONSTRUCTORS
 
-		internal WinformsBitmapWrapper(int width, int height, int numberOfComponents)
+		internal BitmapImage(int width, int height, int numberOfComponents)
 		{
 			PixelFormat pixelFormat;
 			switch (numberOfComponents)

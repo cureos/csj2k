@@ -253,16 +253,16 @@
     <Compile Include="j2k\wavelet\WTDecompSpec.cs" />
     <Compile Include="j2k\wavelet\WTFilterSpec.cs" />
     <Compile Include="J2kSetup.cs" />
-    <Compile Include="Util\BitmapWrapperFactory.cs" />
+    <Compile Include="Util\ImageFactory.cs" />
     <Compile Include="Util\EndianBinaryReader.cs" />
     <Compile Include="Util\EndianBinaryWriter.cs" />
     <Compile Include="Util\FileInfoFactory.cs" />
     <Compile Include="Util\FileStreamFactory.cs" />
-    <Compile Include="Util\IBitmapWrapper.cs" />
-    <Compile Include="Util\IBitmapWrapperCreator.cs" />
+    <Compile Include="Util\IImage.cs" />
     <Compile Include="Util\IFileInfo.cs" />
     <Compile Include="Util\IFileInfoCreator.cs" />
     <Compile Include="Util\IFileStreamCreator.cs" />
+    <Compile Include="Util\IImageCreator.cs" />
     <Compile Include="Util\IMsgLogger.cs" />
     <Compile Include="Util\SupportClass.cs" />
   </ItemGroup>

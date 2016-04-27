@@ -17,7 +17,7 @@ namespace CSJ2K.Util
     using System.Windows.Media.Imaging;
 #endif
 
-    internal class WriteableBitmapWrapper : IBitmapWrapper
+    internal class WriteableBitmapImage : IImage
     {
         #region FIELDS
 
@@ -35,7 +35,7 @@ namespace CSJ2K.Util
 
         #region CONSTRUCTORS
 
-        internal WriteableBitmapWrapper(int width, int height, int numberOfComponents)
+        internal WriteableBitmapImage(int width, int height, int numberOfComponents)
         {
             _width = width;
             _height = height;

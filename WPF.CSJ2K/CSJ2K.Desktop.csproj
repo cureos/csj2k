@@ -40,6 +40,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CSJ2K\Util\BitmapImage.cs">
+      <Link>Util\BitmapImage.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\BitmapImageCreator.cs">
+      <Link>Util\BitmapImageCreator.cs</Link>
+    </Compile>
     <Compile Include="..\CSJ2K\Util\DotnetFileInfo.cs">
       <Link>Util\DotnetFileInfo.cs</Link>
     </Compile>
@@ -52,17 +58,11 @@
     <Compile Include="..\CSJ2K\Util\DotnetMsgLogger.cs">
       <Link>Util\DotnetMsgLogger.cs</Link>
     </Compile>
-    <Compile Include="..\CSJ2K\Util\WinformsBitmapWrapper.cs">
-      <Link>Util\WinformsBitmapWrapper.cs</Link>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapImage.cs">
+      <Link>Util\WriteableBitmapImage.cs</Link>
     </Compile>
-    <Compile Include="..\CSJ2K\Util\WinformsBitmapWrapperCreator.cs">
-      <Link>Util\WinformsBitmapWrapperCreator.cs</Link>
-    </Compile>
-    <Compile Include="..\CSJ2K\Util\WriteableBitmapWrapper.cs">
-      <Link>Util\WriteableBitmapWrapper.cs</Link>
-    </Compile>
-    <Compile Include="..\CSJ2K\Util\WriteableBitmapWrapperCreator.cs">
-      <Link>Util\WriteableBitmapWrapperCreator.cs</Link>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapImageCreator.cs">
+      <Link>Util\WriteableBitmapImageCreator.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

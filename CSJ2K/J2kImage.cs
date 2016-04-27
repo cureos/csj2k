@@ -210,7 +210,7 @@ namespace CSJ2K
             int bytesPerPixel = (numComps == 4 ? 4 : 3);
 
             // **** Copy to Bitmap ****
-            var dst = BitmapWrapperFactory.New(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps);
+            var dst = ImageFactory.New(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps);
 
             Coord numTiles = decodedImage.getNumTiles(null);
 

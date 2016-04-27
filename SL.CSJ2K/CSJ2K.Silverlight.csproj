@@ -73,11 +73,11 @@
     <Compile Include="..\CSJ2K\Util\SilverlightMsgLogger.cs">
       <Link>Util\SilverlightMsgLogger.cs</Link>
     </Compile>
-    <Compile Include="..\CSJ2K\Util\WriteableBitmapWrapper.cs">
-      <Link>Util\WriteableBitmapWrapper.cs</Link>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapImage.cs">
+      <Link>Util\WriteableBitmapImage.cs</Link>
     </Compile>
-    <Compile Include="..\CSJ2K\Util\WriteableBitmapWrapperCreator.cs">
-      <Link>Util\WriteableBitmapWrapperCreator.cs</Link>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapImageCreator.cs">
+      <Link>Util\WriteableBitmapImageCreator.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

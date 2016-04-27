@@ -3,7 +3,7 @@
 
 namespace CSJ2K.Util
 {
-    public class WinformsBitmapWrapperCreator : IBitmapWrapperCreator
+    public class BitmapImageCreator : IImageCreator
     {
         #region PROPERTIES
 
@@ -19,9 +19,9 @@ namespace CSJ2K.Util
 
         #region METHODS
 
-        public IBitmapWrapper Create(int width, int height, int numberOfComponents)
+        public IImage Create(int width, int height, int numberOfComponents)
         {
-            return new WinformsBitmapWrapper(width, height, numberOfComponents);
+            return new BitmapImage(width, height, numberOfComponents);
         }
 
         #endregion

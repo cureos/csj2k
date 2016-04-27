@@ -3,7 +3,7 @@
 
 namespace CSJ2K.Util
 {
-    public class WriteableBitmapWrapperCreator : IBitmapWrapperCreator
+    public class WriteableBitmapImageCreator : IImageCreator
     {
         #region PROPERTIES
 
@@ -22,9 +22,9 @@ namespace CSJ2K.Util
 
         #region METHODS
 
-        public IBitmapWrapper Create(int width, int height, int numberOfComponents)
+        public IImage Create(int width, int height, int numberOfComponents)
         {
-            return new WriteableBitmapWrapper(width, height, numberOfComponents);
+            return new WriteableBitmapImage(width, height, numberOfComponents);
         }
 
         #endregion
