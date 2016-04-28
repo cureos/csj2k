@@ -86,6 +86,9 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <EmbeddedResource Include="..\codectest\file2.jp2">
+      <Link>Files\file2.jp2</Link>
+    </EmbeddedResource>
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -27,20 +27,20 @@
         <file src="..\CSJ2K\bin\Release\CSJ2K.pdb" target="lib\net35-client" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.dll" target="lib\net40-client" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.pdb" target="lib\net40-client" />
-        <file src="..\WPF.CSJ2K\bin\Release\CSJ2K.Platform.dll" target="lib\net40-client" />
-        <file src="..\WPF.CSJ2K\bin\Release\CSJ2K.Platform.pdb" target="lib\net40-client" />
+        <file src="..\CSJ2K.Desktop\bin\Release\CSJ2K.Platform.dll" target="lib\net40-client" />
+        <file src="..\CSJ2K.Desktop\bin\Release\CSJ2K.Platform.pdb" target="lib\net40-client" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.dll" target="lib\portable-netcore451+wpa81" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.pdb" target="lib\portable-netcore451+wpa81" />
-        <file src="..\Store.CSJ2K\bin\Release\CSJ2K.Platform.dll" target="lib\portable-netcore451+wpa81" />
-        <file src="..\Store.CSJ2K\bin\Release\CSJ2K.Platform.pdb" target="lib\portable-netcore451+wpa81" />
+        <file src="..\CSJ2K.81\bin\Release\CSJ2K.Platform.dll" target="lib\portable-netcore451+wpa81" />
+        <file src="..\CSJ2K.81\bin\Release\CSJ2K.Platform.pdb" target="lib\portable-netcore451+wpa81" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.dll" target="lib\sl50" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.pdb" target="lib\sl50" />
-        <file src="..\SL.CSJ2K\Bin\Release\CSJ2K.Platform.dll" target="lib\sl50" />
-        <file src="..\SL.CSJ2K\Bin\Release\CSJ2K.Platform.pdb" target="lib\sl50" />
+        <file src="..\CSJ2K.Silverlight\Bin\Release\CSJ2K.Platform.dll" target="lib\sl50" />
+        <file src="..\CSJ2K.Silverlight\Bin\Release\CSJ2K.Platform.pdb" target="lib\sl50" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.dll" target="lib\wp8" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.pdb" target="lib\wp8" />
-        <file src="..\WP.CSJ2K\bin\Release\CSJ2K.Platform.dll" target="lib\wp8" />
-        <file src="..\WP.CSJ2K\bin\Release\CSJ2K.Platform.pdb" target="lib\wp8" />
+        <file src="..\CSJ2K.WP8\bin\Release\CSJ2K.Platform.dll" target="lib\wp8" />
+        <file src="..\CSJ2K.WP8\bin\Release\CSJ2K.Platform.pdb" target="lib\wp8" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.dll" target="lib\MonoAndroid1" />
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.pdb" target="lib\MonoAndroid1" />
         <file src="..\CSJ2K.Android\bin\Release\CSJ2K.Platform.dll" target="lib\MonoAndroid1" />

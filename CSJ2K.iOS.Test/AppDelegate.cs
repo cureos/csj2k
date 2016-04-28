@@ -1,4 +1,7 @@
-﻿using Foundation;
+﻿// Copyright (c) 2007-2016 CSJ2K contributors.
+// Licensed under the BSD 3-Clause License.
+
+using Foundation;
 using UIKit;
 
 namespace CSJ2K.iOS.Test
