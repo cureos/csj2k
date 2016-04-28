@@ -5,7 +5,26 @@ namespace CSJ2K.Util
 {
     public class StoreFileInfoCreator : IFileInfoCreator
     {
+        #region FIELDS
+
+        private static readonly IFileInfoCreator Instance = new StoreFileInfoCreator();
+
+        #endregion
+
+        #region CONSTRUCTORS
+
+        private StoreFileInfoCreator()
+        {            
+        }
+
+        #endregion
+
         #region METHODS
+
+        public static void Register()
+        {
+            FileInfoFactory.Register(Instance);
+        }
 
         public IFileInfo Create(string name)
         {
