@@ -10,6 +10,11 @@ namespace CSJ2K.Util
     {
         #region METHODS
 
+        public static void Register()
+        {
+            FileStreamFactory.Register(new DotnetFileStreamCreator());
+        }
+
         public Stream Create(string path, string mode)
         {
             if (mode.Equals("rw", StringComparison.OrdinalIgnoreCase)) return new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);

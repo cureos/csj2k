@@ -24,6 +24,11 @@ namespace CSJ2K.Util
 
         #region METHODS
 
+        public static void Register(IFileInfoCreator creator)
+        {
+            _creator = creator;
+        }
+
         internal static IFileInfo New(string fileName)
         {
             if (_creator == null) throw new InvalidOperationException("No file info creator is registered.");

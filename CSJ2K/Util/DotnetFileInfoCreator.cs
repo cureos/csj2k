@@ -5,8 +5,12 @@ namespace CSJ2K.Util
 {
     public class DotnetFileInfoCreator : IFileInfoCreator
     {
-
         #region METHODS
+
+        public static void Register()
+        {
+            FileInfoFactory.Register(new DotnetFileInfoCreator());
+        }
 
         public IFileInfo Create(string fileName)
         {

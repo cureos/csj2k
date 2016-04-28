@@ -17,5 +17,14 @@ namespace CSJ2K.Util
         }
 
         #endregion
+
+        #region METHODS
+
+        public static void Register()
+        {
+            FacilityManager.DefaultMsgLogger = new DotnetMsgLogger();
+        }
+
+        #endregion
     }
 }

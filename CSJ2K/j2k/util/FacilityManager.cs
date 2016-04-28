@@ -80,7 +80,6 @@ namespace CSJ2K.j2k.util
         {
             set
             {
-                if (_defMsgLogger != null) throw new InvalidOperationException("Default message logger can only be registered once.");
                 _defMsgLogger = value;
             }
         }

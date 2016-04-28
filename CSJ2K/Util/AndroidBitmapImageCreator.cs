@@ -22,6 +22,11 @@ namespace CSJ2K.Util
 
         #region METHODS
 
+        public void Register()
+        {
+            ImageFactory.Register(new AndroidBitmapImageCreator());
+        }
+
         public IImage Create(int width, int height, int numberOfComponents)
         {
             return new AndroidBitmapImage(width, height, numberOfComponents);

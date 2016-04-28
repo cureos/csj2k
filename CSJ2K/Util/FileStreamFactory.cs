@@ -25,6 +25,11 @@ namespace CSJ2K.Util
 
         #region METHODS
 
+        public static void Register(IFileStreamCreator creator)
+        {
+            _creator = creator;
+        }
+
         internal static Stream New(string path, string mode)
         {
             if (_creator == null) throw new InvalidOperationException("No file stream creator is registered.");
