@@ -339,6 +339,7 @@
     <Compile Include="Util\IFileInfo.cs" />
     <Compile Include="Util\IFileInfoCreator.cs" />
     <Compile Include="Util\IFileStreamCreator.cs" />
+    <Compile Include="Util\ImageBase.cs" />
     <Compile Include="Util\ImageFactory.cs" />
     <Compile Include="Util\SupportClass.cs">
       <SubType>Code</SubType>
