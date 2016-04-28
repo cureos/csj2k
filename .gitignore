@@ -1,5 +1,6 @@
 *.user
 *.suo
-bin/
-obj/
-packages/
+*.userprefs
+[Bb]in/
+[Oo]bj/
+[Pp]ackages/

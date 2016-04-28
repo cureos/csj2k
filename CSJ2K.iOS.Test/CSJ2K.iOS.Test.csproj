@@ -106,5 +106,17 @@
   <ItemGroup>
     <Content Include="Entitlements.plist" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSJ2K.iOS\CSJ2K.iOS.csproj">
+      <Project>{e242ff7a-8560-40bb-9786-198f0d701c2a}</Project>
+      <Name>CSJ2K.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
+    <ProjectReference Include="..\CSJ2K\CSJ2K.Core.csproj">
+      <Project>{a790cc27-4086-4d2a-bf7b-c02337df4d21}</Project>
+      <Name>CSJ2K.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
