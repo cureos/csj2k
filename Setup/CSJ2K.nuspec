@@ -45,5 +45,9 @@
         <file src="..\CSJ2K\bin\Release\CSJ2K.Core.pdb" target="lib\MonoAndroid1" />
         <file src="..\CSJ2K.Android\bin\Release\CSJ2K.Platform.dll" target="lib\MonoAndroid1" />
         <file src="..\CSJ2K.Android\bin\Release\CSJ2K.Platform.pdb" target="lib\MonoAndroid1" />
+        <file src="..\CSJ2K\bin\Release\CSJ2K.Core.dll" target="lib\Xamarin.iOS10" />
+        <file src="..\CSJ2K\bin\Release\CSJ2K.Core.pdb" target="lib\Xamarin.iOS10" />
+        <file src="..\CSJ2K.iOS\bin\Release\CSJ2K.Platform.dll" target="lib\Xamarin.iOS10" />
+        <file src="..\CSJ2K.iOS\bin\Release\CSJ2K.Platform.pdb" target="lib\Xamarin.iOS10" />
     </files>
 </package>

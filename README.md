@@ -4,7 +4,8 @@ Copyright (c) 1999-2000 JJ2000 Partners; original C# port (c) 2007-2012 Jason S.
 
 Licensed and distributable under the terms of the [BSD license](http://www.opensource.org/licenses/bsd-license.php)
 
-**NOTE! The following information applies to the upcoming version 2.0 of CSJ2K. Please consult earlier commits for details about 0.9.x versions of CSJ2K.**
+**NOTE! The following information applies to the upcoming version 2.0 of CSJ2K. Please consult commit associated with release [0.9.1](https://github.com/cureos/csj2k/releases/tag/v.0.9.1) for details about 
+0.9.x versions of CSJ2K.**
 
 ## Summary
 
@@ -23,7 +24,7 @@ The code is still applicable to .NET 3.5 and later as well; a .NET 3.5 dedicated
 Along with the *CSJ2K* Portable Class Library there are also platform specific complementary libraries for bitmap processing and file handling. In particular, the .NET Framework complementary library implements bitmap processing
 for `WriteableBitmap`, thus facilitating JPEG 2000 decoding in WPF based applications.
 
-Included are very basic Universal Windows 8.1, WPF, Windows Phone 8 Silverlight, Silverlight 5 and Xamarin Android test applications for reading and displaying JPEG 2000 files.
+Included are very basic Universal Windows 8.1, WPF, Windows Phone 8 Silverlight, Silverlight 5, Xamarin Android and Xamarin iOS test applications for reading and displaying JPEG 2000 files.
 
 ## Installation
 
@@ -31,7 +32,7 @@ Apart from building the relevant class libraries from source, pre-built packages
 
 ## Usage
 
-The Portable Class Library provides interfaces for bitmap rendering, file I/O and logging.
+The Portable Class Library provides interfaces for image rendering, file I/O and logging.
 
 On .NET, both `System.Drawing.Bitmap` and `WriteableBitmap` images can be managed, but not simultaneously. By default, `WriteableBitmap` is managed. To work with `Bitmap` images instead, register the corresponding image creator:
 
@@ -56,7 +57,7 @@ public class J2kImage
 }
 ```
 
-`J2kImage.FromFile(string)` is not sufficiently implemented for Silverlight and Windows Phone. Regardless of platform, `J2kImage.FromStream(Stream)` is the recommended method when applicable.
+`J2kImage.FromFile(string)` is not sufficiently implemented for Silverlight and Windows Phone.
 
 The returned `IImage` offers a "cast" method `As<T>()` to obtain an image in the type relevant for the platform. When using the `BitmapImageCreator` on .NET, a cast to `Bitmap` would suffice:
 
@@ -69,6 +70,12 @@ On platforms implementing `WriteableBitmap`, use:
 On Android, use:
 
     var bitmap = decodedImage.As<Android.Graphics.Bitmap>();
+
+On iOS, depending on context, use:
+
+    var image = decodedImage.As<CGImage>();
+    var image = decodedImage.As<CIImage>();
+    var image = decodedImage.As<UIImage>();
 
 ### Encoding
 
