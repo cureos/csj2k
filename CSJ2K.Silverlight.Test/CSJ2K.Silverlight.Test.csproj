@@ -96,7 +96,7 @@
       <Project>{a790cc27-4086-4d2a-bf7b-c02337df4d21}</Project>
       <Name>CSJ2K.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SL.CSJ2K\CSJ2K.Silverlight.csproj">
+    <ProjectReference Include="..\CSJ2K.Silverlight\CSJ2K.Silverlight.csproj">
       <Project>{8f724ff1-1a1d-4521-b379-bf2348022def}</Project>
       <Name>CSJ2K.Silverlight</Name>
     </ProjectReference>

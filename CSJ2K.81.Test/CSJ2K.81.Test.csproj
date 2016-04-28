@@ -108,7 +108,7 @@
       <Project>{a790cc27-4086-4d2a-bf7b-c02337df4d21}</Project>
       <Name>CSJ2K.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Store.CSJ2K\CSJ2K.81.csproj">
+    <ProjectReference Include="..\CSJ2K.81\CSJ2K.81.csproj">
       <Project>{5a0b7bdc-d0fd-4f25-a473-4ae14604d3dd}</Project>
       <Name>CSJ2K.81</Name>
     </ProjectReference>
