@@ -7,15 +7,16 @@ namespace CSJ2K.Util
 
     public abstract class ImageBase<TBase> : IImage
     {
-		#region INNER TYPES
+        #region INNER TYPES
 
-		protected enum ByteOrder
-		{
-			BGRA,
-			RGBA
-		}
+        protected enum ByteOrder
+        {
+            BGRA,
 
-		#endregion
+            RGBA
+        }
+
+        #endregion
 
         #region FIELDS
 
@@ -43,11 +44,17 @@ namespace CSJ2K.Util
 
         #endregion
 
-		#region PROPERTIES
+        #region PROPERTIES
 
-		protected virtual ByteOrder Order { get { return ByteOrder.BGRA; } }
+        protected virtual ByteOrder Order
+        {
+            get
+            {
+                return ByteOrder.BGRA;
+            }
+        }
 
-		#endregion
+        #endregion
 
         #region METHODS
 
@@ -69,17 +76,17 @@ namespace CSJ2K.Util
         {
             switch (this.NumberOfComponents)
             {
-				case 1:
-				case 3:
-					if (this.Order == ByteOrder.RGBA)
-					{
-						for (var k = 0; k < rowValues.Length; k += 3)
-						{
-							var temp = rowValues[k + 2];
-							rowValues[k + 2] = rowValues[k];
-							rowValues[k] = temp;
-						}
-					}
+                case 1:
+                case 3:
+                    if (this.Order == ByteOrder.RGBA)
+                    {
+                        for (var k = 0; k < rowValues.Length; k += 3)
+                        {
+                            var temp = rowValues[k + 2];
+                            rowValues[k + 2] = rowValues[k];
+                            rowValues[k] = temp;
+                        }
+                    }
                     var i = SizeOfArgb * (rowIndex + lineIndex * rowWidth);
                     var j = 0;
                     for (var k = 0; k < rowWidth; ++k)
@@ -91,15 +98,15 @@ namespace CSJ2K.Util
                     }
                     break;
                 case 4:
-					if (this.Order == ByteOrder.RGBA)
-					{
-						for (var k = 0; k < rowValues.Length; k += 3)
-						{
-							var temp = rowValues[k + 2];
-							rowValues[k + 2] = rowValues[k];
-							rowValues[k] = temp;
-						}
-					}
+                    if (this.Order == ByteOrder.RGBA)
+                    {
+                        for (var k = 0; k < rowValues.Length; k += 3)
+                        {
+                            var temp = rowValues[k + 2];
+                            rowValues[k + 2] = rowValues[k];
+                            rowValues[k] = temp;
+                        }
+                    }
                     Array.Copy(
                         rowValues,
                         0,

@@ -3,9 +3,8 @@
 
 namespace CSJ2K.Util
 {
-    using System.Runtime.InteropServices;
-
     using CoreGraphics;
+
     using CoreImage;
 
     using UIKit;
@@ -21,11 +20,17 @@ namespace CSJ2K.Util
 
         #endregion
 
-		#region PROPERTIES
+        #region PROPERTIES
 
-		protected override ByteOrder Order { get { return ByteOrder.RGBA; } }
+        protected override ByteOrder Order
+        {
+            get
+            {
+                return ByteOrder.RGBA;
+            }
+        }
 
-		#endregion
+        #endregion
 
         #region METHODS
 
@@ -46,15 +51,15 @@ namespace CSJ2K.Util
 
         protected override object GetImageObject()
         {
-			using (
+            using (
                 var context = new CGBitmapContext(
-					this.Bytes,
+                    this.Bytes,
                     this.Width,
                     this.Height,
                     8,
-					SizeOfArgb * this.Width,
-					CGColorSpace.CreateDeviceRGB(),
-					CGImageAlphaInfo.PremultipliedLast))
+                    SizeOfArgb * this.Width,
+                    CGColorSpace.CreateDeviceRGB(),
+                    CGImageAlphaInfo.PremultipliedLast))
             {
                 return context.ToImage();
             }
