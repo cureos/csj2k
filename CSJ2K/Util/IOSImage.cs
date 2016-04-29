@@ -21,6 +21,12 @@ namespace CSJ2K.Util
 
         #endregion
 
+		#region PROPERTIES
+
+		protected override ByteOrder Order { get { return ByteOrder.RGBA; } }
+
+		#endregion
+
         #region METHODS
 
         public override T As<T>()
@@ -40,21 +46,17 @@ namespace CSJ2K.Util
 
         protected override object GetImageObject()
         {
-            var handle = GCHandle.Alloc(this.Bytes, GCHandleType.Pinned);
-
-            using (
+			using (
                 var context = new CGBitmapContext(
-                    handle.AddrOfPinnedObject(),
+					this.Bytes,
                     this.Width,
                     this.Height,
                     8,
-                    this.NumberOfComponents * this.Width,
-                    CGColorSpace.CreateDeviceRGB(),
-                    CGImageAlphaInfo.PremultipliedLast))
+					SizeOfArgb * this.Width,
+					CGColorSpace.CreateDeviceRGB(),
+					CGImageAlphaInfo.PremultipliedLast))
             {
-                var image = context.ToImage();
-                handle.Free();
-                return image;
+                return context.ToImage();
             }
         }
 

@@ -27,7 +27,7 @@ namespace CSJ2K.iOS.Test
             using (var stream = typeof(ViewController).Assembly.GetManifestResourceStream("CSJ2K.iOS.Test.Files.file2.jp2"))
             {
                 var uiImage = J2kImage.FromStream(stream).As<UIImage>();
-                var imageView = new UIImageView(new CGRect(0, 0, 600, 600)) { Image = uiImage };
+                var imageView = new UIImageView(new CGRect(0, 0, 360, 480)) { Image = uiImage };
                 this.View.Add(imageView);
             }
         }

@@ -7,6 +7,16 @@ namespace CSJ2K.Util
 
     public abstract class ImageBase<TBase> : IImage
     {
+		#region INNER TYPES
+
+		protected enum ByteOrder
+		{
+			BGRA,
+			RGBA
+		}
+
+		#endregion
+
         #region FIELDS
 
         protected const int SizeOfArgb = 4;
@@ -33,6 +43,12 @@ namespace CSJ2K.Util
 
         #endregion
 
+		#region PROPERTIES
+
+		protected virtual ByteOrder Order { get { return ByteOrder.BGRA; } }
+
+		#endregion
+
         #region METHODS
 
         public virtual T As<T>()
@@ -49,12 +65,21 @@ namespace CSJ2K.Util
             return (T)this.GetImageObject();
         }
 
-        public void FillRow(int rowIndex, int lineIndex, int rowWidth, byte[] rowValues)
+        public virtual void FillRow(int rowIndex, int lineIndex, int rowWidth, byte[] rowValues)
         {
             switch (this.NumberOfComponents)
             {
-                case 1:
-                case 3:
+				case 1:
+				case 3:
+					if (this.Order == ByteOrder.RGBA)
+					{
+						for (var k = 0; k < rowValues.Length; k += 3)
+						{
+							var temp = rowValues[k + 2];
+							rowValues[k + 2] = rowValues[k];
+							rowValues[k] = temp;
+						}
+					}
                     var i = SizeOfArgb * (rowIndex + lineIndex * rowWidth);
                     var j = 0;
                     for (var k = 0; k < rowWidth; ++k)
@@ -66,6 +91,15 @@ namespace CSJ2K.Util
                     }
                     break;
                 case 4:
+					if (this.Order == ByteOrder.RGBA)
+					{
+						for (var k = 0; k < rowValues.Length; k += 3)
+						{
+							var temp = rowValues[k + 2];
+							rowValues[k + 2] = rowValues[k];
+							rowValues[k] = temp;
+						}
+					}
                     Array.Copy(
                         rowValues,
                         0,
