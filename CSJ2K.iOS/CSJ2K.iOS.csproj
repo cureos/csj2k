@@ -61,6 +61,7 @@
     <Compile Include="..\CSJ2K\Util\IOSImageCreator.cs">
       <Link>Util\IOSImageCreator.cs</Link>
     </Compile>
+    <Compile Include="IOSSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

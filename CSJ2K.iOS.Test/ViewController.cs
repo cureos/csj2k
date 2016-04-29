@@ -22,10 +22,7 @@ namespace CSJ2K.iOS.Test
             base.ViewDidLoad();
 
             // Perform any additional setup after loading the view, typically from a nib.
-            DotnetFileInfoCreator.Register();
-            DotnetFileStreamCreator.Register();
-            DotnetMsgLogger.Register();
-            IOSImageCreator.Register();
+            IOSSetup.RegisterCretors();
 
             using (var stream = typeof(ViewController).Assembly.GetManifestResourceStream("CSJ2K.iOS.Test.Files.file2.jp2"))
             {
