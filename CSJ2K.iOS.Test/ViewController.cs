@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2007-2016 CSJ2K contributors.
 // Licensed under the BSD 3-Clause License.
 
-using CSJ2K.Util;
-
 namespace CSJ2K.iOS.Test
 {
     using System;
