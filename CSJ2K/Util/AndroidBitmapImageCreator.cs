@@ -5,6 +5,12 @@ namespace CSJ2K.Util
 {
     public class AndroidBitmapImageCreator : IImageCreator
     {
+        #region FIELDS
+
+        private static readonly IImageCreator Instance = new AndroidBitmapImageCreator();
+
+        #endregion
+
         #region PROPERTIES
 
         /// <summary>
@@ -22,9 +28,9 @@ namespace CSJ2K.Util
 
         #region METHODS
 
-        public void Register()
+        public static void Register()
         {
-            ImageFactory.Register(new AndroidBitmapImageCreator());
+            ImageFactory.Register(Instance);
         }
 
         public IImage Create(int width, int height, int numberOfComponents)

@@ -5,6 +5,12 @@ namespace CSJ2K.Util
 {
     public class WriteableBitmapImageCreator : IImageCreator
     {
+        #region FIELDS
+
+        private static readonly IImageCreator Instance = new WriteableBitmapImageCreator();
+
+        #endregion
+
         #region PROPERTIES
 
         /// <summary>
@@ -24,7 +30,7 @@ namespace CSJ2K.Util
 
         public static void Register()
         {
-            ImageFactory.Register(new WriteableBitmapImageCreator());
+            ImageFactory.Register(Instance);
         }
 
         public IImage Create(int width, int height, int numberOfComponents)

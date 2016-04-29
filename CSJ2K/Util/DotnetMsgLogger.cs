@@ -9,6 +9,12 @@ namespace CSJ2K.Util
 
     public class DotnetMsgLogger : StreamMsgLogger
     {
+        #region FIELDS
+
+        private static readonly IMsgLogger Instance = new DotnetMsgLogger();
+
+        #endregion
+
         #region CONSTRUCTORS
 
         public DotnetMsgLogger()
@@ -22,7 +28,7 @@ namespace CSJ2K.Util
 
         public static void Register()
         {
-            FacilityManager.DefaultMsgLogger = new DotnetMsgLogger();
+            FacilityManager.DefaultMsgLogger = Instance;
         }
 
         #endregion

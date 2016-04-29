@@ -10,6 +10,12 @@ namespace CSJ2K.Util
 
     public class SilverlightMsgLogger : StreamMsgLogger
     {
+        #region FIELDS
+
+        private static readonly IMsgLogger Instance = new SilverlightMsgLogger();
+
+        #endregion
+
         #region CONSTRUCTORS
 
         public SilverlightMsgLogger()
@@ -20,6 +26,11 @@ namespace CSJ2K.Util
         #endregion
 
         #region METHODS
+
+        public static void Register()
+        {
+            FacilityManager.DefaultMsgLogger = Instance;
+        }
 
         private static Stream GetIsolatedFileStream(string fileName)
         {

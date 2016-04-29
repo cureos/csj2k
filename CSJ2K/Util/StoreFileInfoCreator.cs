@@ -11,14 +11,6 @@ namespace CSJ2K.Util
 
         #endregion
 
-        #region CONSTRUCTORS
-
-        private StoreFileInfoCreator()
-        {            
-        }
-
-        #endregion
-
         #region METHODS
 
         public static void Register()

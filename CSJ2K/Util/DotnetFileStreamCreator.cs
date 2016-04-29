@@ -8,11 +8,17 @@ namespace CSJ2K.Util
 
     public class DotnetFileStreamCreator : IFileStreamCreator
     {
+        #region FIELDS
+
+        private static readonly IFileStreamCreator Instance = new DotnetFileStreamCreator();
+
+        #endregion
+
         #region METHODS
 
         public static void Register()
         {
-            FileStreamFactory.Register(new DotnetFileStreamCreator());
+            FileStreamFactory.Register(Instance);
         }
 
         public Stream Create(string path, string mode)

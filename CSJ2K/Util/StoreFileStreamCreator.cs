@@ -7,7 +7,18 @@ namespace CSJ2K.Util
 
     public class StoreFileStreamCreator : IFileStreamCreator
     {
+        #region FIELDS
+
+        private static readonly IFileStreamCreator Instance = new StoreFileStreamCreator();
+
+        #endregion
+
         #region METHODS
+
+        public static void Register()
+        {
+            FileStreamFactory.Register(Instance);
+        }
 
         public Stream Create(string path, string mode)
         {

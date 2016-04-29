@@ -8,7 +8,18 @@ namespace CSJ2K.Util
 
     public class SilverlightFileStreamCreator : IFileStreamCreator
     {
+        #region FIELDS
+
+        private static readonly IFileStreamCreator Instance = new SilverlightFileStreamCreator();
+
+        #endregion
+
         #region METHODS
+
+        public static void Register()
+        {
+            FileStreamFactory.Register(Instance);
+        }
 
         public Stream Create(string path, string mode)
         {

@@ -12,6 +12,12 @@ namespace CSJ2K.Util
 
     public class StoreMsgLogger : StreamMsgLogger
     {
+        #region FIELDS
+
+        private static readonly IMsgLogger Instance = new StoreMsgLogger();
+
+        #endregion
+
         #region CONSTRUCTORS
 
         public StoreMsgLogger()
@@ -22,6 +28,11 @@ namespace CSJ2K.Util
         #endregion
 
         #region METHODS
+
+        public static void Register()
+        {
+            FacilityManager.DefaultMsgLogger = Instance;
+        }
 
         private static Stream GetLogFile(string fileName)
         {
