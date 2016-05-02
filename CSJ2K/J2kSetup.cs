@@ -72,7 +72,8 @@ namespace CSJ2K
             }
             catch (Exception)
             {
-                return default(T);
+                // Try fallback assembly; primarily intended for Mono where default platform WPF not available. 
+                return GetSinglePlatformInstance<T>();
             }
         }
 
