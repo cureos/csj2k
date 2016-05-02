@@ -3,68 +3,36 @@
 
 namespace CSJ2K.Util
 {
-    using System;
     using System.Drawing;
     using System.Drawing.Imaging;
 
-    internal class BitmapImage : IImage
+    internal class BitmapImage : ImageBase<Image>
     {
-        #region FIELDS
-
-        private readonly Bitmap _bitmap;
-
-        #endregion
-
         #region CONSTRUCTORS
 
         internal BitmapImage(int width, int height, int numberOfComponents)
+            : base(width, height, numberOfComponents)
         {
-            PixelFormat pixelFormat;
-            switch (numberOfComponents)
-            {
-                case 1:
-                case 3:
-                    pixelFormat = PixelFormat.Format24bppRgb;
-                    break;
-                case 4:
-                    pixelFormat = PixelFormat.Format32bppArgb;
-                    break;
-                default:
-                    throw new InvalidOperationException(
-                        "Unsupported PixelFormat.  " + numberOfComponents + " components.");
-            }
-
-            _bitmap = new Bitmap(width, height, pixelFormat);
         }
 
         #endregion
 
         #region METHODS
 
-        public T As<T>()
-        {   
-            if (!typeof(Image).IsAssignableFrom(typeof(T)))
-            {
-                throw new InvalidCastException(
-                    string.Format(
-                        "Cannot cast to '{0}'; type must be assignable from '{1}'",
-                        typeof(T).Name,
-                        typeof(Image).Name));
-            }
-
-            return (T)(object)_bitmap;
-        }
-
-        public void FillRow(int rowIndex, int lineIndex, int rowWidth, byte[] rowValues)
+        protected override object GetImageObject()
         {
-            var dstdata = _bitmap.LockBits(
-                new Rectangle(rowIndex, lineIndex, rowWidth, 1),
+            var bitmap = new Bitmap(this.Width, this.Height, PixelFormat.Format32bppArgb);
+
+            var dstdata = bitmap.LockBits(
+                new Rectangle(0, 0, this.Width, this.Height),
                 ImageLockMode.ReadWrite,
-                _bitmap.PixelFormat);
+                bitmap.PixelFormat);
 
             var ptr = dstdata.Scan0;
-            System.Runtime.InteropServices.Marshal.Copy(rowValues, 0, ptr, rowValues.Length);
-            _bitmap.UnlockBits(dstdata);
+            System.Runtime.InteropServices.Marshal.Copy(this.Bytes, 0, ptr, this.Bytes.Length);
+            bitmap.UnlockBits(dstdata);
+
+            return bitmap;
         }
 
         #endregion
