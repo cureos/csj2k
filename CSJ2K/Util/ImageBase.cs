@@ -11,14 +11,6 @@ namespace CSJ2K.Util
 
         protected const int SizeOfArgb = 4;
 
-        protected readonly int Width;
-
-        protected readonly int Height;
-
-        protected readonly int NumberOfComponents;
-
-        protected readonly byte[] Bytes;
-
         #endregion
 
         #region CONSTRUCTORS
@@ -30,6 +22,18 @@ namespace CSJ2K.Util
             this.NumberOfComponents = numberOfComponents;
             this.Bytes = new byte[SizeOfArgb * width * height];
         }
+
+        #endregion
+
+        #region PROPERTIES
+
+        public int Width { get; }
+
+        public int Height { get; }
+
+        public int NumberOfComponents { get; }
+
+        public byte[] Bytes { get; }
 
         #endregion
 
@@ -77,6 +81,24 @@ namespace CSJ2K.Util
                 default:
                     throw new InvalidOperationException("Number of components must be one of 1, 3 or 4.");
             }
+        }
+
+        public byte[] GetComponent(int number)
+        {
+            if (number < 0 || number >= this.NumberOfComponents)
+            {
+                throw new ArgumentOutOfRangeException("number");
+            }
+
+            var length = this.Bytes.Length;
+            var component = new byte[length >> 2];
+
+            for (int i = number, k = 0; i < length; i += 4, ++k)
+            {
+                component[k] = this.Bytes[i];
+            }
+
+            return component;
         }
 
         protected abstract object GetImageObject();
