@@ -20,18 +20,6 @@ namespace CSJ2K.Util
 
         #endregion
 
-        #region PROPERTIES
-
-        protected override ByteOrder Order
-        {
-            get
-            {
-                return ByteOrder.RGBA;
-            }
-        }
-
-        #endregion
-
         #region METHODS
 
         public override T As<T>()
@@ -51,9 +39,21 @@ namespace CSJ2K.Util
 
         protected override object GetImageObject()
         {
+            var length = this.Bytes.Length;
+            var bytes = new byte[length];
+
+            // Switch byte representation from BGRA to RGBA
+            for (var k = 0; k < length; k += 4)
+            {
+                bytes[k] = this.Bytes[k + 2];
+                bytes[k + 1] = this.Bytes[k + 1];
+                bytes[k + 2] = this.Bytes[k];
+                bytes[k + 3] = this.Bytes[k + 3];
+            }
+
             using (
                 var context = new CGBitmapContext(
-                    this.Bytes,
+                    bytes,
                     this.Width,
                     this.Height,
                     8,
