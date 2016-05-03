@@ -66,14 +66,12 @@ namespace CSJ2K
                 var types =
                     assemblies.SelectMany(assembly => assembly.GetTypes())
                         .Where(t => (t.IsSubclassOf(typeof(T)) || typeof(T).IsAssignableFrom(t)) && !t.IsAbstract);
-                var instance = types.Select(t => (T)Activator.CreateInstance(t)).Single(obj => obj.IsDefault);
 
-                return instance;
+                return GetDefaultOrSingleInstance<T>(types);
             }
             catch (Exception)
             {
-                // Try fallback assembly; primarily intended for Mono where default platform WPF not available. 
-                return GetSinglePlatformInstance<T>();
+                return default(T);
             }
         }
 
@@ -91,6 +89,24 @@ namespace CSJ2K
                             return null;
                         }
                     }).Where(assembly => assembly != null);
+        }
+
+        private static T GetDefaultOrSingleInstance<T>(IEnumerable<Type> types) where T : IDefaultable
+        {
+            var instances = types.Select(
+                t =>
+                    {
+                        try
+                        {
+                            return (T)Activator.CreateInstance(t);
+                        }
+                        catch
+                        {
+                            return default(T);
+                        }
+                    }).ToList();
+
+            return instances.Count > 1 ? instances.Single(instance => instance.IsDefault) : instances.SingleOrDefault();
         }
     }
 }
