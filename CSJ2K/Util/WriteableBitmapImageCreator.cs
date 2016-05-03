@@ -3,17 +3,19 @@
 
 namespace CSJ2K.Util
 {
+    using System;
+
     using CSJ2K.j2k.image;
 
     public class WriteableBitmapImageCreator : IImageCreator
     {
-        #region FIELDS
+#region FIELDS
 
         private static readonly IImageCreator Instance = new WriteableBitmapImageCreator();
 
-        #endregion
+#endregion
 
-        #region PROPERTIES
+#region PROPERTIES
 
         /// <summary>
         /// Gets whether or not this type is classified as a default manager.
@@ -26,9 +28,9 @@ namespace CSJ2K.Util
             }
         }
 
-        #endregion
+#endregion
 
-        #region METHODS
+#region METHODS
 
         public static void Register()
         {
@@ -42,9 +44,10 @@ namespace CSJ2K.Util
 
         public BlkImgDataSrc CreateEncodableSource(object imageObject)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
+            //return WriteableBitmapImageReader.Create(imageObject);
         }
 
-        #endregion
+#endregion
     }
 }

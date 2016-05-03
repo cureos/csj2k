@@ -74,6 +74,9 @@
     <Compile Include="..\CSJ2K\Util\WriteableBitmapImageCreator.cs">
       <Link>Util\WriteableBitmapImageCreator.cs</Link>
     </Compile>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapImageReader.cs">
+      <Link>Util\WriteableBitmapImageReader.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

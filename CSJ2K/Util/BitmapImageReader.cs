@@ -22,7 +22,7 @@ namespace CSJ2K.Util
 
         #region CONSTRUCTORS
 
-        internal BitmapImageReader(Bitmap bitmap)
+        private BitmapImageReader(Bitmap bitmap)
         {
             this.bitmap = bitmap;
             this.w = bitmap.Width;
@@ -99,6 +99,12 @@ namespace CSJ2K.Util
             }
 
             return this.rb;
+        }
+
+        internal static ImgReader Create(object imageObject)
+        {
+            var bitmap = imageObject as Bitmap;
+            return bitmap == null ? null : new BitmapImageReader(bitmap);
         }
 
         private static int GetNumberOfComponents(PixelFormat pixelFormat)
