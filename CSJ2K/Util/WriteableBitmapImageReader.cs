@@ -18,6 +18,16 @@ namespace CSJ2K.Util
 
         private readonly int rb;
 
+        private readonly int redIdx;
+
+        private readonly int greenIdx;
+
+        private readonly int blueIdx;
+
+        private readonly int pixelSize;
+
+        private readonly bool isPremultiplied;
+
         #endregion
 
         #region CONSTRUCTORS
@@ -29,6 +39,8 @@ namespace CSJ2K.Util
             this.h = wbm.PixelHeight;
             this.nc = GetNumberOfComponents(wbm.Format);
             this.rb = GetRangeBits(wbm.Format);
+
+            this.DefineHelpers(wbm.Format);
         }
 
         #endregion
@@ -37,7 +49,7 @@ namespace CSJ2K.Util
 
         public override void close()
         {
-            // Do nothing.;
+            // Do nothing.
         }
 
         public override bool isOrigSigned(int c)
@@ -67,13 +79,10 @@ namespace CSJ2K.Util
                 throw new ArgumentOutOfRangeException("c");
             }
 
-            Array data = new int[blk.w * blk.h];
-            // TODO Implement pixel reading.
-
             blk.offset = 0;
             blk.scanw = blk.w;
             blk.progressive = false;
-            blk.Data = data;
+            blk.Data = this.GetDataArray(blk.ulx, blk.uly, blk.w, blk.h);
 
             return blk;
         }
@@ -100,28 +109,36 @@ namespace CSJ2K.Util
             return wbm == null ? null : new WriteableBitmapImageReader(wbm);
         }
 
-        private static int GetNumberOfComponents(PixelFormat pixelFormat)
+        private void DefineHelpers(PixelFormat format)
         {
-            if (pixelFormat.Equals(PixelFormats.BlackWhite) || pixelFormat.Equals(PixelFormats.Gray2)
-                || pixelFormat.Equals(PixelFormats.Gray4) || pixelFormat.Equals(PixelFormats.Gray8)
-                || pixelFormat.Equals(PixelFormats.Gray16))
+            throw new NotImplementedException();
+        }
+
+        private Array GetDataArray(int x0, int y0, int w, int h)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static int GetNumberOfComponents(PixelFormat format)
+        {
+            if (format.Equals(PixelFormats.BlackWhite) || format.Equals(PixelFormats.Gray8))
             {
                 return 1;
             }
 
-            if (pixelFormat.Equals(PixelFormats.Bgra32) || pixelFormat.Equals(PixelFormats.Bgr24)
-                || pixelFormat.Equals(PixelFormats.Bgr32) || pixelFormat.Equals(PixelFormats.Pbgra32)
-                || pixelFormat.Equals(PixelFormats.Rgb24))
+            if (format.Equals(PixelFormats.Bgra32) || format.Equals(PixelFormats.Bgr24)
+                || format.Equals(PixelFormats.Bgr32) || format.Equals(PixelFormats.Pbgra32)
+                || format.Equals(PixelFormats.Rgb24))
             {
                 return 3;
             }
 
-            throw new ArgumentOutOfRangeException("pixelFormat");
+            throw new ArgumentOutOfRangeException("format");
         }
 
-        private static int GetRangeBits(PixelFormat pixelFormat)
+        private static int GetRangeBits(PixelFormat format)
         {
-            return pixelFormat.BitsPerPixel;
+            return format.BitsPerPixel;
         }
 
         #endregion
