@@ -3,6 +3,8 @@
 
 namespace CSJ2K.Util
 {
+    using CSJ2K.j2k.image;
+
     public class BitmapImageCreator : IImageCreator
     {
         #region FIELDS
@@ -33,6 +35,11 @@ namespace CSJ2K.Util
         public IImage Create(int width, int height, int numberOfComponents)
         {
             return new BitmapImage(width, height, numberOfComponents);
+        }
+
+        public BlkImgDataSrc CreateEncodableSource(object imageObject)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion

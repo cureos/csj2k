@@ -172,8 +172,19 @@ namespace CSJ2K.j2k.image
 		{
 			return getData(blk, c, false);
 		}
-		
-		/// <summary> Returns, in the blk argument, a block of image data containing the
+
+	    /// <summary> Closes the underlying file or network connection from where the
+	    /// image data is being read.
+	    /// 
+	    /// </summary>
+	    /// <exception cref="IOException">If an I/O error occurs.
+	    /// </exception>
+	    public void close()
+	    {
+	        // Do nothing.
+	    }
+
+	    /// <summary> Returns, in the blk argument, a block of image data containing the
 		/// specifed rectangular area, in the specified component, using the
 		/// 'transfer type' defined in the block given as argument. The data is
 		/// returned, as a reference to the internal data, if any, instead of as a

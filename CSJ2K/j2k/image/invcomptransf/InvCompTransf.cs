@@ -389,8 +389,19 @@ namespace CSJ2K.j2k.image.invcomptransf
 				return getInternCompData(blk, c);
 			}
 		}
-		
-		/// <summary> Apply the inverse component transformation associated with the current
+
+	    /// <summary> Closes the underlying file or network connection from where the
+	    /// image data is being read.
+	    /// 
+	    /// </summary>
+	    /// <exception cref="IOException">If an I/O error occurs.
+	    /// </exception>
+	    public void close()
+	    {
+	        // Do nothing.
+	    }
+
+	    /// <summary> Apply the inverse component transformation associated with the current
 		/// tile. If no component transformation has been requested by the user,
 		/// data are not modified. Else, appropriate method is called (invRCT or
 		/// invICT).

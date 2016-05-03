@@ -544,8 +544,19 @@ namespace CSJ2K.j2k.image
 			blk.uly += incy;
 			return blk;
 		}
-		
-		/// <summary> Changes the current tile, given the new tile indexes. An
+
+	    /// <summary> Closes the underlying file or network connection from where the
+	    /// image data is being read.
+	    /// 
+	    /// </summary>
+	    /// <exception cref="IOException">If an I/O error occurs.
+	    /// </exception>
+	    public void close()
+	    {
+	        // Do nothing.
+	    }
+
+	    /// <summary> Changes the current tile, given the new tile indexes. An
 		/// IllegalArgumentException is thrown if the coordinates do not correspond
 		/// to a valid tile.
 		/// 

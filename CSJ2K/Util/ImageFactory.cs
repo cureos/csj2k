@@ -3,6 +3,8 @@
 
 namespace CSJ2K.Util
 {
+    using CSJ2K.j2k.image;
+
     public static class ImageFactory
     {
         #region FIELDS
@@ -30,6 +32,18 @@ namespace CSJ2K.Util
         internal static IImage New(int width, int height, int numberOfComponents)
         {
             return _creator.Create(width, height, numberOfComponents);
+        }
+
+        internal static BlkImgDataSrc CreateEncodableSource(object imageObject)
+        {
+            try
+            {
+                return _creator.CreateEncodableSource(imageObject);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         #endregion

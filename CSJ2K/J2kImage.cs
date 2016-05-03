@@ -1,6 +1,8 @@
 // Copyright (c) 2007-2016 CSJ2K contributors.
 // Licensed under the BSD 3-Clause License.
 
+using System.Linq;
+
 namespace CSJ2K
 {
     using System;
@@ -308,28 +310,80 @@ namespace CSJ2K
 
         #region Static Encoder Methods
 
-        public static Stream ToStream(Stream stream, ParameterList parameters = null)
+        public static BlkImgDataSrc GetEncodableSource(Stream stream)
         {
-            return new MemoryStream(ToBytes(new[] { stream }, parameters));
+            return GetEncodableSource(new[] { stream });
         }
 
-        public static Stream ToStream(IList<Stream> streams, ParameterList parameters = null)
+        public static BlkImgDataSrc GetEncodableSource(IEnumerable<Stream> streams)
         {
-            return new MemoryStream(ToBytes(streams, parameters));
-        }
-
-        public static byte[] ToBytes(Stream stream, ParameterList parameters = null)
-        {
-            return ToBytes(new[] { stream }, parameters);
-        }
-
-        public static byte[] ToBytes(IList<Stream> streams, ParameterList parameters = null)
-        {
-            if (streams == null || streams.Count == 0)
+            if (streams == null)
             {
-                throw new ArgumentException("One or more image streams are required", "streams");
+                throw new ArgumentNullException("streams");
             }
 
+            var counter = 0;
+            var ncomp = 0;
+            var ppminput = false;
+            var imageReaders = new List<ImgReader>();
+
+            foreach (var stream in streams)
+            {
+                ++counter;
+                var imgType = GetImageType(stream);
+
+                switch (imgType)
+                {
+                    case "P5":
+                        imageReaders.Add(new ImgReaderPGM(stream));
+                        ncomp += 1;
+                        break;
+                    case "P6":
+                        imageReaders.Add(new ImgReaderPPM(stream));
+                        ncomp += 3;
+                        ppminput = true;
+                        break;
+                    case "PG":
+                        imageReaders.Add(new ImgReaderPGX(stream));
+                        ncomp += 1;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("streams", "Invalid image type");
+                }
+            }
+
+            if (ppminput && counter > 1)
+            {
+                error("With PPM input format only 1 input file can be specified", 2);
+                return null;
+            }
+
+            BlkImgDataSrc imgsrc;
+
+            // **** ImgDataJoiner (if needed) ****
+            if (ppminput || ncomp == 1)
+            {
+                // Just one input
+                imgsrc = imageReaders[0];
+            }
+            else
+            {
+                // More than one reader => join all readers into 1
+                var imgcmpidxs = new int[ncomp];
+                imgsrc = new ImgDataJoiner(imageReaders, imgcmpidxs);
+            }
+
+            return imgsrc;
+        }
+
+        public static byte[] ToBytes(object imageObject, ParameterList parameters = null)
+        {
+            var imgsrc = ImageFactory.CreateEncodableSource(imageObject);
+            return ToBytes(imgsrc, parameters);
+        }
+
+        public static byte[] ToBytes(BlkImgDataSrc imgsrc, ParameterList parameters = null)
+        {
             // Initialize default parameters
             ParameterList defpl = GetDefaultEncoderParameterList(encoder_pinfo);
 
@@ -440,63 +494,8 @@ namespace CSJ2K
             }
 
             // **** ImgReader ****
-            var ncomp = 0;
-            var ppminput = false;
-            var imageReaders = new List<ImgReader>();
-
-            foreach (var stream in streams)
-            {
-                var imgType = GetImageType(stream);
-
-                switch (imgType)
-                {
-                    case "P5":
-                        imageReaders.Add(new ImgReaderPGM(stream));
-                        ncomp += 1;
-                        break;
-                    case "P6":
-                        imageReaders.Add(new ImgReaderPPM(stream));
-                        ncomp += 3;
-                        ppminput = true;
-                        break;
-                    case "PG":
-                        imageReaders.Add(new ImgReaderPGX(stream));
-                        ncomp += 1;
-                        break;
-                    default:
-                        throw new ArgumentException("Invalid image type", "streams");
-                }
-            }
-
-            if (ppminput && streams.Count > 1)
-            {
-                error("With PPM input format only 1 input file can be specified", 2);
-                return null;
-            }
-
-            BlkImgDataSrc imgsrc;
-            var imsigned = new bool[ncomp];
-
-            // **** ImgDataJoiner (if needed) ****
-            if (ppminput || ncomp == 1)
-            {
-                // Just one input
-                imgsrc = imageReaders[0];
-                for (var i = 0; i < ncomp; i++)
-                {
-                    imsigned[i] = imageReaders[0].isOrigSigned(i);
-                }
-            }
-            else
-            {
-                // More than one reader => join all readers into 1
-                var imgcmpidxs = new int[ncomp];
-                for (var i = 0; i < ncomp; i++)
-                {
-                    imsigned[i] = imageReaders[i].isOrigSigned(0);
-                }
-                imgsrc = new ImgDataJoiner(imageReaders, imgcmpidxs);
-            }
+            var ncomp = imgsrc.NumComps;
+            var ppminput = imgsrc.NumComps > 1;
 
             // **** Tiler ****
             // get nominal tile dimensions
@@ -695,6 +694,7 @@ namespace CSJ2K
                 }
 
                 // **** HeaderEncoder ****
+                var imsigned = Enumerable.Repeat(false, ncomp).ToArray();   // TODO Consider supporting signed components.
                 var headenc = new HeaderEncoder(imgsrc, imsigned, dwt, imgtiler, encSpec, rois, ralloc, pl);
                 ralloc.HeaderEncoder = headenc;
 
@@ -792,10 +792,7 @@ namespace CSJ2K
                 }
 
                 // **** Close image readers ***
-                foreach (var imageReader in imageReaders)
-                {
-                    imageReader.close();
-                }
+                imgsrc.close();
 
                 return outStream.ToArray();
             }

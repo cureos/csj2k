@@ -587,7 +587,21 @@ namespace CSJ2K.j2k.image
         {
             return imageData[c].getCompData(blk, compIdx[c]);
         }
-        
+
+        /// <summary> Closes the underlying file or network connection from where the
+        /// image data is being read.
+        /// 
+        /// </summary>
+        /// <exception cref="IOException">If an I/O error occurs.
+        /// </exception>
+        public void close()
+        {
+            foreach (var reader in imageData)
+            {
+                reader.close();
+            }
+        }
+
         /// <summary> Changes the current tile, given the new coordinates. An
         /// IllegalArgumentException is thrown if the coordinates do not correspond
         /// to a valid tile.

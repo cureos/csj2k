@@ -175,5 +175,13 @@ namespace CSJ2K.j2k.image
 		/// 
 		/// </seealso>
 		DataBlk getCompData(DataBlk blk, int c);
+
+	    /// <summary> Closes the underlying file or network connection from where the
+	    /// image data is being read.
+	    /// 
+	    /// </summary>
+	    /// <exception cref="IOException">If an I/O error occurs.
+	    /// </exception>
+	    void  close();
 	}
 }

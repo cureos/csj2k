@@ -3,8 +3,12 @@
 
 namespace CSJ2K.Util
 {
+    using CSJ2K.j2k.image;
+
     public interface IImageCreator : IDefaultable
     {
         IImage Create(int width, int height, int numberOfComponents);
+
+        BlkImgDataSrc CreateEncodableSource(object imageObject);
     }
 }

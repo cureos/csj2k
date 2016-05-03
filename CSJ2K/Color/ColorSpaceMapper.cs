@@ -394,8 +394,19 @@ namespace CSJ2K.Color
 		{
 			return src.getCompData(out_Renamed, c);
 		}
-		
-		/// <summary> Returns, in the blk argument, a block of image data containing the
+
+	    /// <summary> Closes the underlying file or network connection from where the
+	    /// image data is being read.
+	    /// 
+	    /// </summary>
+	    /// <exception cref="IOException">If an I/O error occurs.
+	    /// </exception>
+	    public void close()
+	    {
+            // Do nothing.
+	    }
+
+	    /// <summary> Returns, in the blk argument, a block of image data containing the
 		/// specifed rectangular area, in the specified component. The data is
 		/// returned, as a reference to the internal data, if any, instead of as a
 		/// copy, therefore the returned data should not be modified.

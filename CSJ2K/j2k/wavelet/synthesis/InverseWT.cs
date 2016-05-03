@@ -115,5 +115,16 @@ namespace CSJ2K.j2k.wavelet.synthesis
 		public abstract int getFixedPoint(int param1);
 		public abstract CSJ2K.j2k.image.DataBlk getInternCompData(CSJ2K.j2k.image.DataBlk param1, int param2);
 		public abstract CSJ2K.j2k.image.DataBlk getCompData(CSJ2K.j2k.image.DataBlk param1, int param2);
+
+	    /// <summary> Closes the underlying file or network connection from where the
+	    /// image data is being read.
+	    /// 
+	    /// </summary>
+	    /// <exception cref="IOException">If an I/O error occurs.
+	    /// </exception>
+	    public void close()
+	    {
+	        // Do nothing.
+	    }
 	}
 }
