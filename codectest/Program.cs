@@ -23,19 +23,19 @@ namespace codectest
 
             using (var ppm = File.OpenRead("a1_mono.ppm"))
             {
-                var enc = J2kImage.ToBytes(J2kImage.GetEncodableSource(ppm));
+                var enc = J2kImage.ToBytes(J2kImage.CreateEncodableSource(ppm));
                 File.WriteAllBytes("file11.jp2", enc);
             }
 
             using (var ppm = File.OpenRead("a2_colr.ppm"))
             {
-                var enc = J2kImage.ToBytes(J2kImage.GetEncodableSource(ppm));
+                var enc = J2kImage.ToBytes(J2kImage.CreateEncodableSource(ppm));
                 File.WriteAllBytes("file12.jp2", enc);
             }
 
             using (var ppm = File.OpenRead("c1p0_05_0.pgx"))
             {
-                var enc = J2kImage.ToBytes(J2kImage.GetEncodableSource(ppm));
+                var enc = J2kImage.ToBytes(J2kImage.CreateEncodableSource(ppm));
                 File.WriteAllBytes("file13.jp2", enc);
             }
 

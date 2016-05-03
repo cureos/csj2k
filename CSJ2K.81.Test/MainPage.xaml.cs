@@ -60,7 +60,7 @@ namespace Store.CSJ2K.Test
                 else
                 {
                     // If not already encoded, encode before decoding
-                    var bytes = J2kImage.ToBytes(J2kImage.GetEncodableSource(streams));
+                    var bytes = J2kImage.ToBytes(J2kImage.CreateEncodableSource(streams));
                     image = J2kImage.FromBytes(bytes).As<ImageSource>();
                 }
                 DecodedImage.Source = image;

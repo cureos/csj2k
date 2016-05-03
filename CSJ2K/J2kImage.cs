@@ -310,12 +310,12 @@ namespace CSJ2K
 
         #region Static Encoder Methods
 
-        public static BlkImgDataSrc GetEncodableSource(Stream stream)
+        public static BlkImgDataSrc CreateEncodableSource(Stream stream)
         {
-            return GetEncodableSource(new[] { stream });
+            return CreateEncodableSource(new[] { stream });
         }
 
-        public static BlkImgDataSrc GetEncodableSource(IEnumerable<Stream> streams)
+        public static BlkImgDataSrc CreateEncodableSource(IEnumerable<Stream> streams)
         {
             if (streams == null)
             {
