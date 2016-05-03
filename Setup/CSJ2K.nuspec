@@ -15,7 +15,8 @@
         <releaseNotes>version 2.0.0-beta1
 -------------
 * Switched to PCL Profile 328.
-* Removed WriteableBitmapEx dependency.</releaseNotes>
+* Removed WriteableBitmapEx dependency.
+* Assemblies are strong named.</releaseNotes>
         <copyright>(c) 1999-2000 JJ2000 Partners; 2007-2012 Jason S. Clary; 2013-2016 Anders Gustafsson, Cureos AB</copyright>
         <language>en-US</language>
         <tags>JPEG2000 codec Silverlight WindowsPhone WP8 WPF .NET WinRT Metro Windows Store Xamarin iOS Android</tags>

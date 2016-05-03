@@ -831,7 +831,7 @@ namespace CSJ2K
             str = ICCProfiler.ParameterInfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--) pl[str[i][0]] = str[i][3];
 
-            str = pinfo;
+            str = pinfo ?? decoder_pinfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--) pl[str[i][0]] = str[i][3];
 
             return pl;
@@ -842,7 +842,7 @@ namespace CSJ2K
             ParameterList pl = new ParameterList();
             string[][] str;
 
-            str = pinfo;
+            str = pinfo ?? encoder_pinfo;
             if (str != null) for (int i = str.Length - 1; i >= 0; i--) pl[str[i][0]] = str[i][3];
 
             str = ForwCompTransf.ParameterInfo;
