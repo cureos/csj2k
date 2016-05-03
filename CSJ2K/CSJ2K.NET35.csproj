@@ -131,6 +131,7 @@
     <Compile Include="Icc\Tags\ICCMeasurementType.cs" />
     <Compile Include="J2kImage.cs" />
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
+    <Compile Include="Util\BitmapImageReader.cs" />
     <Compile Include="Util\DotnetMsgLogger.cs" />
     <Compile Include="Util\IDefaultable.cs" />
     <Compile Include="Util\BitmapImageCreator.cs" />

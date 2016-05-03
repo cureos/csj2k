@@ -20,6 +20,7 @@ namespace codectest
             File.Delete("file11.jp2");
             File.Delete("file12.jp2");
             File.Delete("file13.jp2");
+            File.Delete("file14.jp2");
 
             using (var ppm = File.OpenRead("a1_mono.ppm"))
             {
@@ -39,42 +40,49 @@ namespace codectest
                 File.WriteAllBytes("file13.jp2", enc);
             }
 
-            for (int i = 1; i <= 13; i++)
+            using (var bitmap = (Bitmap)Image.FromFile("logo.png"))
             {
-                try
-                {
-                    HiPerfTimer timer = new HiPerfTimer();
-                    timer.Start();
-                    Bitmap image = J2kImage.FromFile("file" + i + ".jp2").As<Bitmap>();
-                    timer.Stop();
-                    Console.WriteLine("file" + i + ": " + timer.Duration + " seconds");
-
-                    Bitmap histogram = GenerateHistogram(image);
-
-                    if (image.Height > 2 * histogram.Height)
-                    {
-                        Graphics g = Graphics.FromImage(image);
-                        g.DrawImage(histogram, 0, 0);
-                    }
-
-                    ImageDialog dlg = new ImageDialog();
-                    dlg.Text = "file" + i + ".jp2";
-                    dlg.ClientSize = new Size(image.Width, image.Height);
-                    dlg.pictureBox1.Image = image;
-                    dlg.ShowDialog();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("file" + i + ":\r\n" + e.Message);
-                    if (e.InnerException != null)
-                    {
-                        Console.WriteLine(e.InnerException.Message);
-                        Console.WriteLine(e.InnerException.StackTrace);
-                    }
-                    else Console.WriteLine(e.StackTrace);
-
-                }
+                var enc = J2kImage.ToBytes(bitmap);
+                File.WriteAllBytes("file14.jp2", enc);
             }
+
+
+            for (int i = 1; i <= 14; i++)
+                {
+                    try
+                    {
+                        HiPerfTimer timer = new HiPerfTimer();
+                        timer.Start();
+                        Bitmap image = J2kImage.FromFile("file" + i + ".jp2").As<Bitmap>();
+                        timer.Stop();
+                        Console.WriteLine("file" + i + ": " + timer.Duration + " seconds");
+
+                        Bitmap histogram = GenerateHistogram(image);
+
+                        if (image.Height > 2 * histogram.Height)
+                        {
+                            Graphics g = Graphics.FromImage(image);
+                            g.DrawImage(histogram, 0, 0);
+                        }
+
+                        ImageDialog dlg = new ImageDialog();
+                        dlg.Text = "file" + i + ".jp2";
+                        dlg.ClientSize = new Size(image.Width, image.Height);
+                        dlg.pictureBox1.Image = image;
+                        dlg.ShowDialog();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("file" + i + ":\r\n" + e.Message);
+                        if (e.InnerException != null)
+                        {
+                            Console.WriteLine(e.InnerException.Message);
+                            Console.WriteLine(e.InnerException.StackTrace);
+                        }
+                        else Console.WriteLine(e.StackTrace);
+
+                    }
+                }
         }
 
         private static Bitmap GenerateHistogram(Bitmap image)

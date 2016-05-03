@@ -3,6 +3,8 @@
 
 namespace CSJ2K.Util
 {
+    using System.Drawing;
+
     using CSJ2K.j2k.image;
 
     public class BitmapImageCreator : IImageCreator
@@ -39,7 +41,8 @@ namespace CSJ2K.Util
 
         public BlkImgDataSrc CreateEncodableSource(object imageObject)
         {
-            throw new System.NotImplementedException();
+            var bitmap = imageObject as Bitmap;
+            return bitmap == null ? null : new BitmapImageReader(bitmap);
         }
 
         #endregion
