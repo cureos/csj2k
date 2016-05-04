@@ -62,10 +62,7 @@ namespace CSJ2K
             try
             {
                 var assemblies = GetPlatformAssemblies();
-
-                var types =
-                    assemblies.SelectMany(assembly => assembly.GetTypes())
-                        .Where(t => (t.IsSubclassOf(typeof(T)) || typeof(T).IsAssignableFrom(t)) && !t.IsAbstract);
+                var types = GetConcreteTypes<T>(assemblies);
 
                 return GetDefaultOrSingleInstance<T>(types);
             }
@@ -89,6 +86,22 @@ namespace CSJ2K
                             return null;
                         }
                     }).Where(assembly => assembly != null);
+        }
+
+        private static IEnumerable<Type> GetConcreteTypes<T>(IEnumerable<Assembly> assemblies)
+        {
+            return assemblies.SelectMany(assembly => assembly.GetTypes()).Where(
+                t =>
+                    {
+                        try
+                        {
+                            return (t.IsSubclassOf(typeof(T)) || typeof(T).IsAssignableFrom(t)) && !t.IsAbstract;
+                        }
+                        catch
+                        {
+                            return false;
+                        }
+                    });
         }
 
         private static T GetDefaultOrSingleInstance<T>(IEnumerable<Type> types) where T : IDefaultable
