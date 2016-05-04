@@ -453,6 +453,21 @@ namespace CSJ2K.j2k.image.forwcomptransf
 	        // Do nothing.
 	    }
 
+	    /// <summary> Returns true if the data read was originally signed in the specified
+	    /// component, false if not.
+	    /// 
+	    /// </summary>
+	    /// <param name="c">The index of the component, from 0 to C-1.
+	    /// 
+	    /// </param>
+	    /// <returns> true if the data was originally signed, false if not.
+	    /// 
+	    /// </returns>
+	    public bool isOrigSigned(int c)
+	    {
+	        return false;
+	    }
+
 	    /// <summary> Apply the component transformation associated with the current tile. If
 		/// no component transformation has been requested by the user, data are
 		/// not modified. Else, appropriate method is called (forwRCT or forwICT).

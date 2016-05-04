@@ -602,6 +602,21 @@ namespace CSJ2K.j2k.image
             }
         }
 
+        /// <summary> Returns true if the data read was originally signed in the specified
+        /// component, false if not.
+        /// 
+        /// </summary>
+        /// <param name="c">The index of the component, from 0 to C-1.
+        /// 
+        /// </param>
+        /// <returns> true if the data was originally signed, false if not.
+        /// 
+        /// </returns>
+        public bool isOrigSigned(int c)
+        {
+            return false;
+        }
+
         /// <summary> Changes the current tile, given the new coordinates. An
         /// IllegalArgumentException is thrown if the coordinates do not correspond
         /// to a valid tile.

@@ -502,9 +502,9 @@ namespace CSJ2K.j2k.image.input
 		/// 
 		/// </returns>
 		public abstract bool isOrigSigned(int c);
-		public abstract int getFixedPoint(int param1);
-		public abstract CSJ2K.j2k.image.DataBlk getInternCompData(CSJ2K.j2k.image.DataBlk param1, int param2);
-		public abstract int getNomRangeBits(int param1);
-		public abstract CSJ2K.j2k.image.DataBlk getCompData(CSJ2K.j2k.image.DataBlk param1, int param2);
+		public abstract int getFixedPoint(int c);
+		public abstract DataBlk getInternCompData(DataBlk blk, int c);
+		public abstract int getNomRangeBits(int c);
+		public abstract DataBlk getCompData(DataBlk blk, int c);
 	}
 }
