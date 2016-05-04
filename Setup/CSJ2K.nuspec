@@ -12,9 +12,7 @@
         <description>Portable Class Library and platform specific support libraries for decoding and encoding JPEG2000 images. Works with Universal Windows (8.1 and 10), 
 		.NET (WPF and Windows Forms), Windows Phone 8 Silverlight, Silverlight 5, Xamarin iOS and Xamarin Android applications.</description>
         <summary>Portable JPEG 2000 codec library</summary>
-        <releaseNotes>version 2.0.0-beta1
--------------
-* Switched to PCL Profile 328.
+        <releaseNotes>* Switched to PCL Profile 328.
 * Removed WriteableBitmapEx dependency.
 * Assemblies are strong named.</releaseNotes>
         <copyright>(c) 1999-2000 JJ2000 Partners; 2007-2012 Jason S. Clary; 2013-2016 Anders Gustafsson, Cureos AB</copyright>

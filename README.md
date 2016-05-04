@@ -79,21 +79,25 @@ On iOS, depending on context, use:
 
 ### Encoding
 
-To encode an image of any of the formats *PGM* (Portable Graymap), *PPM* (Portable Pixmap) or *PGX* (JPEG2000 conformance testing format), call any of these methods:
+To encode an image, the following overloads are available:
 
 ```csharp
 public class J2kImage
 {
-	public static Stream ToStream(Stream, ParameterList = null);
-	public static Stream ToStream(Stream[], ParameterList = null);
-	public static byte[] ToBytes(Stream, ParameterList = null);
-	public static byte[] ToBytes(Stream[], ParameterList = null);
+	public static byte[] ToBytes(object, ParameterList = null);
+	public static byte[] ToBytes(BlkImgDataSrc, ParameterList = null);
 }
 ```
 
-For *PGM* and *PPM* images, you would normally enter one `Stream` object in the argument list, whereas for *PGX* images, you may enter one `Stream` object per color component. Note that encoding currently does not support
-`Bitmap`/`WriteableBitmap` images; files in these formats need to be converted into any of the supported formats before invoking the encoder. Monochrome images are preferably converted into PGM and color images into PPM format
-before JPEG2000 encoding is applied.
+The first overload takes an platform-specific image `object`. This is still works-in-progress, but a partial implementation is available for `System.Drawing.Bitmap` objects on .NET Desktop.
+
+The second overload takes an *CSJ2K* specific object implementing the `BlkImgDataSrc` interface. When *Portable Graymap* (PGM), *Portable Pixelmap* (PPM) or JPEG2000 conformance testing format (PGX) objects are available as `Stream`s, 
+it is possible to create `BlkImgDataSrc` objects using either of the following methods:
+
+    J2kImage.CreateEncodableSource(Stream);
+	J2kImage.CreateEncodableSource(IList<Stream>);
+	
+For *PGM* and *PPM* images, you would normally use the single `Stream` overload, whereas for *PGX* images, you may enter one `Stream` object per color component.
 
 ## Links
 
