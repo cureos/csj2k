@@ -44,7 +44,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.iOS", "CSJ2K.iOS\CSJ2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.iOS.Test", "CSJ2K.iOS.Test\CSJ2K.iOS.Test.csproj", "{7A2661AB-A8C8-4DDC-9650-8803DF1696E2}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CSJ2K.Shared", "CSJ2K\CSJ2K.Shared.shproj", "{46621573-93E5-4E5D-8EEE-969C0CD862B5}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CSJ2K\CSJ2K.Shared.projitems*{46621573-93e5-4e5d-8eee-969c0cd862b5}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
