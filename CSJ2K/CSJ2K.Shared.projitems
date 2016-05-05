@@ -9,6 +9,7 @@
     <Import_RootNamespace>CSJ2K.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\SharedAssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Color\boxes\ChannelDefinitionBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Color\boxes\ColorSpecificationBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Color\boxes\ComponentMappingBox.cs" />

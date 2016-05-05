@@ -48,6 +48,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CSJ2K.Shared", "CSJ2K\CSJ2K
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CSJ2K\CSJ2K.Shared.projitems*{1ea0f9ba-0194-4f08-9e55-89888d5a4724}*SharedItemsImports = 4
+		CSJ2K\CSJ2K.Shared.projitems*{a790cc27-4086-4d2a-bf7b-c02337df4d21}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{46621573-93e5-4e5d-8eee-969c0cd862b5}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
