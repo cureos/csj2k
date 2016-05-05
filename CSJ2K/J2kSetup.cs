@@ -15,15 +15,6 @@ namespace CSJ2K
     /// </summary>
     internal static class J2kSetup
     {
-        #region FIELDS
-
-        /// <summary>
-        /// Potential names of the CSJ2K platform-specific assemblies.
-        /// </summary>
-        private static readonly string[] PlatformAssemblyNames = { "CSJ2K", "CSJ2K.Platform" };
-
-        #endregion
-
         /// <summary>
         /// Gets a single instance from the platform assembly implementing the <typeparamref name="T"/> type.
         /// </summary>
@@ -35,11 +26,17 @@ namespace CSJ2K
         {
             try
             {
-                var assemblies = GetPlatformAssemblies();
-
+                var assembly = GetCurrentAssembly();
+#if NETFX_CORE
                 var type =
-                    assemblies.SelectMany(assembly => assembly.GetTypes())
+                    assembly.DefinedTypes.Single(
+                        t => (t.IsSubclassOf(typeof(T)) || typeof(T).GetTypeInfo().IsAssignableFrom(t)) && !t.IsAbstract)
+                        .AsType();
+#else
+                var type =
+                    assembly.GetTypes()
                         .Single(t => (t.IsSubclassOf(typeof(T)) || typeof(T).IsAssignableFrom(t)) && !t.IsAbstract);
+#endif
                 var instance = (T)Activator.CreateInstance(type);
 
                 return instance;
@@ -61,8 +58,8 @@ namespace CSJ2K
         {
             try
             {
-                var assemblies = GetPlatformAssemblies();
-                var types = GetConcreteTypes<T>(assemblies);
+                var assembly = GetCurrentAssembly();
+                var types = GetConcreteTypes<T>(assembly);
 
                 return GetDefaultOrSingleInstance<T>(types);
             }
@@ -72,36 +69,42 @@ namespace CSJ2K
             }
         }
 
-        private static IEnumerable<Assembly> GetPlatformAssemblies()
+        private static Assembly GetCurrentAssembly()
         {
-            return PlatformAssemblyNames.Select(
-                name =>
-                    {
-                        try
-                        {
-                            return Assembly.Load(name);
-                        }
-                        catch
-                        {
-                            return null;
-                        }
-                    }).Where(assembly => assembly != null);
+#if NETFX_CORE
+            return typeof(J2kSetup).GetTypeInfo().Assembly;
+#else
+            return typeof(J2kSetup).Assembly;
+#endif
         }
 
-        private static IEnumerable<Type> GetConcreteTypes<T>(IEnumerable<Assembly> assemblies)
+        private static IEnumerable<Type> GetConcreteTypes<T>(Assembly assembly)
         {
-            return assemblies.SelectMany(assembly => assembly.GetTypes()).Where(
+#if NETFX_CORE
+            return assembly.DefinedTypes.Where(
+#else
+            return assembly.GetTypes().Where(
+#endif
                 t =>
                     {
                         try
                         {
+#if NETFX_CORE
+                            return (t.IsSubclassOf(typeof(T)) || typeof(T).GetTypeInfo().IsAssignableFrom(t))
+                                   && !t.IsAbstract;
+#else
                             return (t.IsSubclassOf(typeof(T)) || typeof(T).IsAssignableFrom(t)) && !t.IsAbstract;
+#endif
                         }
                         catch
                         {
                             return false;
                         }
+#if NETFX_CORE
+                    }).Select(t => t.AsType());
+#else
                     });
+#endif
         }
 
         private static T GetDefaultOrSingleInstance<T>(IEnumerable<Type> types) where T : IDefaultable

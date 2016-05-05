@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CSJ2K</RootNamespace>
-    <AssemblyName>CSJ2K.Platform</AssemblyName>
+    <AssemblyName>CSJ2K</AssemblyName>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -65,9 +65,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CSJ2K\Properties\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="..\CSJ2K\Util\DotnetFileInfo.cs">
       <Link>Util\DotnetFileInfo.cs</Link>
     </Compile>
@@ -88,12 +85,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CSJ2K\CSJ2K.Core.csproj">
-      <Project>{a790cc27-4086-4d2a-bf7b-c02337df4d21}</Project>
-      <Name>CSJ2K.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <Import Project="..\CSJ2K\CSJ2K.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -77,10 +77,6 @@
       <Project>{e3480922-4cf4-4c22-a9ac-ecda99771792}</Project>
       <Name>CSJ2K.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CSJ2K\CSJ2K.Core.csproj">
-      <Project>{a790cc27-4086-4d2a-bf7b-c02337df4d21}</Project>
-      <Name>CSJ2K.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

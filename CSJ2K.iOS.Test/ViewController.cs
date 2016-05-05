@@ -20,8 +20,6 @@ namespace CSJ2K.iOS.Test
             base.ViewDidLoad();
 
             // Perform any additional setup after loading the view, typically from a nib.
-            IOSSetup.RegisterCretors();
-
             using (var stream = typeof(ViewController).Assembly.GetManifestResourceStream("CSJ2K.iOS.Test.Files.file2.jp2"))
             {
                 var uiImage = J2kImage.FromStream(stream).As<UIImage>();

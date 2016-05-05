@@ -4,6 +4,8 @@
 namespace CSJ2K.Util
 {
     using System;
+    using System.Reflection;
+
 
     public abstract class ImageBase<TBase> : IImage
     {
@@ -41,7 +43,11 @@ namespace CSJ2K.Util
 
         public virtual T As<T>()
         {
+#if NETFX_CORE
+            if (!typeof(TBase).GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo()))
+#else
             if (!typeof(TBase).IsAssignableFrom(typeof(T)))
+#endif
             {
                 throw new InvalidCastException(
                     string.Format(
@@ -103,6 +109,6 @@ namespace CSJ2K.Util
 
         protected abstract object GetImageObject();
 
-        #endregion
+#endregion
     }
 }

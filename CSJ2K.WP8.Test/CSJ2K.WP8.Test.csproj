@@ -151,10 +151,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSJ2K\CSJ2K.Core.csproj">
-      <Project>{A790CC27-4086-4D2A-BF7B-C02337DF4D21}</Project>
-      <Name>CSJ2K.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CSJ2K.WP8\CSJ2K.WP8.csproj">
       <Project>{ABE6B54D-A4AB-4204-A1AF-9B679B6ABA6B}</Project>
       <Name>CSJ2K.WP8</Name>

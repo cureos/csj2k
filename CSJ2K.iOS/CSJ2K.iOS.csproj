@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>CSJ2K</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>CSJ2K.Platform</AssemblyName>
+    <AssemblyName>CSJ2K</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,9 +44,6 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CSJ2K\Properties\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="..\CSJ2K\Util\DotnetFileInfo.cs">
       <Link>Util\DotnetFileInfo.cs</Link>
     </Compile>
@@ -65,14 +62,8 @@
     <Compile Include="..\CSJ2K\Util\IOSImageCreator.cs">
       <Link>Util\IOSImageCreator.cs</Link>
     </Compile>
-    <Compile Include="IOSSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CSJ2K\CSJ2K.Core.csproj">
-      <Project>{a790cc27-4086-4d2a-bf7b-c02337df4d21}</Project>
-      <Name>CSJ2K.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <Import Project="..\CSJ2K\CSJ2K.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
