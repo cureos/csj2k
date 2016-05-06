@@ -13,8 +13,8 @@ namespace CSJ2K.Util
     {
         #region CONSTRUCTORS
 
-        internal IOSImage(int width, int height, int numberOfComponents)
-            : base(width, height, numberOfComponents)
+        internal IOSImage(int width, int height, byte[] bytes)
+            : base(width, height, bytes)
         {
         }
 

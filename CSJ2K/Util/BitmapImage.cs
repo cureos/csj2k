@@ -10,8 +10,8 @@ namespace CSJ2K.Util
     {
         #region CONSTRUCTORS
 
-        internal BitmapImage(int width, int height, int numberOfComponents)
-            : base(width, height, numberOfComponents)
+        internal BitmapImage(int width, int height, byte[] bytes)
+            : base(width, height, bytes)
         {
         }
 

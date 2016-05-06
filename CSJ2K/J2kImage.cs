@@ -212,7 +212,7 @@ namespace CSJ2K
             int bytesPerPixel = (numComps == 4 ? 4 : 3);
 
             // **** Copy to Bitmap ****
-            var dst = ImageFactory.New(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps);
+            var dst = new PortableImage(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps);
 
             Coord numTiles = decodedImage.getNumTiles(null);
 
@@ -378,7 +378,7 @@ namespace CSJ2K
 
         public static byte[] ToBytes(object imageObject, ParameterList parameters = null)
         {
-            var imgsrc = ImageFactory.CreateEncodableSource(imageObject);
+            var imgsrc = ImageFactory.ToPortableImageSource(imageObject);
             return ToBytes(imgsrc, parameters);
         }
 

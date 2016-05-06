@@ -32,12 +32,12 @@ namespace CSJ2K.Util
             ImageFactory.Register(Instance);
         }
 
-        public IImage Create(int width, int height, int numberOfComponents)
+        public IImage Create(int width, int height, byte[] bytes)
         {
-            return new BitmapImage(width, height, numberOfComponents);
+            return new BitmapImage(width, height, bytes);
         }
 
-        public BlkImgDataSrc CreateEncodableSource(object imageObject)
+        public BlkImgDataSrc ToPortableImageSource(object imageObject)
         {
             return BitmapImageReader.Create(imageObject);
         }

@@ -29,16 +29,16 @@ namespace CSJ2K.Util
             _creator = creator;
         }
 
-        internal static IImage New(int width, int height, int numberOfComponents)
+        internal static IImage New(int width, int height, byte[] bytes)
         {
-            return _creator.Create(width, height, numberOfComponents);
+            return _creator.Create(width, height, bytes);
         }
 
-        internal static BlkImgDataSrc CreateEncodableSource(object imageObject)
+        internal static BlkImgDataSrc ToPortableImageSource(object imageObject)
         {
             try
             {
-                return _creator.CreateEncodableSource(imageObject);
+                return _creator.ToPortableImageSource(imageObject);
             }
             catch
             {

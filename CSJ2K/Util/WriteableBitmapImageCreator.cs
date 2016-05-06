@@ -9,13 +9,13 @@ namespace CSJ2K.Util
 
     public class WriteableBitmapImageCreator : IImageCreator
     {
-#region FIELDS
+        #region FIELDS
 
         private static readonly IImageCreator Instance = new WriteableBitmapImageCreator();
 
-#endregion
+        #endregion
 
-#region PROPERTIES
+        #region PROPERTIES
 
         /// <summary>
         /// Gets whether or not this type is classified as a default manager.
@@ -28,26 +28,26 @@ namespace CSJ2K.Util
             }
         }
 
-#endregion
+        #endregion
 
-#region METHODS
+        #region METHODS
 
         public static void Register()
         {
             ImageFactory.Register(Instance);
         }
 
-        public IImage Create(int width, int height, int numberOfComponents)
+        public IImage Create(int width, int height, byte[] bytes)
         {
-            return new WriteableBitmapImage(width, height, numberOfComponents);
+            return new WriteableBitmapImage(width, height, bytes);
         }
 
-        public BlkImgDataSrc CreateEncodableSource(object imageObject)
+        public BlkImgDataSrc ToPortableImageSource(object imageObject)
         {
             throw new NotImplementedException();
             //return WriteableBitmapImageReader.Create(imageObject);
         }
 
-#endregion
+        #endregion
     }
 }

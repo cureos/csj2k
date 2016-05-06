@@ -35,12 +35,12 @@ namespace CSJ2K.Util
             ImageFactory.Register(Instance);
         }
 
-        public IImage Create(int width, int height, int numberOfComponents)
+        public IImage Create(int width, int height, byte[] bytes)
         {
-            return new IOSImage(width, height, numberOfComponents);
+            return new IOSImage(width, height, bytes);
         }
 
-        public BlkImgDataSrc CreateEncodableSource(object imageObject)
+        public BlkImgDataSrc ToPortableImageSource(object imageObject)
         {
             throw new System.NotImplementedException();
         }

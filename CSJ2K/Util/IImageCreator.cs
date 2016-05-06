@@ -7,8 +7,8 @@ namespace CSJ2K.Util
 
     public interface IImageCreator : IDefaultable
     {
-        IImage Create(int width, int height, int numberOfComponents);
+        IImage Create(int width, int height, byte[] bytes);
 
-        BlkImgDataSrc CreateEncodableSource(object imageObject);
+        BlkImgDataSrc ToPortableImageSource(object imageObject);
     }
 }

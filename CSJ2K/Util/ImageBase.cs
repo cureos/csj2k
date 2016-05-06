@@ -17,25 +17,22 @@ namespace CSJ2K.Util
 
         #region CONSTRUCTORS
 
-        protected ImageBase(int width, int height, int numberOfComponents)
+        protected ImageBase(int width, int height, byte[] bytes)
         {
             this.Width = width;
             this.Height = height;
-            this.NumberOfComponents = numberOfComponents;
-            this.Bytes = new byte[SizeOfArgb * width * height];
+            this.Bytes = bytes;
         }
 
         #endregion
 
         #region PROPERTIES
 
-        public int Width { get; }
+        protected int Width { get; }
 
-        public int Height { get; }
+        protected int Height { get; }
 
-        public int NumberOfComponents { get; }
-
-        public byte[] Bytes { get; }
+        protected byte[] Bytes { get; }
 
         #endregion
 
@@ -57,54 +54,6 @@ namespace CSJ2K.Util
             }
 
             return (T)this.GetImageObject();
-        }
-
-        public virtual void FillRow(int rowIndex, int lineIndex, int rowWidth, byte[] rowValues)
-        {
-            switch (this.NumberOfComponents)
-            {
-                case 1:
-                case 3:
-                    var i = SizeOfArgb * (rowIndex + lineIndex * rowWidth);
-                    var j = 0;
-                    for (var k = 0; k < rowWidth; ++k)
-                    {
-                        this.Bytes[i++] = rowValues[j++];
-                        this.Bytes[i++] = rowValues[j++];
-                        this.Bytes[i++] = rowValues[j++];
-                        this.Bytes[i++] = 0xff;
-                    }
-
-                    break;
-                case 4:
-                    Array.Copy(
-                        rowValues,
-                        0,
-                        this.Bytes,
-                        SizeOfArgb * (rowIndex + lineIndex * rowWidth),
-                        SizeOfArgb * rowWidth);
-                    break;
-                default:
-                    throw new InvalidOperationException("Number of components must be one of 1, 3 or 4.");
-            }
-        }
-
-        public byte[] GetComponent(int number)
-        {
-            if (number < 0 || number >= this.NumberOfComponents)
-            {
-                throw new ArgumentOutOfRangeException("number");
-            }
-
-            var length = this.Bytes.Length;
-            var component = new byte[length >> 2];
-
-            for (int i = number, k = 0; i < length; i += 4, ++k)
-            {
-                component[k] = this.Bytes[i];
-            }
-
-            return component;
         }
 
         protected abstract object GetImageObject();

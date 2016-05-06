@@ -225,6 +225,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)j2k\wavelet\WTFilterSpec.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)J2kImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)J2kSetup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Util\PortableImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\PortableImageSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\EndianBinaryReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\EndianBinaryWriter.cs" />
