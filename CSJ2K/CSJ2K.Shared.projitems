@@ -122,7 +122,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)j2k\fileformat\reader\FileFormatReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)j2k\fileformat\writer\FileFormatWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)j2k\image\BlkImgDataSrc.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)j2k\image\BlkImgDataSrcImpl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)j2k\image\CompTransfSpec.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)j2k\image\Coord.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)j2k\image\DataBlk.cs" />
@@ -226,6 +225,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)j2k\wavelet\WTFilterSpec.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)J2kImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)J2kSetup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Util\PortableImageSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\EndianBinaryReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\EndianBinaryWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\FileInfoFactory.cs" />

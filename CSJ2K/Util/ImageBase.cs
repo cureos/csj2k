@@ -109,6 +109,6 @@ namespace CSJ2K.Util
 
         protected abstract object GetImageObject();
 
-#endregion
+        #endregion
     }
 }

@@ -1,11 +1,14 @@
 ﻿// Copyright (c) 2007-2016 CSJ2K contributors.
 // Licensed under the BSD 3-Clause License.
 
-using System;
-
-namespace CSJ2K.j2k.image
+namespace CSJ2K.Util    
 {
-    public sealed class BlkImgDataSrcImpl : BlkImgDataSrc
+    using System;
+
+    using CSJ2K.j2k;
+    using CSJ2K.j2k.image;
+
+    public class PortableImageSource : BlkImgDataSrc
     {
         #region FIELDS
 
@@ -25,7 +28,7 @@ namespace CSJ2K.j2k.image
 
         #region CONSTRUCTORS
 
-        public BlkImgDataSrcImpl(int w, int h, int nc, int rb, bool[] sgnd, int[][] comps)
+        public PortableImageSource(int w, int h, int nc, int rb, bool[] sgnd, int[][] comps)
         {
             this.w = w;
             this.h = h;
