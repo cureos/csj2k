@@ -39,7 +39,7 @@ namespace CSJ2K.Util
 
         public BlkImgDataSrc ToPortableImageSource(object imageObject)
         {
-            return BitmapImageReader.Create(imageObject);
+            return BitmapImageSource.Create(imageObject);
         }
 
         #endregion

@@ -45,7 +45,7 @@ namespace CSJ2K.Util
         public BlkImgDataSrc ToPortableImageSource(object imageObject)
         {
             throw new NotImplementedException();
-            //return WriteableBitmapImageReader.Create(imageObject);
+            //return WriteableBitmapImageSource.Create(imageObject);
         }
 
         #endregion

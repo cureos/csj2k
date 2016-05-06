@@ -50,8 +50,8 @@
     <Compile Include="..\CSJ2K\Util\BitmapImageCreator.cs">
       <Link>Util\BitmapImageCreator.cs</Link>
     </Compile>
-    <Compile Include="..\CSJ2K\Util\BitmapImageReader.cs">
-      <Link>Util\BitmapImageReader.cs</Link>
+    <Compile Include="..\CSJ2K\Util\BitmapImageSource.cs">
+      <Link>Util\BitmapImageSource.cs</Link>
     </Compile>
     <Compile Include="..\CSJ2K\Util\DotnetFileInfo.cs">
       <Link>Util\DotnetFileInfo.cs</Link>
@@ -71,8 +71,8 @@
     <Compile Include="..\CSJ2K\Util\WriteableBitmapImageCreator.cs">
       <Link>Util\WriteableBitmapImageCreator.cs</Link>
     </Compile>
-    <Compile Include="..\CSJ2K\Util\WriteableBitmapImageReader.cs">
-      <Link>Util\WriteableBitmapImageReader.cs</Link>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapImageSource.cs">
+      <Link>Util\WriteableBitmapImageSource.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

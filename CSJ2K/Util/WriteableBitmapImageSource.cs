@@ -10,7 +10,7 @@ namespace CSJ2K.Util
     using CSJ2K.j2k.image;
     using CSJ2K.j2k.image.input;
 
-    internal class WriteableBitmapImageReader : ImgReader
+    internal class WriteableBitmapImageSource : ImgReader
     {
         #region FIELDS
 
@@ -32,7 +32,7 @@ namespace CSJ2K.Util
 
         #region CONSTRUCTORS
 
-        private WriteableBitmapImageReader(WriteableBitmap wbm)
+        private WriteableBitmapImageSource(WriteableBitmap wbm)
         {
             this.wbm = wbm;
             this.w = wbm.PixelWidth;
@@ -106,7 +106,7 @@ namespace CSJ2K.Util
         public static ImgReader Create(object imageObject)
         {
             var wbm = imageObject as WriteableBitmap;
-            return wbm == null ? null : new WriteableBitmapImageReader(wbm);
+            return wbm == null ? null : new WriteableBitmapImageSource(wbm);
         }
 
         private void DefineHelpers(PixelFormat format)

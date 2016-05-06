@@ -109,7 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\BitmapImageReader.cs" />
+    <Compile Include="Util\BitmapImageSource.cs" />
     <Compile Include="Util\DotnetMsgLogger.cs" />
     <Compile Include="Util\BitmapImageCreator.cs" />
     <Compile Include="Util\BitmapImage.cs" />
@@ -118,7 +118,7 @@
     <Compile Include="Util\DotnetFileInfo.cs" />
     <Compile Include="Util\WriteableBitmapImage.cs" />
     <Compile Include="Util\WriteableBitmapImageCreator.cs" />
-    <Compile Include="Util\WriteableBitmapImageReader.cs" />
+    <Compile Include="Util\WriteableBitmapImageSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
