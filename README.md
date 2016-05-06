@@ -21,7 +21,7 @@ package *jj2000*, version 5.1. This Portable Class Library adaptation of *CSJ2K*
 
 The code is still applicable to .NET 3.5 and later as well; a .NET 3.5 dedicated class library is maintained here for reference.
 
-Along with the *CSJ2K* Portable Class Library there are also platform specific complementary libraries for bitmap processing and file handling. In particular, the .NET Framework complementary library implements bitmap processing
+Along with the *CSJ2K* Portable Class Library there are also platform specific replacement libraries for bitmap processing and file handling. In particular, the .NET Framework library implements bitmap processing
 for `WriteableBitmap`, thus facilitating JPEG 2000 decoding in WPF based applications.
 
 Included are very basic Universal Windows 8.1, WPF, Windows Phone 8 Silverlight, Silverlight 5, Xamarin Android and Xamarin iOS test applications for reading and displaying JPEG 2000 files.
@@ -51,15 +51,15 @@ To decode a JPEG 2000 encoded image, call one of the following methods:
 ```csharp
 public class J2kImage
 {
-	public static IImage FromStream(Stream, ParameterList = null);
-	public static IImage FromBytes(byte[], ParameterList = null);
-	public static IImage FromFile(string, ParameterList = null);
+	public static PortableImage FromStream(Stream, ParameterList = null);
+	public static PortableImage FromBytes(byte[], ParameterList = null);
+	public static PortableImage FromFile(string, ParameterList = null);
 }
 ```
 
 `J2kImage.FromFile(string)` is not sufficiently implemented for Silverlight and Windows Phone.
 
-The returned `IImage` offers a "cast" method `As<T>()` to obtain an image in the type relevant for the platform. When using the `BitmapImageCreator` on .NET, a cast to `Bitmap` would suffice:
+The returned `PortableImage` offers a "cast" method `As<T>()` to obtain an image in the type relevant for the platform. When using the `BitmapImageCreator` on .NET, a cast to `Bitmap` would suffice:
 
     var bitmap = decodedImage.As<Bitmap>();
 	

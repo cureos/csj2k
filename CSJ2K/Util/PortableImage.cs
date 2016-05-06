@@ -27,13 +27,13 @@ namespace CSJ2K.Util
 
         #region PROPERTIES
 
-        public int Width { get; }
+        internal int Width { get; }
 
-        public int Height { get; }
+        internal int Height { get; }
 
         public int NumberOfComponents { get; }
 
-        public byte[] Bytes { get; }
+        internal byte[] Bytes { get; }
 
         #endregion
 
@@ -75,7 +75,7 @@ namespace CSJ2K.Util
             }
         }
 
-        internal byte[] GetComponent(int number)
+        public byte[] GetComponent(int number)
         {
             if (number < 0 || number >= this.NumberOfComponents)
             {

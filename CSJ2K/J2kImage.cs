@@ -40,7 +40,7 @@ namespace CSJ2K
 
         #region Static Decoder Methods
 
-        public static IImage FromFile(string filename, ParameterList parameters = null)
+        public static PortableImage FromFile(string filename, ParameterList parameters = null)
         {
             using (var stream = FileStreamFactory.New(filename, "r"))
             {
@@ -48,7 +48,7 @@ namespace CSJ2K
             }
         }
 
-        public static IImage FromBytes(byte[] j2kdata, ParameterList parameters = null)
+        public static PortableImage FromBytes(byte[] j2kdata, ParameterList parameters = null)
         {
             using (var stream = new MemoryStream(j2kdata))
             {
@@ -56,7 +56,7 @@ namespace CSJ2K
             }
         }
 
-        public static IImage FromStream(Stream stream, ParameterList parameters = null)
+        public static PortableImage FromStream(Stream stream, ParameterList parameters = null)
         {
             RandomAccessIO in_stream = new ISRandomAccessIO(stream);
 
@@ -1216,14 +1216,14 @@ namespace CSJ2K
         #endregion
 
         /**
-	 * Prints the error message 'msg' to standard err, prepending "ERROR" to
-	 * it, and sets the exitCode to 'code'. An exit code different than 0
-	 * indicates that there where problems.
-	 *
-	 * @param msg The error message
-	 *
-	 * @param code The exit code to set
-	 * */
+     * Prints the error message 'msg' to standard err, prepending "ERROR" to
+     * it, and sets the exitCode to 'code'. An exit code different than 0
+     * indicates that there where problems.
+     *
+     * @param msg The error message
+     *
+     * @param code The exit code to set
+     * */
 
         private static void error(String msg, int code)
         {
@@ -1232,11 +1232,11 @@ namespace CSJ2K
         }
 
         /**
-		 * Prints the warning message 'msg' to standard err, prepending "WARNING"
-		 * to it.
-		 *
-		 * @param msg The error message
-		 * */
+         * Prints the warning message 'msg' to standard err, prepending "WARNING"
+         * to it.
+         *
+         * @param msg The error message
+         * */
 
         private static void warning(String msg)
         {
