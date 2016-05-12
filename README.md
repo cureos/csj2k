@@ -1,5 +1,7 @@
 # CSJ2K - A Managed and Portable JPEG2000 Codec
 
+[![Join the chat at https://gitter.im/cureos/csj2k](https://badges.gitter.im/cureos/csj2k.svg)](https://gitter.im/cureos/csj2k?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Copyright (c) 1999-2000 JJ2000 Partners; original C# port (c) 2007-2012 Jason S. Clary; C# encoding and adaptation to Portable Class Library with platform specific support (c) 2013-2016 Anders Gustafsson, Cureos AB   
 
 Licensed and distributable under the terms of the [BSD license](http://www.opensource.org/licenses/bsd-license.php)
