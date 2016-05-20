@@ -40,7 +40,7 @@ namespace CSJ2K.Util
 
         public virtual T As<T>()
         {
-#if NETFX_CORE
+#if NETFX_CORE || NETSTANDARD
             if (!typeof(TBase).GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo()))
 #else
             if (!typeof(TBase).IsAssignableFrom(typeof(T)))

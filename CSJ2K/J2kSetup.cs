@@ -27,7 +27,7 @@ namespace CSJ2K
             try
             {
                 var assembly = GetCurrentAssembly();
-#if NETFX_CORE
+#if NETFX_CORE || NETSTANDARD
                 var type =
                     assembly.DefinedTypes.Single(
                         t => (t.IsSubclassOf(typeof(T)) || typeof(T).GetTypeInfo().IsAssignableFrom(t)) && !t.IsAbstract)
@@ -71,7 +71,7 @@ namespace CSJ2K
 
         private static Assembly GetCurrentAssembly()
         {
-#if NETFX_CORE
+#if NETFX_CORE || NETSTANDARD
             return typeof(J2kSetup).GetTypeInfo().Assembly;
 #else
             return typeof(J2kSetup).Assembly;
@@ -80,7 +80,7 @@ namespace CSJ2K
 
         private static IEnumerable<Type> GetConcreteTypes<T>(Assembly assembly)
         {
-#if NETFX_CORE
+#if NETFX_CORE || NETSTANDARD
             return assembly.DefinedTypes.Where(
 #else
             return assembly.GetTypes().Where(
@@ -89,7 +89,7 @@ namespace CSJ2K
                     {
                         try
                         {
-#if NETFX_CORE
+#if NETFX_CORE || NETSTANDARD
                             return (t.IsSubclassOf(typeof(T)) || typeof(T).GetTypeInfo().IsAssignableFrom(t))
                                    && !t.IsAbstract;
 #else
@@ -100,7 +100,7 @@ namespace CSJ2K
                         {
                             return false;
                         }
-#if NETFX_CORE
+#if NETFX_CORE || NETSTANDARD
                     }).Select(t => t.AsType());
 #else
                     });

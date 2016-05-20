@@ -1,6 +1,8 @@
 *.user
 *.suo
 *.userprefs
+*.lock.json
 [Bb]in/
 [Oo]bj/
 [Pp]ackages/
+.vs/
