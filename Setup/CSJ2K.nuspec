@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>CSJ2K</id>
-        <version>2.0.0-beta5</version>
+        <version>2.0.0-beta6</version>
         <title>CSJ2K JPEG 2000 codec library</title>
         <authors>Anders Gustafsson, Jason S. Clary, JJ2000 Partners</authors>
         <owners>Cureos AB</owners>
@@ -20,6 +20,8 @@
     <files>
         <file src="..\CSJ2K\bin\Release\netstandard1.0\CSJ2K.dll" target="lib\netstandard1.0" />
         <file src="..\CSJ2K\bin\Release\netstandard1.0\CSJ2K.pdb" target="lib\netstandard1.0" />
+        <file src="..\CSJ2K\bin\Release\netstandard1.3\CSJ2K.dll" target="lib\netstandard1.3" />
+        <file src="..\CSJ2K\bin\Release\netstandard1.3\CSJ2K.pdb" target="lib\netstandard1.3" />
         <file src="..\CSJ2K.NET35\bin\Release\CSJ2K.NET35.dll" target="lib\net35-client" />
         <file src="..\CSJ2K.NET35\bin\Release\CSJ2K.NET35.pdb" target="lib\net35-client" />
         <file src="..\CSJ2K.Portable\bin\Release\CSJ2K.dll" target="lib\portable-net4+sl5+netcore45+wpa81+wp8" />
