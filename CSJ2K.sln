@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.NET35", "CSJ2K\CSJ2K.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codectest", "codectest\codectest.csproj", "{08EBCC10-76CD-4198-9F60-E8091432E4D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.Portable", "CSJ2K\CSJ2K.Portable.csproj", "{A790CC27-4086-4D2A-BF7B-C02337DF4D21}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{3F4353EB-578D-416C-88B4-CA4B94ED9214}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{260F6E14-7C77-4B54-BF26-ACFD89598259}"
@@ -46,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.iOS.Test", "CSJ2K.iOS
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CSJ2K.Shared", "CSJ2K\CSJ2K.Shared.shproj", "{46621573-93E5-4E5D-8EEE-969C0CD862B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.Portable", "CSJ2K.Portable\CSJ2K.Portable.csproj", "{A790CC27-4086-4D2A-BF7B-C02337DF4D21}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		CSJ2K\CSJ2K.Shared.projitems*{abe6b54d-a4ab-4204-a1af-9b679b6aba6b}*SharedItemsImports = 4
@@ -71,10 +71,6 @@ Global
 		{08EBCC10-76CD-4198-9F60-E8091432E4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08EBCC10-76CD-4198-9F60-E8091432E4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08EBCC10-76CD-4198-9F60-E8091432E4D8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E3480922-4CF4-4C22-A9AC-ECDA99771792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3480922-4CF4-4C22-A9AC-ECDA99771792}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3480922-4CF4-4C22-A9AC-ECDA99771792}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -127,6 +123,10 @@ Global
 		{E242FF7A-8560-40BB-9786-198F0D701C2A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A2661AB-A8C8-4DDC-9650-8803DF1696E2}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{7A2661AB-A8C8-4DDC-9650-8803DF1696E2}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
