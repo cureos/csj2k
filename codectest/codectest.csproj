@@ -106,15 +106,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSJ2K\CSJ2K.NET35.csproj">
-      <Project>{1ea0f9ba-0194-4f08-9e55-89888d5a4724}</Project>
-      <Name>CSJ2K.NET35</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSJ2K.NET35\CSJ2K.NET35.csproj">
+      <Project>{1ea0f9ba-0194-4f08-9e55-89888d5a4724}</Project>
+      <Name>CSJ2K.NET35</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

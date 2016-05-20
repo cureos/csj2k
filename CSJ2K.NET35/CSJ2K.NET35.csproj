@@ -23,10 +23,6 @@
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <ProjectGuid>{1EA0F9BA-0194-4F08-9E55-89888D5A4724}</ProjectGuid>
-    <SccProjectName>%24/csj2k/CSJ2K/CSJ2K</SccProjectName>
-    <SccLocalPath>.</SccLocalPath>
-    <SccAuxPath>https://tfs03.codeplex.com</SccAuxPath>
-    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
@@ -95,7 +91,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>csj2k.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\CSJ2K\csj2k.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib">
@@ -108,17 +104,37 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CSJ2K\Util\BitmapImage.cs">
+      <Link>Util\BitmapImage.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\BitmapImageCreator.cs">
+      <Link>Util\BitmapImageCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\BitmapImageSource.cs">
+      <Link>Util\BitmapImageSource.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\DotnetFileInfo.cs">
+      <Link>Util\DotnetFileInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\DotnetFileInfoCreator.cs">
+      <Link>Util\DotnetFileInfoCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\DotnetFileStreamCreator.cs">
+      <Link>Util\DotnetFileStreamCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\DotnetMsgLogger.cs">
+      <Link>Util\DotnetMsgLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapImage.cs">
+      <Link>Util\WriteableBitmapImage.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapImageCreator.cs">
+      <Link>Util\WriteableBitmapImageCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\WriteableBitmapImageSource.cs">
+      <Link>Util\WriteableBitmapImageSource.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\BitmapImageSource.cs" />
-    <Compile Include="Util\DotnetMsgLogger.cs" />
-    <Compile Include="Util\BitmapImageCreator.cs" />
-    <Compile Include="Util\BitmapImage.cs" />
-    <Compile Include="Util\DotnetFileStreamCreator.cs" />
-    <Compile Include="Util\DotnetFileInfoCreator.cs" />
-    <Compile Include="Util\DotnetFileInfo.cs" />
-    <Compile Include="Util\WriteableBitmapImage.cs" />
-    <Compile Include="Util\WriteableBitmapImageCreator.cs" />
-    <Compile Include="Util\WriteableBitmapImageSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -132,7 +148,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <Import Project="CSJ2K.Shared.projitems" Label="Shared" />
+  <Import Project="..\CSJ2K\CSJ2K.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
