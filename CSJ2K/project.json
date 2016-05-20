@@ -1,29 +1,53 @@
 ﻿{
-  "buildOptions": {
-    "publicSign": true,
-    "keyFile": "csj2k.snk",
-    "outputName": "CSJ2K",
-    "define": [ "NETSTANDARD" ],
-
-    "compile": {
-      "exclude": [
-        "Util/Bitmap*",
-        "Util/Android*",
-        "Util/Dotnet*",
-        "Util/IOS*",
-        "Util/Silverlight*",
-        "Util/Store*",
-        "Util/WriteableBitmap*" 
-      ]
-    }
-  },
-
-  "dependencies": {
-    "NETStandard.Library": "1.5.0-rc2-24027"
-  },
-
   "frameworks": {
     "netstandard1.0": {
+      "buildOptions": {
+        "publicSign": true,
+        "keyFile": "csj2k.snk",
+        "outputName": "CSJ2K",
+        "define": [ "NETSTANDARD" ],
+
+        "compile": {
+          "exclude": [
+            "Util/Android*",
+            "Util/Bitmap*",
+            "Util/Dotnet*",
+            "Util/IOS*",
+            "Util/Silverlight*",
+            "Util/Store*",
+            "Util/WriteableBitmap*"
+          ]
+        }
+      },
+
+      "dependencies": {
+        "NETStandard.Library": "1.5.0-rc2-24027"
+      }
+    },
+
+    "netstandard1.3": {
+      "buildOptions": {
+        "publicSign": true,
+        "keyFile": "csj2k.snk",
+        "outputName": "CSJ2K",
+        "define": [ "NETSTANDARD" ],
+
+        "compile": {
+          "exclude": [
+            "Util/Android*",
+            "Util/Bitmap*",
+            "Util/IOS*",
+            "Util/Silverlight*",
+            "Util/Store*",
+            "Util/WriteableBitmap*"
+          ]
+        }
+      },
+
+      "dependencies": {
+        "NETStandard.Library": "1.5.0-rc2-24027",
+        "System.IO.FileSystem": "4.0.1-rc2-24027"
+      }
     }
   }
 }
