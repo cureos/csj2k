@@ -1,8 +1,20 @@
 ﻿{
   "buildOptions": {
+    "publicSign": true,
+    "keyFile": "csj2k.snk",
+    "outputName": "CSJ2K",
     "define": [ "NETSTANDARD" ],
+
     "compile": {
-      "exclude": [ "Util/Bitmap*", "Util/Android*", "Util/Dotnet*", "Util/IOS*", "Util/Silverlight*", "Util/Store*", "Util/WriteableBitmap*" ]
+      "exclude": [
+        "Util/Bitmap*",
+        "Util/Android*",
+        "Util/Dotnet*",
+        "Util/IOS*",
+        "Util/Silverlight*",
+        "Util/Store*",
+        "Util/WriteableBitmap*" 
+      ]
     }
   },
 
