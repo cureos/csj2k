@@ -21,6 +21,8 @@ package *jj2000*, version 5.1. This Portable Class Library adaptation of *CSJ2K*
 * Xamarin iOS
 * Xamarin Android
 
+A Class Library targeting .NET Core is also included, targeting .NET Standard 1.0.
+
 The code is still applicable to .NET 3.5 and later as well; a .NET 3.5 dedicated class library is maintained here for reference.
 
 Along with the *CSJ2K* Portable Class Library there are also platform specific replacement libraries for bitmap processing and file handling. In particular, the .NET Framework library implements bitmap processing
