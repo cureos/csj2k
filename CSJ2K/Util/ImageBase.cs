@@ -19,9 +19,9 @@ namespace CSJ2K.Util
 
         protected ImageBase(int width, int height, byte[] bytes)
         {
-            this.Width = width;
-            this.Height = height;
-            this.Bytes = bytes;
+            Width = width;
+            Height = height;
+            Bytes = bytes;
         }
 
         #endregion
@@ -47,13 +47,10 @@ namespace CSJ2K.Util
 #endif
             {
                 throw new InvalidCastException(
-                    string.Format(
-                        "Cannot cast to '{0}'; type must be assignable from '{1}'",
-                        typeof(T).Name,
-                        typeof(TBase).Name));
+                    $"Cannot cast to '{typeof(T).Name}'; type must be assignable from '{typeof(TBase).Name}'");
             }
 
-            return (T)this.GetImageObject();
+            return (T)GetImageObject();
         }
 
         protected abstract object GetImageObject();

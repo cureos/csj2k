@@ -1,26 +1,31 @@
 ﻿// Copyright (c) 2007-2016 CSJ2K contributors.
 // Licensed under the BSD 3-Clause License.
 
+using System;
+using System.Linq;
+
 namespace CSJ2K.Util
 {
-    using System;
-
     public sealed class PortableImage : IImage
     {
         #region FIELDS
 
         private const int SizeOfArgb = 4;
 
+        private readonly double[] _byteScaling;
+
         #endregion
 
         #region CONSTRUCTORS
 
-        internal PortableImage(int width, int height, int numberOfComponents)
+        internal PortableImage(int width, int height, int numberOfComponents, int[] bitsUsed)
         {
-            this.Width = width;
-            this.Height = height;
-            this.NumberOfComponents = numberOfComponents;
-            this.Bytes = new byte[SizeOfArgb * width * height];
+            Width = width;
+            Height = height;
+            NumberOfComponents = numberOfComponents;
+            _byteScaling = bitsUsed.Select(b => 255.0 / (1 << b)).ToArray();
+
+            Data = new int[numberOfComponents * width * height];
         }
 
         #endregion
@@ -33,7 +38,7 @@ namespace CSJ2K.Util
 
         public int NumberOfComponents { get; }
 
-        internal byte[] Bytes { get; }
+        internal int[] Data { get; }
 
         #endregion
 
@@ -41,56 +46,90 @@ namespace CSJ2K.Util
 
         public T As<T>()
         {
-            var image = ImageFactory.New(this.Width, this.Height, this.Bytes);
+            var image = ImageFactory.New(Width, Height, ToBytes(Width, Height, NumberOfComponents, _byteScaling, Data));
             return image.As<T>();
         }
 
-        internal void FillRow(int rowIndex, int lineIndex, int rowWidth, byte[] rowValues)
+        public int[] GetComponent(int number)
         {
-            switch (this.NumberOfComponents)
+            if (number < 0 || number >= NumberOfComponents)
             {
-                case 1:
-                case 3:
-                    var i = SizeOfArgb * (rowIndex + lineIndex * rowWidth);
-                    var j = 0;
-                    for (var k = 0; k < rowWidth; ++k)
-                    {
-                        this.Bytes[i++] = rowValues[j++];
-                        this.Bytes[i++] = rowValues[j++];
-                        this.Bytes[i++] = rowValues[j++];
-                        this.Bytes[i++] = 0xff;
-                    }
-
-                    break;
-                case 4:
-                    Array.Copy(
-                        rowValues,
-                        0,
-                        this.Bytes,
-                        SizeOfArgb * (rowIndex + lineIndex * rowWidth),
-                        SizeOfArgb * rowWidth);
-                    break;
-                default:
-                    throw new InvalidOperationException("Number of components must be one of 1, 3 or 4.");
-            }
-        }
-
-        public byte[] GetComponent(int number)
-        {
-            if (number < 0 || number >= this.NumberOfComponents)
-            {
-                throw new ArgumentOutOfRangeException("number");
+                throw new ArgumentOutOfRangeException(nameof(number));
             }
 
-            var length = this.Bytes.Length;
-            var component = new byte[length >> 2];
+            var length = Width * Height;
+            var component = new int[length];
 
-            for (int i = number, k = 0; i < length; i += 4, ++k)
+            for (int i = number, k = 0; i < length; i += NumberOfComponents, ++k)
             {
-                component[k] = this.Bytes[i];
+                component[k] = Data[i];
             }
 
             return component;
+        }
+
+        internal void FillRow(int rowIndex, int lineIndex, int rowWidth, int[] rowValues)
+        {
+            Array.Copy(
+                rowValues,
+                0,
+                Data,
+                NumberOfComponents * (rowIndex + lineIndex * rowWidth),
+                NumberOfComponents * rowWidth);
+        }
+
+        private static byte[] ToBytes(int width, int height, int numberOfComponents, double[] byteScaling, int[] data)
+        {
+            var count = numberOfComponents * width * height;
+            var bytes = new byte[SizeOfArgb * width * height];
+
+            switch (numberOfComponents)
+            {
+                case 1:
+                    var scale = byteScaling[0];
+                    for (int i = 0, j = 0; i < count; ++i)
+                    {
+                        var b = (byte)(scale * data[i]);
+                        bytes[j++] = b;
+                        bytes[j++] = b;
+                        bytes[j++] = b;
+                        bytes[j++] = 0xff;
+                    }
+                    break;
+                case 3:
+                    {
+                        var scale0 = byteScaling[0];
+                        var scale1 = byteScaling[1];
+                        var scale2 = byteScaling[2];
+                        for (int i = 0, j = 0; i < count;)
+                        {
+                            bytes[j++] = (byte)(scale0 * data[i++]);
+                            bytes[j++] = (byte)(scale1 * data[i++]);
+                            bytes[j++] = (byte)(scale2 * data[i++]);
+                            bytes[j++] = 0xff;
+                        }
+                    }
+                    break;
+                case 4:
+                    {
+                        var scale0 = byteScaling[0];
+                        var scale1 = byteScaling[1];
+                        var scale2 = byteScaling[2];
+                        var scale3 = byteScaling[3];
+                        for (int i = 0, j = 0; i < count;)
+                        {
+                            bytes[j++] = (byte)(scale0 * data[i++]);
+                            bytes[j++] = (byte)(scale1 * data[i++]);
+                            bytes[j++] = (byte)(scale2 * data[i++]);
+                            bytes[j++] = (byte)(scale3 * data[i++]);
+                        }
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(numberOfComponents), $"Invalid number of components: {numberOfComponents}");
+            }
+
+            return bytes;
         }
 
         #endregion

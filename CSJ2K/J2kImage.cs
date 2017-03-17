@@ -209,10 +209,12 @@ namespace CSJ2K
             }
             int numComps = decodedImage.NumComps;
 
-            int bytesPerPixel = (numComps == 4 ? 4 : 3);
-
             // **** Copy to Bitmap ****
-            var dst = new PortableImage(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps);
+
+            var bitsUsed = new int[numComps];
+            for (var j = 0; j < numComps; ++j) bitsUsed[j] = decodedImage.getNomRangeBits(numComps - 1 - j);
+
+            var dst = new PortableImage(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps, bitsUsed);
 
             Coord numTiles = decodedImage.getNumTiles(null);
 
@@ -258,7 +260,7 @@ namespace CSJ2K
                         int[] k = new int[numComps];
                         for (int i = numComps - 1; i >= 0; i--) k[i] = db[i].offset + width - 1;
 
-                        byte[] rowvalues = new byte[width * bytesPerPixel];
+                        var rowvalues = new int[width * numComps];
 
                         for (int i = width - 1; i >= 0; i--)
                         {
@@ -268,33 +270,26 @@ namespace CSJ2K
                                 tmp[j] = (db[j].data_array[k[j]--] >> fb[j]) + ls[j];
                                 tmp[j] = (tmp[j] < 0) ? 0 : ((tmp[j] > mv[j]) ? mv[j] : tmp[j]);
 
-                                if (decodedImage.getNomRangeBits(j) != 8)
-                                    tmp[j] =
-                                        (int)
-                                        Math.Round(
-                                            ((double)tmp[j] / Math.Pow(2D, (double)decodedImage.getNomRangeBits(j)))
-                                            * 255D);
-
                             }
-                            int offset = i * bytesPerPixel;
+                            var offset = i * numComps;
                             switch (numComps)
                             {
                                 case 1:
-                                    rowvalues[offset + 0] = (byte)tmp[0];
-                                    rowvalues[offset + 1] = (byte)tmp[0];
-                                    rowvalues[offset + 2] = (byte)tmp[0];
+                                    rowvalues[offset + 0] = tmp[0];
                                     break;
                                 case 3:
-                                    rowvalues[offset + 0] = (byte)tmp[2];
-                                    rowvalues[offset + 1] = (byte)tmp[1];
-                                    rowvalues[offset + 2] = (byte)tmp[0];
+                                    rowvalues[offset + 0] = tmp[2];
+                                    rowvalues[offset + 1] = tmp[1];
+                                    rowvalues[offset + 2] = tmp[0];
                                     break;
                                 case 4:
-                                    rowvalues[offset + 0] = (byte)tmp[3];
-                                    rowvalues[offset + 1] = (byte)tmp[2];
-                                    rowvalues[offset + 2] = (byte)tmp[1];
-                                    rowvalues[offset + 3] = (byte)tmp[0];
+                                    rowvalues[offset + 0] = tmp[3];
+                                    rowvalues[offset + 1] = tmp[2];
+                                    rowvalues[offset + 2] = tmp[1];
+                                    rowvalues[offset + 3] = tmp[0];
                                     break;
+                                default:
+                                    throw new InvalidOperationException($"Invalid number of components: {numComps}");
                             }
                         }
 
