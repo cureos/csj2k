@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.0;netstandard1.3</TargetFrameworks>
+    <AssemblyName>CSJ2K.NetCore</AssemblyName>
+    <PackageId>CSJ2K.NetCore</PackageId>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.0' ">1.6.1</NetStandardImplicitPackageVersion>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.1</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
+    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
+    <PublicSign>true</PublicSign>
+    <AssemblyName>CSJ2K</AssemblyName>
+    <AssemblyOriginatorKeyFile>../CSJ2K/csj2k.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
+    <PublicSign>true</PublicSign>
+    <AssemblyName>CSJ2K</AssemblyName>
+    <AssemblyOriginatorKeyFile>../CSJ2K/csj2k.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
+    <Compile Remove="..\CSJ2K\Util\Android*;..\CSJ2K\Util\Bitmap*;..\CSJ2K\Util\Dotnet*;..\CSJ2K\Util\IOS*;..\CSJ2K\Util\Silverlight*;..\CSJ2K\Util\Store*;..\CSJ2K\Util\WriteableBitmap*" />
+    <Compile Include="..\CSJ2K\**\*.cs" Exclude="..\CSJ2K\Util\Android*;..\CSJ2K\Util\Bitmap*;..\CSJ2K\Util\Dotnet*;..\CSJ2K\Util\IOS*;..\CSJ2K\Util\Silverlight*;..\CSJ2K\Util\Store*;..\CSJ2K\Util\WriteableBitmap*;bin\**;obj\**;**\*.xproj;packages\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <Compile Remove="..\CSJ2K\Util\Android*;..\CSJ2K\Util\Bitmap*;..\CSJ2K\Util\IOS*;..\CSJ2K\Util\Silverlight*;..\CSJ2K\Util\Store*;..\CSJ2K\Util\WriteableBitmap*" />
+    <Compile Include="..\CSJ2K\**\*.cs" Exclude="..\CSJ2K\Util\Android*;..\CSJ2K\Util\Bitmap*;..\CSJ2K\Util\IOS*;..\CSJ2K\Util\Silverlight*;..\CSJ2K\Util\Store*;..\CSJ2K\Util\WriteableBitmap*;bin\**;obj\**;**\*.xproj;packages\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

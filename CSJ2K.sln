@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9C5FFA5E-FB9D-493E-9E45-086C0C8453CE}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9C5FFA
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codectest", "codectest\codectest.csproj", "{08EBCC10-76CD-4198-9F60-E8091432E4D8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{3F4353EB-578D-416C-88B4-CA4B94ED9214}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{260F6E14-7C77-4B54-BF26-ACFD89598259}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codectest", "codectest\codectest.csproj", "{08EBCC10-76CD-4198-9F60-E8091432E4D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.Android", "CSJ2K.Android\CSJ2K.Android.csproj", "{E3480922-4CF4-4C22-A9AC-ECDA99771792}"
 EndProject
@@ -44,11 +44,11 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CSJ2K.Shared", "CSJ2K\CSJ2K
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.Portable", "CSJ2K.Portable\CSJ2K.Portable.csproj", "{A790CC27-4086-4D2A-BF7B-C02337DF4D21}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CSJ2K.NetCore", "CSJ2K\CSJ2K.NetCore.xproj", "{CEC3F104-4874-47AF-B325-05881C62F9E6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.NET35", "CSJ2K.NET35\CSJ2K.NET35.csproj", "{1EA0F9BA-0194-4F08-9E55-89888D5A4724}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSJ2K.Unity", "CSJ2K.Unity\CSJ2K.Unity.csproj", "{8C1E0E86-DB5E-4337-930D-8778C6F43C4F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSJ2K.NetCore", "CSJ2K.NetCore\CSJ2K.NetCore.csproj", "{CEC3F104-4874-47AF-B325-05881C62F9E6}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -57,7 +57,6 @@ Global
 		CSJ2K\CSJ2K.Shared.projitems*{5a0b7bdc-d0fd-4f25-a473-4ae14604d3dd}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{68adb736-925c-4423-aa99-ebb14da0d2c9}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{8c1e0e86-db5e-4337-930d-8778c6f43c4f}*SharedItemsImports = 4
-		CSJ2K\CSJ2K.Shared.projitems*{8f724ff1-1a1d-4521-b379-bf2348022def}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{a790cc27-4086-4d2a-bf7b-c02337df4d21}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{abe6b54d-a4ab-4204-a1af-9b679b6aba6b}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{e242ff7a-8560-40bb-9786-198f0d701c2a}*SharedItemsImports = 4
@@ -128,10 +127,6 @@ Global
 		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A790CC27-4086-4D2A-BF7B-C02337DF4D21}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CEC3F104-4874-47AF-B325-05881C62F9E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEC3F104-4874-47AF-B325-05881C62F9E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEC3F104-4874-47AF-B325-05881C62F9E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEC3F104-4874-47AF-B325-05881C62F9E6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EA0F9BA-0194-4F08-9E55-89888D5A4724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EA0F9BA-0194-4F08-9E55-89888D5A4724}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EA0F9BA-0194-4F08-9E55-89888D5A4724}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -140,6 +135,10 @@ Global
 		{8C1E0E86-DB5E-4337-930D-8778C6F43C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C1E0E86-DB5E-4337-930D-8778C6F43C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C1E0E86-DB5E-4337-930D-8778C6F43C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEC3F104-4874-47AF-B325-05881C62F9E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEC3F104-4874-47AF-B325-05881C62F9E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEC3F104-4874-47AF-B325-05881C62F9E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEC3F104-4874-47AF-B325-05881C62F9E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,8 +157,8 @@ Global
 		{39606097-7698-46A7-99AF-3A4533D8EE70} = {260F6E14-7C77-4B54-BF26-ACFD89598259}
 		{E242FF7A-8560-40BB-9786-198F0D701C2A} = {3F4353EB-578D-416C-88B4-CA4B94ED9214}
 		{7A2661AB-A8C8-4DDC-9650-8803DF1696E2} = {260F6E14-7C77-4B54-BF26-ACFD89598259}
-		{CEC3F104-4874-47AF-B325-05881C62F9E6} = {3F4353EB-578D-416C-88B4-CA4B94ED9214}
 		{1EA0F9BA-0194-4F08-9E55-89888D5A4724} = {3F4353EB-578D-416C-88B4-CA4B94ED9214}
 		{8C1E0E86-DB5E-4337-930D-8778C6F43C4F} = {3F4353EB-578D-416C-88B4-CA4B94ED9214}
+		{CEC3F104-4874-47AF-B325-05881C62F9E6} = {3F4353EB-578D-416C-88B4-CA4B94ED9214}
 	EndGlobalSection
 EndGlobal
