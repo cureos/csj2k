@@ -33,10 +33,34 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Unity_4.5.0f6\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CSJ2K.NET35\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\DotnetFileInfo.cs">
+      <Link>Util\DotnetFileInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\DotnetFileInfoCreator.cs">
+      <Link>Util\DotnetFileInfoCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\DotnetFileStreamCreator.cs">
+      <Link>Util\DotnetFileStreamCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\DotnetMsgLogger.cs">
+      <Link>Util\DotnetMsgLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\UnityImage.cs">
+      <Link>Util\UnityImage.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\UnityImageCreator.cs">
+      <Link>Util\UnityImageCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\CSJ2K\Util\UnityImageSource.cs">
+      <Link>Util\UnityImageSource.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="..\CSJ2K\CSJ2K.Shared.projitems" Label="Shared" />
