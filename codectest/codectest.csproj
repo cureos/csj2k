@@ -64,6 +64,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\..\Downloads\file0.jp2">
+      <Link>file0.jp2</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="a1_mono.ppm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

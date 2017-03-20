@@ -60,7 +60,7 @@ namespace CSJ2K.Util
             var length = Width * Height;
             var component = new int[length];
 
-            for (int i = number, k = 0; i < length; i += NumberOfComponents, ++k)
+            for (int i = number, k = 0; k < length; i += NumberOfComponents, ++k)
             {
                 component[k] = Data[i];
             }
