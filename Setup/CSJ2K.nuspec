@@ -45,10 +45,10 @@
         <tags>JPEG2000 codec Silverlight WindowsPhone WP8 WPF .NET WinRT Metro Windows Store Xamarin iOS Android</tags>
     </metadata>
     <files>
-        <file src="..\CSJ2K\bin\Release\netstandard1.0\CSJ2K.dll" target="lib\netstandard1.0" />
-        <file src="..\CSJ2K\bin\Release\netstandard1.0\CSJ2K.pdb" target="lib\netstandard1.0" />
-        <file src="..\CSJ2K\bin\Release\netstandard1.3\CSJ2K.dll" target="lib\netstandard1.3" />
-        <file src="..\CSJ2K\bin\Release\netstandard1.3\CSJ2K.pdb" target="lib\netstandard1.3" />
+        <file src="..\CSJ2K.NetCore\bin\Release\netstandard1.0\CSJ2K.dll" target="lib\netstandard1.0" />
+        <file src="..\CSJ2K.NetCore\bin\Release\netstandard1.0\CSJ2K.pdb" target="lib\netstandard1.0" />
+        <file src="..\CSJ2K.NetCore\bin\Release\netstandard1.3\CSJ2K.dll" target="lib\netstandard1.3" />
+        <file src="..\CSJ2K.NetCore\bin\Release\netstandard1.3\CSJ2K.pdb" target="lib\netstandard1.3" />
         <file src="..\CSJ2K.NET35\bin\Release\CSJ2K.NET35.dll" target="lib\net35-client" />
         <file src="..\CSJ2K.NET35\bin\Release\CSJ2K.NET35.pdb" target="lib\net35-client" />
         <file src="..\CSJ2K.Portable\bin\Release\CSJ2K.dll" target="lib\portable-net4+sl5+netcore45+wpa81+wp8" />
