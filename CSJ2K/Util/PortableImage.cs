@@ -75,7 +75,7 @@ namespace CSJ2K.Util
                 0,
                 Data,
                 NumberOfComponents * (rowIndex + lineIndex * rowWidth),
-                NumberOfComponents * rowWidth);
+                rowValues.Length);
         }
 
         private static byte[] ToBytes(int width, int height, int numberOfComponents, double[] byteScaling, int[] data)

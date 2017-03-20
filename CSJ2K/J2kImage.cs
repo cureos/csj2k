@@ -207,14 +207,15 @@ namespace CSJ2K
             {
                 decodedImage = ictransf;
             }
-            int numComps = decodedImage.NumComps;
+            var numComps = decodedImage.NumComps;
+            var imgWidth = decodedImage.ImgWidth;
 
             // **** Copy to Bitmap ****
 
             var bitsUsed = new int[numComps];
             for (var j = 0; j < numComps; ++j) bitsUsed[j] = decodedImage.getNomRangeBits(numComps - 1 - j);
 
-            var dst = new PortableImage(decodedImage.ImgWidth, decodedImage.ImgHeight, numComps, bitsUsed);
+            var dst = new PortableImage(imgWidth, decodedImage.ImgHeight, numComps, bitsUsed);
 
             Coord numTiles = decodedImage.getNumTiles(null);
 
@@ -293,7 +294,7 @@ namespace CSJ2K
                             }
                         }
 
-                        dst.FillRow(tOffx, tOffy + l, width, rowvalues);
+                        dst.FillRow(tOffx, tOffy + l, imgWidth, rowvalues);
                     }
                 }
             }
