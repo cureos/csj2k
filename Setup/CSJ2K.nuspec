@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>CSJ2K</id>
-        <version>2.0.0.1</version>
+        <version>3.0.0-alpha/version>
         <title>CSJ2K JPEG 2000 codec library</title>
         <authors>Anders Gustafsson, Jason S. Clary, JJ2000 Partners</authors>
         <owners>Cureos AB</owners>
@@ -10,7 +10,7 @@
         <projectUrl>https://github.com/cureos/csj2k</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Portable Class Library and platform specific support libraries for decoding and encoding JPEG2000 images. Works with Universal Windows (8.1 and 10), 
-		.NET Core for Standard Libraries 1.0 and higher, .NET 3.5 (WPF and Windows Forms), Windows Phone 8 Silverlight, Silverlight 5, Xamarin iOS and Xamarin Android applications.</description>
+		.NET Core for .NET Standard 1.0 and higher, .NET 3.5 (WPF and Windows Forms), Windows Phone 8 Silverlight, Silverlight 5, Xamarin iOS and Xamarin Android applications.</description>
         <summary>Portable JPEG 2000 codec library</summary>
         <releaseNotes>Added empty dependencies sections</releaseNotes>
         <copyright>(c) 1999-2000 JJ2000 Partners; 2007-2012 Jason S. Clary; 2013-2016 Anders Gustafsson, Cureos AB</copyright>
@@ -35,11 +35,11 @@
 			<group targetFramework="portable-net4+sl5+netcore45+wpa81+wp8">
 			</group>
 			<group targetFramework="netstandard1.0">
-				<dependency id="NETStandard.Library" version="1.6.0"/>
+				<dependency id="NETStandard.Library" version="1.6.1"/>
 			</group>
 			<group targetFramework="netstandard1.3">
-				<dependency id="NETStandard.Library" version="1.6.0"/>
-				<dependency id="System.IO.FileSystem" version="4.0.1"/>
+				<dependency id="NETStandard.Library" version="1.6.1"/>
+				<dependency id="System.IO.FileSystem" version="4.3.0"/>
 			</group>
 		</dependencies>
         <tags>JPEG2000 codec Silverlight WindowsPhone WP8 WPF .NET WinRT Metro Windows Store Xamarin iOS Android</tags>
