@@ -10,7 +10,6 @@ using RandomAccessIO = CSJ2K.j2k.io.RandomAccessIO;
 
 namespace CSJ2K.Color.Boxes
 {
-	
 	/// <summary> The abstract super class modeling the aspects of
 	/// a JP2 box common to all such boxes.
 	/// 
@@ -37,16 +36,16 @@ namespace CSJ2K.Color.Boxes
 		public int length;
 
 		/// <summary>input file</summary>
-		protected internal RandomAccessIO in_Renamed;
+		protected RandomAccessIO in_Renamed;
 
 		/// <summary>offset to start of box</summary>
-		protected internal int boxStart;
+		protected int boxStart;
 
 		/// <summary>offset to end of box</summary>
-		protected internal int boxEnd;
+		protected int boxEnd;
 
 		/// <summary>offset to start of data in box</summary>
-		protected internal int dataStart;
+		protected int dataStart;
 
         /// <summary> Construct a JP2Box from an input image.</summary>
         /// <param name="in_Renamed">RandomAccessIO jp2 image
@@ -77,7 +76,7 @@ namespace CSJ2K.Color.Boxes
 		}
 		
 		/// <summary>JP2 Box structure analysis help </summary>
-		internal class BoxType : Dictionary<int, string>
+		private static class BoxType
 		{
 			private static readonly Dictionary<int, string> map;
 			

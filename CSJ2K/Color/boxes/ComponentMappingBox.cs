@@ -10,6 +10,7 @@ using RandomAccessIO = CSJ2K.j2k.io.RandomAccessIO;
 
 namespace CSJ2K.Color.Boxes
 {
+    using CSJ2K.j2k.fileformat;
 
     /// <summary> This class maps the components in the codestream
     /// to channels in the image.  It models the Component
@@ -53,7 +54,6 @@ namespace CSJ2K.Color.Boxes
         }
 
         /* Return the component mapped to the channel. */
-
         public int getCMP(int channel)
         {
             byte[] mapping = map[channel];
@@ -75,7 +75,7 @@ namespace CSJ2K.Color.Boxes
         }
 
         /// <summary>Return a suitable String representation of the class instance. </summary>
-        public override String ToString()
+        public override string ToString()
         {
             StringBuilder rep = new StringBuilder("[ComponentMappingBox ").Append("  ");
             rep.Append("nChannels= ").Append(Convert.ToString(NChannels));
@@ -91,26 +91,24 @@ namespace CSJ2K.Color.Boxes
             return rep.ToString();
         }
 
-        private int getCMP(byte[] mapping)
+        private static int getCMP(byte[] mapping)
         {
             return ICCProfile.getShort(mapping, 0) & 0x0000ffff;
         }
 
-        private short getMTYP(byte[] mapping)
+        private static short getMTYP(byte[] mapping)
         {
             return (short)(mapping[2] & 0x00ff);
         }
 
-        private short getPCOL(byte[] mapping)
+        private static short getPCOL(byte[] mapping)
         {
             return (short)(mapping[3] & 0x000ff);
         }
 
         static ComponentMappingBox()
         {
-            {
-                type = 0x636d6170;
-            }
+            type = FileFormatBoxes.COMPONENT_MAPPING_BOX;
         }
     }
 }

@@ -9,6 +9,7 @@ using ICCProfile = CSJ2K.Icc.ICCProfile;
 
 namespace CSJ2K.Color.Boxes
 {
+    using CSJ2K.j2k.fileformat;
 
     /// <summary> This class models the Image Header box contained in a JP2
     /// image.  It is a stub class here since for colormapping the
@@ -21,19 +22,19 @@ namespace CSJ2K.Color.Boxes
     /// </author>
     public sealed class ImageHeaderBox : JP2Box
     {
-        internal long height;
+        private long height;
 
-        internal long width;
+        private long width;
 
-        internal int nc;
+        private int nc;
 
-        internal short bpc;
+        private short bpc;
 
-        internal short c;
+        private short c;
 
-        internal bool unk;
+        private bool unk;
 
-        internal bool ipr;
+        private bool ipr;
 
         /// <summary> Construct an ImageHeaderBox from an input image.</summary>
         /// <param name="in_Renamed">RandomAccessIO jp2 image
@@ -84,9 +85,7 @@ namespace CSJ2K.Color.Boxes
 
         static ImageHeaderBox()
         {
-            {
-                type = 69686472;
-            }
+            type = FileFormatBoxes.IMAGE_HEADER_BOX;
         }
     }
 }

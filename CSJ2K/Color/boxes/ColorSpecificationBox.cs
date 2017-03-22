@@ -9,8 +9,9 @@ using CSJ2K.j2k.io;
 
 namespace CSJ2K.Color.Boxes
 {
-	
-	/// <summary> This class models the Color Specification Box in a JP2 image.
+    using CSJ2K.j2k.fileformat;
+
+    /// <summary> This class models the Color Specification Box in a JP2 image.
 	/// 
 	/// </summary>
 	/// <version> 	1.0
@@ -32,7 +33,7 @@ namespace CSJ2K.Color.Boxes
 	    public string MethodString => Method.ToString();
 
 		/* Retrieve the ICC Profile from the image as a byte []. */
-	    public byte[] ICCProfile { get; private set; } = null;
+	    public byte[] ICCProfile { get; private set; }
 
         /// <summary> Construct a ColorSpecificationBox from an input image.</summary>
         /// <param name="in_Renamed">RandomAccessIO jp2 image
@@ -158,12 +159,10 @@ namespace CSJ2K.Color.Boxes
 			rep.Append("colorspace= ").Append(Convert.ToString(ColorSpace)).Append("]");
 			return rep.ToString();
 		}
-		
-		static ColorSpecificationBox()
-		{
-			{
-				type = 0x636f6c72;
-			}
-		}
+
+	    static ColorSpecificationBox()
+	    {
+	        type = FileFormatBoxes.COLOUR_SPECIFICATION_BOX;
+	    }
 	}
 }

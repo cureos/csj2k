@@ -2905,7 +2905,7 @@ namespace CSJ2K.j2k.codestream.reader
 		/// </exception>
 		public virtual BlkImgDataSrc createChannelDefinitionMapper(BlkImgDataSrc src, CSJ2K.Color.ColorSpace csMap)
 		{
-			return ChannelDefinitionMapper.createInstance(src, csMap);
+			return new ChannelDefinitionMapper(src, csMap);
 		}
 		
 		/// <summary> Creates and returns the PalettizedColorSpaceMapper which uses
@@ -2928,7 +2928,7 @@ namespace CSJ2K.j2k.codestream.reader
 		/// </exception>
 		public virtual BlkImgDataSrc createPalettizedColorSpaceMapper(BlkImgDataSrc src, CSJ2K.Color.ColorSpace csMap)
 		{
-			return PalettizedColorSpaceMapper.createInstance(src, csMap);
+			return new PalettizedColorSpaceMapper(src, csMap);
 		}
 		
 		/// <summary> Creates and returns the Resampler which converts the input
@@ -2944,14 +2944,12 @@ namespace CSJ2K.j2k.codestream.reader
 		/// </param>
 		/// <returns> The resampled BlkImgDataSrc
 		/// </returns>
-		/// <exception cref="IOException">image access exception
-		/// </exception>
 		/// <exception cref="ColorSpaceException">if image contains a bad colorspace box
 		/// 
 		/// </exception>
 		public virtual BlkImgDataSrc createResampler(BlkImgDataSrc src, CSJ2K.Color.ColorSpace csMap)
 		{
-			return Resampler.createInstance(src, csMap);
+			return new Resampler(src, csMap);
 		}
 		
 		/// <summary> Creates and returns the ROIDeScaler corresponding to the information

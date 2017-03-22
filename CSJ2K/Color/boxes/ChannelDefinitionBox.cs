@@ -10,6 +10,7 @@ using RandomAccessIO = CSJ2K.j2k.io.RandomAccessIO;
 
 namespace CSJ2K.Color.Boxes
 {
+    using CSJ2K.j2k.fileformat;
 
     /// <summary> This class maps the components in the codestream
     /// to channels in the image.  It models the Component
@@ -25,7 +26,7 @@ namespace CSJ2K.Color.Boxes
         /// <summary>Return the number of channel definitions.</summary>
         public int NDefs { get; private set; }
 
-        private readonly Dictionary<System.Int32, int[]> definitions = new Dictionary<int, int[]>();
+        private readonly Dictionary<int, int[]> definitions = new Dictionary<int, int[]>();
 
         /// <summary> Construct a ChannelDefinitionBox from an input image.</summary>
         /// <param name="in_Renamed">RandomAccessIO jp2 image
@@ -113,43 +114,41 @@ namespace CSJ2K.Color.Boxes
         }
 
         /// <summary>Return the channel from the record.</summary>
-        private int getCn(byte[] bfr)
+        private static int getCn(byte[] bfr)
         {
             return ICCProfile.getShort(bfr, 0);
         }
 
         /// <summary>Return the channel type from the record.</summary>
-        private int getTyp(byte[] bfr)
+        private static int getTyp(byte[] bfr)
         {
             return ICCProfile.getShort(bfr, 2);
         }
 
         /// <summary>Return the associated channel from the record.</summary>
-        private int getAsoc(byte[] bfr)
+        private static int getAsoc(byte[] bfr)
         {
             return ICCProfile.getShort(bfr, 4);
         }
 
-        private int getCn(int[] bfr)
+        private static int getCn(int[] bfr)
         {
             return bfr[0];
         }
 
-        private int getTyp(int[] bfr)
+        private static int getTyp(int[] bfr)
         {
             return bfr[1];
         }
 
-        private int getAsoc(int[] bfr)
+        private static int getAsoc(int[] bfr)
         {
             return bfr[2];
         }
 
         static ChannelDefinitionBox()
         {
-            {
-                type = 0x63646566;
-            }
+            type = FileFormatBoxes.CHANNEL_DEFINITION_BOX;
         }
     }
 }
