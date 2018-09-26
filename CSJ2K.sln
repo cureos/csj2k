@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9C5FFA5E-FB9D-493E-9E45-086C0C8453CE}"
 	ProjectSection(SolutionItems) = preProject
@@ -57,6 +57,7 @@ Global
 		CSJ2K\CSJ2K.Shared.projitems*{5a0b7bdc-d0fd-4f25-a473-4ae14604d3dd}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{68adb736-925c-4423-aa99-ebb14da0d2c9}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{8c1e0e86-db5e-4337-930d-8778c6f43c4f}*SharedItemsImports = 4
+		CSJ2K\CSJ2K.Shared.projitems*{8f724ff1-1a1d-4521-b379-bf2348022def}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{a790cc27-4086-4d2a-bf7b-c02337df4d21}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{abe6b54d-a4ab-4204-a1af-9b679b6aba6b}*SharedItemsImports = 4
 		CSJ2K\CSJ2K.Shared.projitems*{e242ff7a-8560-40bb-9786-198f0d701c2a}*SharedItemsImports = 4

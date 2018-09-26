@@ -48,4 +48,10 @@
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="..\CSJ2K\Util\UnityImage.cs" />
+    <Compile Remove="..\CSJ2K\Util\UnityImageCreator.cs" />
+    <Compile Remove="..\CSJ2K\Util\UnityImageSource.cs" />
+  </ItemGroup>
+
 </Project>

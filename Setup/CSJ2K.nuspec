@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>CSJ2K</id>
-        <version>3.0.0-alpha</version>
+        <version>3.0.0</version>
         <title>CSJ2K JPEG 2000 codec library</title>
         <authors>Anders Gustafsson, Jason S. Clary, JJ2000 Partners</authors>
         <owners>Cureos AB</owners>
@@ -13,7 +13,7 @@
 		.NET Core for .NET Standard 1.0 and higher, .NET 3.5 (WPF and Windows Forms), Windows Phone 8 Silverlight, Silverlight 5, Xamarin iOS and Xamarin Android applications.</description>
         <summary>Portable JPEG 2000 codec library</summary>
         <releaseNotes>Added empty dependencies sections</releaseNotes>
-        <copyright>(c) 1999-2000 JJ2000 Partners; 2007-2012 Jason S. Clary; 2013-2017 Anders Gustafsson, Cureos AB</copyright>
+        <copyright>(c) 1999-2000 JJ2000 Partners; 2007-2012 Jason S. Clary; 2013-2018 Anders Gustafsson, Cureos AB</copyright>
         <language>en-US</language>
 		<dependencies>
 			<group targetFramework="net35">
